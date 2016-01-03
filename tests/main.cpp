@@ -3,18 +3,11 @@
 #include <array>
 #include <valarray>
 
-#include "darray.hpp"
-#include "sarray.hpp"
-#include "pdarray.hpp"
-#include "psarray.hpp"
-
-#include "array_base_static.hpp"
-#include "vector_math.hpp"
-#include "geometry.hpp"
+#include "gal.hpp"
 
 #include "test_construction.hpp"
 #include "test_construction_from_std.hpp"
-#include "test_aritmetic.hpp"
+#include "test_arithmetic.hpp"
 
 #include "test_geometry.hpp"
 
