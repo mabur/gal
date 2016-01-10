@@ -6,6 +6,9 @@
 
 #include "array_base_static.hpp"
 
+/**
+\brief Static array.
+*/
 template<typename T, size_t... SIZES>
 class sarray : public array_base_static<T, SIZES...>
 {

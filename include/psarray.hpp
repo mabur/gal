@@ -2,6 +2,9 @@
 
 #include "array_base_static.hpp"
 
+/**
+\brief Pointer to a static array.
+*/
 template<typename T, size_t... SIZES>
 class psarray : public array_base_static<T, SIZES...>
 {

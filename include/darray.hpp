@@ -5,6 +5,9 @@
 
 #include "array_base_dynamic.hpp"
 
+/**
+\brief Dynamic array.
+*/
 template<typename T, size_t D = 1>
 class darray : public array_base_dynamic<T, D>
 {

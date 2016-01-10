@@ -1,8 +1,10 @@
-// Copyright 2015 Volumental AB. CONFIDENTIAL. DO NOT REDISTRIBUTE.
 #pragma once
 
 #include "array_base_dynamic.hpp"
 
+/**
+\brief Pointer to a dynamic array.
+*/
 template<typename T, size_t D = 1>
 class pdarray : public array_base_dynamic<T, D>
 {
