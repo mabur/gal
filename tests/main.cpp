@@ -12,6 +12,8 @@
 #include "test_geometry.hpp"
 
 /*
+* Lägg till transpose-funktion.
+
 Frågor
 * Konstruktör utan initializer list för arrayer med rank=1.
 * copy-construction från samma typ. Hanteras det av de templatiserade konstruktörerna?
