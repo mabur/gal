@@ -27,7 +27,7 @@ contain some array classes:
 ```
         | Owns Memory    Non Owning Pointer
 --------|----------------------------------
-Static  | std::array
+Static  | std::array     -
 Dynamic | std::vector    gsl::span
         | std::valarray
 ```
@@ -36,7 +36,7 @@ Note that these do not support multiple dimensions.
 # Common interface for arrays in GAL
 
 The following holds for all of the arrays in GAL:
-- Its elements are stored contiguously in memory.
+- The elements are stored contiguously in memory. Strided arrays are not supported.
 - The element with index `i` of array `a` is retrieved as `a[i]`.
 - The indexing of the elements starts at `0`.
 - The number of elements is retrieved by calling the member function `size()`.

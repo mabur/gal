@@ -66,10 +66,10 @@ $(document).ready(function(){initNavTree('index.html','');});
 <p>The arrays that own memory are containers, similar to those in the standard template library <a href="http://www.cplusplus.com/reference/stl/">STL</a>. The non owning arrays just point to an array owned by someone else. They can point to any array, e.g. an array from another library.</p>
 <p>All of these arrays support multiple dimensions.</p>
 <h1>Other standard arrays</h1>
-<p>The standard template library <a href="http://www.cplusplus.com/reference/stl/">STL</a>, and the Guidelines Support Library <a href="https://github.com/Microsoft/GSL">GSL</a>, also contain some array classes: </p><div class="fragment"><div class="line">        | Owns Memory    Non Owning Pointer</div><div class="line">--------|----------------------------------</div><div class="line">Static  | std::array</div><div class="line">Dynamic | std::vector    gsl::span</div><div class="line">        | std::valarray</div></div><!-- fragment --><p> Note that these do not support multiple dimensions.</p>
+<p>The standard template library <a href="http://www.cplusplus.com/reference/stl/">STL</a>, and the Guidelines Support Library <a href="https://github.com/Microsoft/GSL">GSL</a>, also contain some array classes: </p><div class="fragment"><div class="line">        | Owns Memory    Non Owning Pointer</div><div class="line">--------|----------------------------------</div><div class="line">Static  | std::array     -</div><div class="line">Dynamic | std::vector    gsl::span</div><div class="line">        | std::valarray</div></div><!-- fragment --><p> Note that these do not support multiple dimensions.</p>
 <h1>Common interface for arrays in GAL</h1>
 <p>The following holds for all of the arrays in GAL:</p><ul>
-<li>Its elements are stored contiguously in memory.</li>
+<li>The elements are stored contiguously in memory. Strided arrays are not supported.</li>
 <li>The element with index <code>i</code> of array <code>a</code> is retrieved as <code>a[i]</code>.</li>
 <li>The indexing of the elements starts at <code>0</code>.</li>
 <li>The number of elements is retrieved by calling the member function <code>size()</code>.<ul>
