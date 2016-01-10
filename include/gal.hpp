@@ -11,27 +11,51 @@ Dynamic | darray         pdarray
 ```
 The size of a static array is known at compile time.
 The size of a dynamic array is known at run time.
-
 The arrays that own memory are containers, similar to those in the standard
 template library [STL](http://www.cplusplus.com/reference/stl/).
 The non owning arrays just point to an array owned by
 someone else. They can point to any array, e.g. an array from another library.
 
-All of these arrays support multiple dimensions.
+All four array types in GAL support multiple dimensions. Furthermore, they all
+assume contiguous memory. There is no support for strided arrays.
+
+GAL provides array interfaces that are consistent across these four use cases,
+while also being consistent with the arrays in the standard library.
 
 # Other standard arrays
 
-The standard template library [STL](http://www.cplusplus.com/reference/stl/),
-and the Guidelines Support Library [GSL](https://github.com/Microsoft/GSL), also
-contain some array classes:
+The standard template library [STL](http://www.cplusplus.com/reference/stl/) has
+some array containers:
 ```
         | Owns Memory    Non Owning Pointer
 --------|----------------------------------
 Static  | std::array     -
-Dynamic | std::vector    gsl::span
+Dynamic | std::vector    -
         | std::valarray
 ```
-Note that these do not support multiple dimensions.
+STL has no class for multi-dimensional arrays or any class for
+representing non owning pointers to general arrays.
+The Guidelines Support Library [GSL](https://github.com/Microsoft/GSL) has a
+class that represents a non owning pointer to a single-dimensional dynamic array:
+```
+        | Owns Memory    Non Owning Pointer
+--------|----------------------------------
+Static  | -              -
+Dynamic | -              gsl::span
+```
+[The Boost Multidimensional Array Library]
+(http://www.boost.org/doc/libs/1_60_0/libs/multi_array/doc/index.html)
+has support for multi-dimensional dynamic arrays:
+```
+        | Owns Memory    Non Owning Pointer
+--------|----------------------------------
+Static  | -              -
+Dynamic | multi_array    multi_array_ref
+        |                const_multi_array_ref
+```
+GAL attempts to fill in the gaps between these libraries and at the same time
+provide a consistent interface.
+
 
 # Common interface for arrays in GAL
 
