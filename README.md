@@ -13,3 +13,5 @@ The library provides a consistent interface for all these different cases of arr
 Static  | sarray         psarray
 Dynamic | darray         pdarray
 ```
+
+The documentation is [here](http://mabur.github.io/gal/).
