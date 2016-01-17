@@ -1,2 +1,3 @@
 # General Array Library
-GAL is a C++ array library. The documentation is [here](http://mabur.github.io/gal/).
+* This C++ library provides different array data structures.
+* The documentation is [here](http://mabur.github.io/gal/).
