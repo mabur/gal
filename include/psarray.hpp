@@ -11,6 +11,7 @@ class psarray : public array_base_static<T, SIZES...>
 public:
 	psarray() : data_(nullptr) {}
 
+    // TODO: fix.
 	explicit psarray(T* data) : data_(data) {}
 
 	// TODO: fix.

@@ -79,7 +79,81 @@ The following holds for all of the arrays in GAL:
 - The member function `extents` returns all extents of the array as an
   `std::array<size_t, rank()>`.
 
+
+# Construct Owning Arrays with Uninitialized Data
+
+## Static Owning Array
+
+An `sarray` of size `N` can be constructed similar to an `std::array`:
+```
+const auto N = size_t{ 10 };
+auto array0 = std::array<float, N>();
+auto array1 = sarray<float, N>();
+```
+`sarray` also supports multiple dimensions:
+```
+const auto N = size_t{ 10 };
+const auto M = size_t{ 20 };
+const auto L = size_t{ 30 };
+auto array0 = std::array<float, N>();
+auto array1 = sarray<float, N>();
+auto array2 = sarray<float, N, M>();
+auto array3 = sarray<float, N, M, L>();
+```
+The template arguments specify the extent of each dimension.
+
+## Dynamic Owning Array
+
+An `darray` of size `N` can be constructed similar to an `std::vector`:
+```
+auto N = size_t{ 10 };
+auto array0 = std::vector<float>(N);
+auto array1 = darray<float>(N);
+```
+`darray` also supports multiple dimensions:
+```
+auto N = size_t{ 10 };
+auto M = size_t{ 20 };
+auto L = size_t{ 30 };
+auto array1 = darray<float, 1>({ N });
+auto array1 = darray<float, 2>({ N, M });
+auto array1 = darray<float, 3>({ N, M, L });
+```
+The second template argument for `darray` specifies the rank, i.e. the number of
+dimensions. It has a defult value of `1`. The extent of each dimension are
+specified by the non-templated argument. For `darray` of rank 1 the braces
+around the extent is optional and all of these have the same meaning:
+```
+auto N = size_t{ 10 };
+auto array0 = darray<float>(N);
+auto array1 = darray<float>({N});
+auto array2 = darray<float, 1>(N);
+auto array3 = darray<float, 1>({N});
+```
+
+# Construct Owning Arrays with Initialized Data
+
+`sarray` can be constructed with the data initialized, unlike `std::array`:
+```
+const auto N = size_t{ 10 };
+const auto M = size_t{ 20 };
+auto value = 6.283f;
+auto array1 = sarray<float, N>(value);
+auto array2 = sarray<float, N, M>(value);
+```
+`darray` can be constructed with the data initialized similar to `std::vector`:
+```
+auto N = size_t{ 10 };
+auto M = size_t{ 20 };
+auto value = 6.283f;
+auto array1 = std::vector<float>(N, value);
+auto array2 = darray<float>({ N }, value); // TODO: allow without braces.
+auto array3 = darray<float, 2>({ N, M }, value);
+```
+
 */
+
+
 
 #pragma once
 
