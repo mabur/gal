@@ -131,9 +131,10 @@ auto array2 = darray<float, 1>(N);
 auto array3 = darray<float, 1>({N});
 ```
 
-# Construct Owning Arrays with Initialized Data
+## Construct Owning Arrays with Initialized Data
 
-`sarray` can be constructed with the data initialized, unlike `std::array`:
+`sarray` can be constructed with all the data initialized to the same value,
+unlike `std::array`:
 ```
 const auto N = size_t{ 10 };
 const auto M = size_t{ 20 };
@@ -141,7 +142,8 @@ auto value = 6.283f;
 auto array1 = sarray<float, N>(value);
 auto array2 = sarray<float, N, M>(value);
 ```
-`darray` can be constructed with the data initialized similar to `std::vector`:
+`darray` can also be constructed with the data initialized to the same value
+similar to `std::vector`:
 ```
 auto N = size_t{ 10 };
 auto M = size_t{ 20 };
@@ -151,6 +153,71 @@ auto array2 = darray<float>({ N }, value); // TODO: allow without braces.
 auto array3 = darray<float, 2>({ N, M }, value);
 ```
 
+## Construct Owning Arrays with Copied Data
+
+Static arrays:
+```
+const auto N = size_t{ 10 };
+const auto M = size_t{ 20 };
+auto array0 = std::array<float, N * M>();
+auto data_pointer = array0.data();
+auto array1 = sarray<float, N>(data_pointer);
+auto array2 = sarray<float, N, M>(data_pointer);
+```
+
+Dynamic arrays:
+```
+auto N = size_t{ 10 };
+auto M = size_t{ 20 };
+auto array1 = std::vector<float>(N * M);
+auto data_pointer = array1.data();
+auto array2 = darray<float>(N, data_pointer);
+auto array3 = darray<float, 2>({ N, M }, data_pointer);
+```
+
+## Constructing Non-owning Pointer Arrays.
+
+Array with static size pointing to data owned by someone else:
+```
+const auto N = size_t{ 10 };
+const auto M = size_t{ 20 };
+auto array0 = std::array<float, N * M>();
+auto data_pointer = array0.data();
+auto array1 = psarray<float, N>(data_pointer);
+auto array2 = psarray<float, N, M>(data_pointer);
+```
+You can specify that the data pointed at should be constant in this way:
+```
+const auto N = size_t{ 10 };
+const auto M = size_t{ 20 };
+const auto array0 = std::array<float, N * M>();
+const auto data_pointer = array0.data();
+auto array1 = psarray<const float, N>(data_pointer);
+auto array2 = psarray<const float, N, M>(data_pointer);
+```
+Note that `const` in front of the templated type and not in front of the array.
+This is similar to how you specofy a pointer to a constant using
+`std::shared_ptr` and `std::uniqe_ptr`.
+
+Array with dynamic size pointing to data owned by someone else are constructed
+like this:
+```
+auto N = size_t{ 10 };
+auto M = size_t{ 20 };
+auto array1 = std::vector<float>(N * M);
+auto data_pointer = array1.data();
+auto array2 = pdarray<float>(N, data_pointer);
+auto array3 = pdarray<float, 2>({ N, M }, data_pointer);
+```
+Dynamic arrays pointing at constant data are constructed like this:
+```
+auto N = size_t{ 10 };
+auto M = size_t{ 20 };
+const auto array1 = std::vector<float>(N * M);
+const auto data_pointer = array1.data();
+auto array2 = pdarray<const float>(N, data_pointer);
+auto array3 = pdarray<const float, 2>({ N, M }, data_pointer);
+```
 */
 
 
