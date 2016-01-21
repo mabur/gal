@@ -14,8 +14,10 @@
 /*
 * Lägg till transpose-funktion.
 
+* sliced_array, med stride, lägg till. Finns det nån kort bokstav för det?
+  Vill man bara ha strided för pointer arrays? Kan heta spsarray och spdarray.
+
 Frågor
-* Konstruktör utan initializer list för arrayer med rank=1.
 * copy-construction från samma typ. Hanteras det av de templatiserade konstruktörerna?
 * Single-dimensional construction from:
   - Eigen::Matrix
@@ -23,8 +25,6 @@ Frågor
 * Implicit konvertering? För ägande arrayer: Nej. För pekare ?
 
 * Hur ska nullptr hanteras? Ska man kräva att size()==0 då?
-
-* sliced_array, med stride, lägg till. Finns det nån kort bokstav för det?
 
 * make_pdarray({1,2,4}, data); // Så man slipper redundanta template argument.
   make_darray({1,2}, 0.f);
@@ -37,6 +37,7 @@ Frågor
   - Kvaternioner
   - Expression templates
 * Ha många elementvisa operationer i annan modul: * / % < <= > >= && ! ||.
+* implementera som allmänna funktioner: add, subtract, multiply, divide.
 
 * storage order för matriser.
 - Skulle kunna ha allmän default-templatiserad flagga i class-signature.
