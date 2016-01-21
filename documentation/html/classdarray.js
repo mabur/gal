@@ -5,6 +5,7 @@ var classdarray =
     [ "darray", "classdarray.html#ac88de17d06c85b8a1c6f254af9630622", null ],
     [ "darray", "classdarray.html#acd9b21ec66438e166b63eb932305b965", null ],
     [ "darray", "classdarray.html#ab2dd2379934b64fe4b512066c0f93c20", null ],
+    [ "darray", "classdarray.html#a78bc54b02ae5f5e302a53e8349167cac", null ],
     [ "darray", "classdarray.html#ae00f4121c8490bfe2653998b5f530bf9", null ],
     [ "darray", "classdarray.html#a7c43d3c123419d4c3f6fd9f1b158a57e", null ],
     [ "begin", "classdarray.html#a981d6ac0fc5e0a59fc54ad2eeb1ce7c4", null ],

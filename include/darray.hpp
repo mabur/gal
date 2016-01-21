@@ -38,14 +38,14 @@ public:
 	{
 		static_assert(RANK == 1, "Wrong rank");
 	}
-	/*
-	darray(size_t size, const T& value, typename std::enable_if<D==1, T>::type* = nullptr)
+	
+	explicit darray(size_t size, const T& value)//, typename std::enable_if<D==1, T>::type* = nullptr)
 		: array_base_dynamic({size})
 		, data_(value, size)
 	{
 		static_assert(RANK == 1, "Wrong rank");
 	}
-	*/
+	
 	darray(size_t size, const T* data_begin)
 		: array_base_dynamic({size})
 		, data_(size)

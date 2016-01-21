@@ -84,7 +84,7 @@ void test_construction_documentation_darray3()
     auto M = size_t{ 20 };
     auto value = 6.283f;
     auto array1 = std::vector<float>(N, value);
-    auto array2 = darray<float>({ N }, value); // TODO: allow without braces.
+    auto array2 = darray<float>(N, value); // TODO: allow without braces.
     auto array3 = darray<float, 2>({ N, M }, value);
 }
 
