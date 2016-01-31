@@ -35,18 +35,18 @@ class array_base_static : public array_base<T, sizeof...(EXTENTS)>
 public:
     using typename array_base<T, sizeof...(EXTENTS)>::extents_type;
 
-	static constexpr size_t size()    { return total_size<EXTENTS...>::value; };
+	static constexpr size_t size() { return total_size<EXTENTS...>::value; };
 
-	static constexpr size_t extent0() { return get_size<0, EXTENTS...>::value; }
-	static constexpr size_t extent1() { return get_size<1, EXTENTS...>::value; }
-	static constexpr size_t extent2() { return get_size<2, EXTENTS...>::value; }
-	static constexpr size_t extent3() { return get_size<3, EXTENTS...>::value; }
+    template<size_t dimension>
+    static constexpr size_t extent()
+    {
+        return get_size<dimension, EXTENTS...>::value;
+    }
 
-	template<size_t dimension>
-	static constexpr size_t extent()
-	{
-		return get_size<dimension, EXTENTS...>::value;
-	}
+	static constexpr size_t extent0() { return extent<0>(); }
+	static constexpr size_t extent1() { return extent<1>(); }
+	static constexpr size_t extent2() { return extent<2>(); }
+	static constexpr size_t extent3() { return extent<3>(); }
 
 	static constexpr extents_type extents() { return { EXTENTS... }; }
 };
