@@ -29,6 +29,10 @@ struct get_size<0, first_size, sizes...>
 	static constexpr size_t value = first_size;
 };
 
+/**
+\brief The base class that all static arrays derive from,
+i.e. arrays with size known at compile-time. Defines size and extents for such arrays.
+*/
 template<typename T, size_t... EXTENTS>
 class array_base_static : public array_base<T, sizeof...(EXTENTS)>
 {
@@ -36,6 +40,8 @@ public:
     using typename array_base<T, sizeof...(EXTENTS)>::extents_type;
 
 	static constexpr size_t size() { return total_size<EXTENTS...>::value; };
+
+    static constexpr extents_type extents() { return{ EXTENTS... }; }
 
     template<size_t DIMENSION>
     static constexpr size_t extent()
@@ -48,5 +54,5 @@ public:
 	static constexpr size_t extent2() { return extent<2>(); }
 	static constexpr size_t extent3() { return extent<3>(); }
 
-	static constexpr extents_type extents() { return { EXTENTS... }; }
+	
 };

@@ -53,8 +53,8 @@ Static  | -              -
 Dynamic | multi_array    multi_array_ref
         |                const_multi_array_ref
 ```
-GAL attempts to fill in the gaps between these libraries and at the same time
-provide a consistent interface.
+GAL attempts to fill in the gaps between these libraries and provide a
+consistent interface.
 
 
 # Common interface for arrays in GAL

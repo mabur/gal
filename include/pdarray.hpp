@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cassert>
+
 #include "array_base_dynamic.hpp"
 
 /**

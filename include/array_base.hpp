@@ -1,9 +1,14 @@
 #pragma once
 
-#include <cassert>
+#include <array>
+#include <cstddef>
 
 #include "non_member_functions.hpp"
 
+/**
+\brief The base class that all arrays derive from.
+Contains some type aliases, and the definition of rank.
+*/
 template<typename T, size_t RANK>
 struct array_base
 {
@@ -14,8 +19,8 @@ struct array_base
 	using const_pointer		= const T*;
 	using iterator			= T*;
 	using const_iterator	= const T*;
-	using size_type			= std::size_t;
-	using difference_type	= std::ptrdiff_t;
+	using size_type			= size_t;
+	using difference_type	= ptrdiff_t;
 
     using extents_type      = std::array<size_t, RANK>;
 

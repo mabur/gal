@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <array>
+#include <cassert>
 #include <initializer_list>
 
 #include "array_base_static.hpp"
@@ -13,8 +14,6 @@ template<typename T, size_t... EXTENTS>
 class sarray : public array_base_static<T, EXTENTS...>
 {
 public:
-
-    static constexpr size_t SIZE = array_base_static<T, EXTENTS...>::size();
     using array_base_static<T, EXTENTS...>::size;
     using array_base_static<T, EXTENTS...>::extent;
     using array_base_static<T, EXTENTS...>::extent0;
@@ -71,7 +70,7 @@ public:
     const T& operator()(size_t i0, size_t i1, size_t i2) const { return data_[i0 + extent<0>() * (i1 + extent<1>() * i2)]; }
 
 private:
-
+    static constexpr size_t SIZE = array_base_static<T, EXTENTS...>::size();
 	std::array<T, SIZE> data_;
 };
 

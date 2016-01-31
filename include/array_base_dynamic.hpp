@@ -25,6 +25,11 @@ size_t product(const std::array<size_t, size>& array)
     return product<size>(&array.front());
 }
 
+
+/**
+\brief The base class that all dynamic arrays derive from,
+i.e. arrays with size known at run-time. Defines extents for such arrays.
+*/
 template<typename T, size_t RANK>
 class array_base_dynamic : public array_base<T, RANK>
 {

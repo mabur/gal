@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>General Array Library: array_base&lt; T, D &gt; Struct Template Reference</title>
+<title>General Array Library: array_base&lt; T, RANK &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -67,94 +67,64 @@ $(document).ready(function(){initNavTree('structarray__base.html','');});
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="structarray__base-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">array_base&lt; T, D &gt; Struct Template Reference</div>  </div>
+<div class="title">array_base&lt; T, RANK &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Inherited by <a class="el" href="classarray__base__dynamic.html">array_base_dynamic&lt; T, D &gt;</a>.</p>
+<p>The base class that all arrays derive from. Contains some type aliases, and the definition of rank.  
+ <a href="structarray__base.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="array__base_8hpp_source.html">array_base.hpp</a>&gt;</code></p>
+
+<p>Inherited by <a class="el" href="classarray__base__dynamic.html">array_base_dynamic&lt; T, RANK &gt;</a>.</p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a99dc2c75c801fd9fe23bccf3332e3ea8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a99dc2c75c801fd9fe23bccf3332e3ea8"></a>
+<tr class="memitem:a45a52ecea55db1811cbe2f9960a4bf9e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a45a52ecea55db1811cbe2f9960a4bf9e"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b> = T</td></tr>
-<tr class="separator:a99dc2c75c801fd9fe23bccf3332e3ea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abcef960d4f5370d7ede240995bc9307c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abcef960d4f5370d7ede240995bc9307c"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>reference</b> = value_type &amp;</td></tr>
-<tr class="separator:abcef960d4f5370d7ede240995bc9307c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a559a311c785c59cbd2d0bfdd095b7030"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a559a311c785c59cbd2d0bfdd095b7030"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>const_reference</b> = const reference</td></tr>
-<tr class="separator:a559a311c785c59cbd2d0bfdd095b7030"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a541ad026509c8967fce80de649317ec4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a541ad026509c8967fce80de649317ec4"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>pointer</b> = value_type *</td></tr>
-<tr class="separator:a541ad026509c8967fce80de649317ec4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f8bba0d11e06817f604362c1db613e4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4f8bba0d11e06817f604362c1db613e4"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>const_pointer</b> = const pointer</td></tr>
-<tr class="separator:a4f8bba0d11e06817f604362c1db613e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60775004c8c7ea9959681bd72331dac1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a60775004c8c7ea9959681bd72331dac1"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>iterator</b> = pointer</td></tr>
-<tr class="separator:a60775004c8c7ea9959681bd72331dac1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9d8404bccfe144e8a79a8593d0c95df"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac9d8404bccfe144e8a79a8593d0c95df"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>const_iterator</b> = const_pointer</td></tr>
-<tr class="separator:ac9d8404bccfe144e8a79a8593d0c95df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a684e9a82a9714dc65d70741f8071ee17"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a684e9a82a9714dc65d70741f8071ee17"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>size_type</b> = std::size_t</td></tr>
-<tr class="separator:a684e9a82a9714dc65d70741f8071ee17"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb8c7b7f42ba1997fe841f58c77b7312"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adb8c7b7f42ba1997fe841f58c77b7312"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>difference_type</b> = std::ptrdiff_t</td></tr>
-<tr class="separator:adb8c7b7f42ba1997fe841f58c77b7312"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a45a52ecea55db1811cbe2f9960a4bf9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2784b79fbd1d92f71cd595f24c473e24"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2784b79fbd1d92f71cd595f24c473e24"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>reference</b> = T &amp;</td></tr>
+<tr class="separator:a2784b79fbd1d92f71cd595f24c473e24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb67b4de4e32f350fb651e15a236fd9f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acb67b4de4e32f350fb651e15a236fd9f"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>const_reference</b> = const T &amp;</td></tr>
+<tr class="separator:acb67b4de4e32f350fb651e15a236fd9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4ce32784b213c93b384f9bcdebf235b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af4ce32784b213c93b384f9bcdebf235b"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>pointer</b> = T *</td></tr>
+<tr class="separator:af4ce32784b213c93b384f9bcdebf235b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b6008c1cb1d62109841da0e5d6097ab"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5b6008c1cb1d62109841da0e5d6097ab"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>const_pointer</b> = const T *</td></tr>
+<tr class="separator:a5b6008c1cb1d62109841da0e5d6097ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4352dc40f59f0c46843d0fcb1a4c79a1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4352dc40f59f0c46843d0fcb1a4c79a1"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>iterator</b> = T *</td></tr>
+<tr class="separator:a4352dc40f59f0c46843d0fcb1a4c79a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad177501735028ef575eacd01236be5c1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad177501735028ef575eacd01236be5c1"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>const_iterator</b> = const T *</td></tr>
+<tr class="separator:ad177501735028ef575eacd01236be5c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcff7046690a64ed26574457231e294f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afcff7046690a64ed26574457231e294f"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>size_type</b> = size_t</td></tr>
+<tr class="separator:afcff7046690a64ed26574457231e294f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a978d743be8ee0c3481ab21027644219e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a978d743be8ee0c3481ab21027644219e"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>difference_type</b> = ptrdiff_t</td></tr>
+<tr class="separator:a978d743be8ee0c3481ab21027644219e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6306de495048872dd0935b6d5869cff6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6306de495048872dd0935b6d5869cff6"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>extents_type</b> = std::array&lt; size_t, RANK &gt;</td></tr>
+<tr class="separator:a6306de495048872dd0935b6d5869cff6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:acf78745eb2fc80714275a23810ec8698"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acf78745eb2fc80714275a23810ec8698"></a>
+<tr class="memitem:aafd2066de91e1e10949eab31cb1dfd5d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aafd2066de91e1e10949eab31cb1dfd5d"></a>
 static constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><b>rank</b> ()</td></tr>
-<tr class="separator:acf78745eb2fc80714275a23810ec8698"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a719bef022db2b5025aaa089bcc285c02"><td class="memTemplParams" colspan="2"><a class="anchor" id="a719bef022db2b5025aaa089bcc285c02"></a>
-template&lt;typename Array &gt; </td></tr>
-<tr class="memitem:a719bef022db2b5025aaa089bcc285c02"><td class="memTemplItemLeft" align="right" valign="top">static Array::reference&#160;</td><td class="memTemplItemRight" valign="bottom"><b>get_element</b> (Array &amp;a, size_t i0)</td></tr>
-<tr class="separator:a719bef022db2b5025aaa089bcc285c02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83b1fbb1436f5c2ab851f81196b21914"><td class="memTemplParams" colspan="2"><a class="anchor" id="a83b1fbb1436f5c2ab851f81196b21914"></a>
-template&lt;typename Array &gt; </td></tr>
-<tr class="memitem:a83b1fbb1436f5c2ab851f81196b21914"><td class="memTemplItemLeft" align="right" valign="top">static Array::const_reference&#160;</td><td class="memTemplItemRight" valign="bottom"><b>get_element</b> (const Array &amp;a, size_t i0)</td></tr>
-<tr class="separator:a83b1fbb1436f5c2ab851f81196b21914"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d1e56fd72086c6b10c60064dbafccf1"><td class="memTemplParams" colspan="2"><a class="anchor" id="a6d1e56fd72086c6b10c60064dbafccf1"></a>
-template&lt;typename Array &gt; </td></tr>
-<tr class="memitem:a6d1e56fd72086c6b10c60064dbafccf1"><td class="memTemplItemLeft" align="right" valign="top">static Array::reference&#160;</td><td class="memTemplItemRight" valign="bottom"><b>get_element</b> (Array &amp;a, size_t i0, size_t i1)</td></tr>
-<tr class="separator:a6d1e56fd72086c6b10c60064dbafccf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02b1f0085a9e571edbd2c8b772095057"><td class="memTemplParams" colspan="2"><a class="anchor" id="a02b1f0085a9e571edbd2c8b772095057"></a>
-template&lt;typename Array &gt; </td></tr>
-<tr class="memitem:a02b1f0085a9e571edbd2c8b772095057"><td class="memTemplItemLeft" align="right" valign="top">static Array::const_reference&#160;</td><td class="memTemplItemRight" valign="bottom"><b>get_element</b> (const Array &amp;a, size_t i0, size_t i1)</td></tr>
-<tr class="separator:a02b1f0085a9e571edbd2c8b772095057"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa35629d47a9d13f0d9e776b48f77347d"><td class="memTemplParams" colspan="2"><a class="anchor" id="aa35629d47a9d13f0d9e776b48f77347d"></a>
-template&lt;typename Array &gt; </td></tr>
-<tr class="memitem:aa35629d47a9d13f0d9e776b48f77347d"><td class="memTemplItemLeft" align="right" valign="top">static Array::reference&#160;</td><td class="memTemplItemRight" valign="bottom"><b>get_element</b> (Array &amp;a, size_t i0, size_t i1, size_t i2)</td></tr>
-<tr class="separator:aa35629d47a9d13f0d9e776b48f77347d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d09f453841d6448b6b3dddb6f03cbc0"><td class="memTemplParams" colspan="2"><a class="anchor" id="a7d09f453841d6448b6b3dddb6f03cbc0"></a>
-template&lt;typename Array &gt; </td></tr>
-<tr class="memitem:a7d09f453841d6448b6b3dddb6f03cbc0"><td class="memTemplItemLeft" align="right" valign="top">static Array::const_reference&#160;</td><td class="memTemplItemRight" valign="bottom"><b>get_element</b> (const Array &amp;a, size_t i0, size_t i1, size_t i2)</td></tr>
-<tr class="separator:a7d09f453841d6448b6b3dddb6f03cbc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa301213d962bd3ec59c0e019343058a8"><td class="memTemplParams" colspan="2"><a class="anchor" id="aa301213d962bd3ec59c0e019343058a8"></a>
-template&lt;typename Array , size_t dimension, typename... Indices&gt; </td></tr>
-<tr class="memitem:aa301213d962bd3ec59c0e019343058a8"><td class="memTemplItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>offset</b> (const Array &amp;a, Indices...indices)</td></tr>
-<tr class="separator:aa301213d962bd3ec59c0e019343058a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a883ea274d191fb1dc39c5392d73fec7f"><td class="memTemplParams" colspan="2"><a class="anchor" id="a883ea274d191fb1dc39c5392d73fec7f"></a>
-template&lt;typename Array , typename... Indices&gt; </td></tr>
-<tr class="memitem:a883ea274d191fb1dc39c5392d73fec7f"><td class="memTemplItemLeft" align="right" valign="top">static Array::const_reference&#160;</td><td class="memTemplItemRight" valign="bottom"><b>get_element</b> (const Array &amp;a, Indices...indices)</td></tr>
-<tr class="separator:a883ea274d191fb1dc39c5392d73fec7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0bfc4ff937f0436a833993b1ff6ad06"><td class="memTemplParams" colspan="2"><a class="anchor" id="aa0bfc4ff937f0436a833993b1ff6ad06"></a>
-template&lt;typename Array , size_t dimension&gt; </td></tr>
-<tr class="memitem:aa0bfc4ff937f0436a833993b1ff6ad06"><td class="memTemplItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>product_size</b> (const Array &amp;a)</td></tr>
-<tr class="separator:aa0bfc4ff937f0436a833993b1ff6ad06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
-Static Public Attributes</h2></td></tr>
-<tr class="memitem:a6516aca9d370640550e0bfdea321c56b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6516aca9d370640550e0bfdea321c56b"></a>
-static constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><b>RANK</b> = D</td></tr>
-<tr class="separator:a6516aca9d370640550e0bfdea321c56b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:aafd2066de91e1e10949eab31cb1dfd5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this struct was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;typename T, size_t RANK&gt;<br />
+struct array_base&lt; T, RANK &gt;</h3>
+
+<p>The base class that all arrays derive from. Contains some type aliases, and the definition of rank. </p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="array__base_8hpp_source.html">array_base.hpp</a></li>
 </ul>
 </div><!-- contents -->
