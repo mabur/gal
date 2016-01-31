@@ -53,8 +53,8 @@ Static  | -              -
 Dynamic | multi_array    multi_array_ref
         |                const_multi_array_ref
 ```
-GAL attempts to fill in the gaps between these libraries and at the same time
-provide a consistent interface.
+GAL attempts to fill in the gaps between these libraries and provide a
+consistent interface.
 
 
 # Common interface for arrays in GAL
@@ -79,7 +79,197 @@ The following holds for all of the arrays in GAL:
 - The member function `extents` returns all extents of the array as an
   `std::array<size_t, rank()>`.
 
+
+# Example
+
+```
+void fill_and_print_array2d(Array2d& array)
+{
+    assert(array.rank() == 2);
+
+    for (int i = 0; i < array.size(); ++i)
+    {
+        array[i] = i;
+    }
+
+    for (auto& element : array)
+    {
+        element += 10;
+    }
+    
+    using namespace std;
+
+    for (int y = 0; y < array.extent1(); ++y)
+    {
+        for (int x = 0; x < array.extent0(); ++x)
+        {
+            cout << array(x, y) << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
+
+int main()
+{
+    auto static_array2d = sarray<float, 3, 2>();
+    auto dynamic_array2d = darray<int, 2>({ 8, 4 });
+    fill_and_print_array2d(static_array2d);
+    fill_and_print_array2d(dynamic_array2d);
+}
+```
+Prints:
+```
+10 11 12
+13 14 15
+
+10 11 12 13 14 15 16 17
+18 19 20 21 22 23 24 25
+26 27 28 29 30 31 32 33
+34 35 36 37 38 39 40 41
+```
+
+# Construct Owning Arrays with Uninitialized Data
+
+## Static Owning Array
+
+An `sarray` of size `N` can be constructed similar to an `std::array`:
+```
+const auto N = size_t{ 10 };
+auto array0 = std::array<float, N>();
+auto array1 = sarray<float, N>();
+```
+`sarray` also supports multiple dimensions:
+```
+const auto N = size_t{ 10 };
+const auto M = size_t{ 20 };
+const auto L = size_t{ 30 };
+auto array0 = std::array<float, N>();
+auto array1 = sarray<float, N>();
+auto array2 = sarray<float, N, M>();
+auto array3 = sarray<float, N, M, L>();
+```
+The template arguments specify the extent of each dimension.
+
+## Dynamic Owning Array
+
+An `darray` of size `N` can be constructed similar to an `std::vector`:
+```
+auto N = size_t{ 10 };
+auto array0 = std::vector<float>(N);
+auto array1 = darray<float>(N);
+```
+`darray` also supports multiple dimensions:
+```
+auto N = size_t{ 10 };
+auto M = size_t{ 20 };
+auto L = size_t{ 30 };
+auto array1 = darray<float, 1>({ N });
+auto array1 = darray<float, 2>({ N, M });
+auto array1 = darray<float, 3>({ N, M, L });
+```
+The second template argument for `darray` specifies the rank, i.e. the number of
+dimensions. It has a defult value of `1`. The extent of each dimension are
+specified by the non-templated argument. For `darray` of rank 1 the braces
+around the extent is optional and all of these have the same meaning:
+```
+auto N = size_t{ 10 };
+auto array0 = darray<float>(N);
+auto array1 = darray<float>({N});
+auto array2 = darray<float, 1>(N);
+auto array3 = darray<float, 1>({N});
+```
+
+## Construct Owning Arrays with Initialized Data
+
+`sarray` can be constructed with all the data initialized to the same value,
+unlike `std::array`:
+```
+const auto N = size_t{ 10 };
+const auto M = size_t{ 20 };
+auto value = 6.283f;
+auto array1 = sarray<float, N>(value);
+auto array2 = sarray<float, N, M>(value);
+```
+`darray` can also be constructed with the data initialized to the same value
+similar to `std::vector`:
+```
+auto N = size_t{ 10 };
+auto M = size_t{ 20 };
+auto value = 6.283f;
+auto array1 = std::vector<float>(N, value);
+auto array2 = darray<float>(N, value);
+auto array3 = darray<float, 2>({ N, M }, value);
+```
+
+## Construct Owning Arrays with Copied Data
+
+Static arrays:
+```
+const auto N = size_t{ 10 };
+const auto M = size_t{ 20 };
+auto array0 = std::array<float, N * M>();
+auto data_pointer = array0.data();
+auto array1 = sarray<float, N>(data_pointer);
+auto array2 = sarray<float, N, M>(data_pointer);
+```
+
+Dynamic arrays:
+```
+auto N = size_t{ 10 };
+auto M = size_t{ 20 };
+auto array1 = std::vector<float>(N * M);
+auto data_pointer = array1.data();
+auto array2 = darray<float>(N, data_pointer);
+auto array3 = darray<float, 2>({ N, M }, data_pointer);
+```
+
+## Constructing Non-owning Pointer Arrays.
+
+Array with static size pointing to data owned by someone else:
+```
+const auto N = size_t{ 10 };
+const auto M = size_t{ 20 };
+auto array0 = std::array<float, N * M>();
+auto data_pointer = array0.data();
+auto array1 = psarray<float, N>(data_pointer);
+auto array2 = psarray<float, N, M>(data_pointer);
+```
+You can specify that the data pointed at should be constant in this way:
+```
+const auto N = size_t{ 10 };
+const auto M = size_t{ 20 };
+const auto array0 = std::array<float, N * M>();
+const auto data_pointer = array0.data();
+auto array1 = psarray<const float, N>(data_pointer);
+auto array2 = psarray<const float, N, M>(data_pointer);
+```
+Note that `const` in front of the templated type and not in front of the array.
+This is similar to how you specofy a pointer to a constant using
+`std::shared_ptr` and `std::uniqe_ptr`.
+
+Array with dynamic size pointing to data owned by someone else are constructed
+like this:
+```
+auto N = size_t{ 10 };
+auto M = size_t{ 20 };
+auto array1 = std::vector<float>(N * M);
+auto data_pointer = array1.data();
+auto array2 = pdarray<float>(N, data_pointer);
+auto array3 = pdarray<float, 2>({ N, M }, data_pointer);
+```
+Dynamic arrays pointing at constant data are constructed like this:
+```
+auto N = size_t{ 10 };
+auto M = size_t{ 20 };
+const auto array1 = std::vector<float>(N * M);
+const auto data_pointer = array1.data();
+auto array2 = pdarray<const float>(N, data_pointer);
+auto array3 = pdarray<const float, 2>({ N, M }, data_pointer);
+```
 */
+
+
 
 #pragma once
 

@@ -1,16 +1,16 @@
 var hierarchy =
 [
-    [ "array_base< T, D >", "structarray__base.html", [
-      [ "array_base_dynamic< T, D >", "classarray__base__dynamic.html", [
-        [ "darray< T, D >", "classdarray.html", null ],
-        [ "pdarray< T, D >", "classpdarray.html", null ]
+    [ "array_base< T, RANK >", "structarray__base.html", [
+      [ "array_base_dynamic< T, RANK >", "classarray__base__dynamic.html", [
+        [ "darray< T, RANK >", "classdarray.html", null ],
+        [ "pdarray< T, RANK >", "classpdarray.html", null ]
       ] ]
     ] ],
-    [ "array_base< T, sizeof...(extents)>", "structarray__base.html", [
-      [ "array_base_static< T, extents >", "classarray__base__static.html", null ],
-      [ "array_base_static< T, SIZES... >", "classarray__base__static.html", [
-        [ "psarray< T, SIZES >", "classpsarray.html", null ],
-        [ "sarray< T, SIZES >", "classsarray.html", null ]
+    [ "array_base< T, sizeof...(EXTENTS)>", "structarray__base.html", [
+      [ "array_base_static< T, EXTENTS >", "classarray__base__static.html", null ],
+      [ "array_base_static< T, EXTENTS... >", "classarray__base__static.html", [
+        [ "psarray< T, EXTENTS >", "classpsarray.html", null ],
+        [ "sarray< T, EXTENTS >", "classsarray.html", null ]
       ] ]
     ] ],
     [ "false_type", null, [

@@ -14,8 +14,10 @@
 /*
 * Lägg till transpose-funktion.
 
+* sliced_array, med stride, lägg till. Finns det nån kort bokstav för det?
+  Vill man bara ha strided för pointer arrays? Kan heta spsarray och spdarray.
+
 Frågor
-* Konstruktör utan initializer list för arrayer med rank=1.
 * copy-construction från samma typ. Hanteras det av de templatiserade konstruktörerna?
 * Single-dimensional construction from:
   - Eigen::Matrix
@@ -23,8 +25,6 @@ Frågor
 * Implicit konvertering? För ägande arrayer: Nej. För pekare ?
 
 * Hur ska nullptr hanteras? Ska man kräva att size()==0 då?
-
-* sliced_array, med stride, lägg till. Finns det nån kort bokstav för det?
 
 * make_pdarray({1,2,4}, data); // Så man slipper redundanta template argument.
   make_darray({1,2}, 0.f);
@@ -37,6 +37,7 @@ Frågor
   - Kvaternioner
   - Expression templates
 * Ha många elementvisa operationer i annan modul: * / % < <= > >= && ! ||.
+* implementera som allmänna funktioner: add, subtract, multiply, divide.
 
 * storage order för matriser.
 - Skulle kunna ha allmän default-templatiserad flagga i class-signature.
@@ -115,6 +116,34 @@ void g(pdarray<int, 2> a)
 	}
 }
 
+template<typename Array2d>
+void fill_and_print_array2d(Array2d& array)
+{
+    assert(array.rank() == 2);
+
+    for (int i = 0; i < array.size(); ++i)
+    {
+        array[i] = i;
+    }
+
+    for (auto& element : array)
+    {
+        element += 10;
+    }
+    
+    using namespace std;
+
+    for (int y = 0; y < array.extent1(); ++y)
+    {
+        for (int x = 0; x < array.extent0(); ++x)
+        {
+            cout << array(x, y) << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
+
 int main()
 {
 	using namespace std;
@@ -149,7 +178,7 @@ int main()
 	auto M = sarray<int, 2, 3>();
 
 	std::array<size_t, 2> sizes = {2, 3};
-	auto f = darray<float, 2>(sizes);
+    auto f = darray<float, 2>({2, 3});
 	auto g = f;
 
 	begin(e);
@@ -162,6 +191,12 @@ int main()
 	data(f);
 	size(f);
 	
+    cout << "print array" << endl;
+    auto static_array2d = sarray<float, 3, 2>();
+    auto dynamic_array2d = darray<int, 2>({ 8, 4 });
+    fill_and_print_array2d(static_array2d);
+    fill_and_print_array2d(dynamic_array2d);
+
 	for (auto x : f)
 	{
 		std::ignore = x;
@@ -170,6 +205,9 @@ int main()
 	for (size_t y = 0; y < f.extent1(); ++y)
 		for (size_t x = 0; x < f.extent0(); ++x)
 			f(x, y);
+
+    for (size_t i = 0; i < f.size(); ++i)
+        f[i];
 
 	M.size();
 	M.rank();

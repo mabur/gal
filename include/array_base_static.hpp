@@ -29,29 +29,30 @@ struct get_size<0, first_size, sizes...>
 	static constexpr size_t value = first_size;
 };
 
-template<typename T, size_t... extents>
-class array_base_static : public array_base<T, sizeof...(extents)>
+/**
+\brief The base class that all static arrays derive from,
+i.e. arrays with size known at compile-time. Defines size and extents for such arrays.
+*/
+template<typename T, size_t... EXTENTS>
+class array_base_static : public array_base<T, sizeof...(EXTENTS)>
 {
 public:
-	using Extents = std::array<size_t, RANK>;
+    using typename array_base<T, sizeof...(EXTENTS)>::extents_type;
 
-	static constexpr size_t SIZE = total_size<extents...>::value;
+	static constexpr size_t size() { return total_size<EXTENTS...>::value; };
 
-	static constexpr size_t size() { return SIZE; };
+    static constexpr extents_type extents() { return{ EXTENTS... }; }
 
-	static constexpr size_t extent0() { return get_size<0, extents...>::value; }
-	static constexpr size_t extent1() { return get_size<1, extents...>::value; }
-	static constexpr size_t extent2() { return get_size<2, extents...>::value; }
-	static constexpr size_t extent3() { return get_size<3, extents...>::value; }
+    template<size_t DIMENSION>
+    static constexpr size_t extent()
+    {
+        return get_size<DIMENSION, EXTENTS...>::value;
+    }
 
-	template<size_t dimension>
-	static constexpr size_t extent()
-	{
-		return get_size<dimension, extents...>::value;
-	}
+	static constexpr size_t extent0() { return extent<0>(); }
+	static constexpr size_t extent1() { return extent<1>(); }
+	static constexpr size_t extent2() { return extent<2>(); }
+	static constexpr size_t extent3() { return extent<3>(); }
 
-	static constexpr Extents extents()
-	{
-		return { extents... };
-	}
+	
 };

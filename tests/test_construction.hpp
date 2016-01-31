@@ -9,6 +9,115 @@
 
 #include "geometry.hpp"
 
+void test_construction_documentation_sarray1()
+{
+    const auto N = size_t{ 10 };
+    const auto M = size_t{ 20 };
+    const auto L = size_t{ 30 };
+    auto array0 = std::array<float, N>();
+    auto array1 = sarray<float, N>();
+    auto array2 = sarray<float, N, M>();
+    auto array3 = sarray<float, N, M, L>();
+}
+
+void test_construction_documentation_darray1()
+{
+    auto N = size_t{ 10 };
+    auto M = size_t{ 20 };
+    auto L = size_t{ 30 };
+    auto array1 = darray<float, 1>({ N });
+    auto array2 = darray<float, 2>({ N, M });
+    auto array3 = darray<float, 3>({ N, M, L });
+}
+
+void test_construction_documentation_sarray2()
+{
+    const auto N = size_t{ 10 };
+    const auto M = size_t{ 20 };
+    auto value = 6.283f;
+    auto array1 = sarray<float, N>(value);
+    auto array2 = sarray<float, N, M>(value);
+}
+
+void test_construction_documentation_sarray3()
+{
+    const auto N = size_t{ 10 };
+    const auto M = size_t{ 20 };
+    auto array0 = std::array<float, N * M>();
+    auto data_pointer = array0.data();
+    auto array1 = sarray<float, N>(data_pointer);
+    auto array2 = sarray<float, N, M>(data_pointer);
+}
+
+void test_construction_documentation_psarray()
+{
+    const auto N = size_t{ 10 };
+    const auto M = size_t{ 20 };
+    auto array0 = std::array<float, N * M>();
+    auto data_pointer = array0.data();
+    auto array1 = psarray<float, N>(data_pointer);
+    auto array2 = psarray<float, N, M>(data_pointer);
+}
+
+void test_construction_documentation_psarray2()
+{
+    const auto N = size_t{ 10 };
+    const auto M = size_t{ 20 };
+    const auto array0 = std::array<float, N * M>();
+    const auto data_pointer = array0.data();
+    auto array1 = psarray<const float, N>(data_pointer);
+    auto array2 = psarray<const float, N, M>(data_pointer);
+}
+
+void test_construction_documentation_darray2()
+{
+    auto N = size_t{ 10 };
+    auto array0 = darray<float>(N);
+    auto array1 = darray<float>({ N });
+    auto array2 = darray<float, 1>(N);
+    auto array3 = darray<float, 1>({ N });
+}
+
+void test_construction_documentation_darray3()
+{
+    auto N = size_t{ 10 };
+    auto M = size_t{ 20 };
+    auto value = 6.283f;
+    auto array1 = std::vector<float>(N, value);
+    auto array2 = darray<float>(N, value); // TODO: allow without braces.
+    auto array3 = darray<float, 2>({ N, M }, value);
+}
+
+void test_construction_documentation_darray4()
+{
+    auto N = size_t{ 10 };
+    auto M = size_t{ 20 };
+    auto array1 = std::vector<float>(N * M);
+    auto data_pointer = array1.data();
+    auto array2 = darray<float>(N, data_pointer);
+    auto array3 = darray<float, 2>({ N, M }, data_pointer);
+}
+
+void test_construction_documentation_pdarray()
+{
+    auto N = size_t{ 10 };
+    auto M = size_t{ 20 };
+    auto array1 = std::vector<float>(N * M);
+    auto data_pointer = array1.data();
+    auto array2 = pdarray<float>(N, data_pointer);
+    auto array3 = pdarray<float, 2>({ N, M }, data_pointer);
+}
+
+void test_construction_documentation_pdarray2()
+{
+    auto N = size_t{ 10 };
+    auto M = size_t{ 20 };
+    const auto array1 = std::vector<float>(N * M);
+    const auto data_pointer = array1.data();
+    auto array2 = pdarray<const float>(N, data_pointer);
+    auto array3 = pdarray<const float, 2>({ N, M }, data_pointer);
+}
+
 void test_construction_sarray()
 {
 	auto sarray0 = sarray<float, 2>();
@@ -52,7 +161,14 @@ void test_construction_pdarray()
 
 void test_construction_psarray()
 {
+    const auto ROWS = size_t{ 3 };
+    const auto COLUMNS = size_t{ 4 };
+    const auto N = ROWS * COLUMNS;
+    auto vector0 = std::vector<float>(N);
 
+    auto psarray0 = psarray<float, N>();
+    //auto psarray1 = psarray<float, N>(vector0.data());
+    auto psarray2 = psarray<float, N>(vector0);
 }
 
 void test_construction_mixed()
