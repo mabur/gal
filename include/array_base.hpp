@@ -21,11 +21,3 @@ struct array_base
 
 	static constexpr size_t rank() { return RANK; }
 };
-
-
-// TODO:
-//template<typename Array>
-//T* data(Array& array);
-
-template<typename Array>
-std::array<size_t, 1> extents(const Array& a) { return std::array<size_t, 1>{a.size()}; }
