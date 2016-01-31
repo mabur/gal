@@ -80,6 +80,55 @@ The following holds for all of the arrays in GAL:
   `std::array<size_t, rank()>`.
 
 
+# Example
+
+```
+void fill_and_print_array2d(Array2d& array)
+{
+    assert(array.rank() == 2);
+
+    for (int i = 0; i < array.size(); ++i)
+    {
+        array[i] = i;
+    }
+
+    for (auto& element : array)
+    {
+        element += 10;
+    }
+    
+    using namespace std;
+
+    for (int y = 0; y < array.extent1(); ++y)
+    {
+        for (int x = 0; x < array.extent0(); ++x)
+        {
+            cout << array(x, y) << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
+
+int main()
+{
+    auto static_array2d = sarray<float, 3, 2>();
+    auto dynamic_array2d = darray<int, 2>({ 8, 4 });
+    fill_and_print_array2d(static_array2d);
+    fill_and_print_array2d(dynamic_array2d);
+}
+```
+Prints:
+```
+10 11 12
+13 14 15
+
+10 11 12 13 14 15 16 17
+18 19 20 21 22 23 24 25
+26 27 28 29 30 31 32 33
+34 35 36 37 38 39 40 41
+```
+
 # Construct Owning Arrays with Uninitialized Data
 
 ## Static Owning Array

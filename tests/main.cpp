@@ -116,6 +116,34 @@ void g(pdarray<int, 2> a)
 	}
 }
 
+template<typename Array2d>
+void fill_and_print_array2d(Array2d& array)
+{
+    assert(array.rank() == 2);
+
+    for (int i = 0; i < array.size(); ++i)
+    {
+        array[i] = i;
+    }
+
+    for (auto& element : array)
+    {
+        element += 10;
+    }
+    
+    using namespace std;
+
+    for (int y = 0; y < array.extent1(); ++y)
+    {
+        for (int x = 0; x < array.extent0(); ++x)
+        {
+            cout << array(x, y) << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
+
 int main()
 {
 	using namespace std;
@@ -150,7 +178,7 @@ int main()
 	auto M = sarray<int, 2, 3>();
 
 	std::array<size_t, 2> sizes = {2, 3};
-	auto f = darray<float, 2>(sizes);
+    auto f = darray<float, 2>({2, 3});
 	auto g = f;
 
 	begin(e);
@@ -163,6 +191,12 @@ int main()
 	data(f);
 	size(f);
 	
+    cout << "print array" << endl;
+    auto static_array2d = sarray<float, 3, 2>();
+    auto dynamic_array2d = darray<int, 2>({ 8, 4 });
+    fill_and_print_array2d(static_array2d);
+    fill_and_print_array2d(dynamic_array2d);
+
 	for (auto x : f)
 	{
 		std::ignore = x;
@@ -171,6 +205,9 @@ int main()
 	for (size_t y = 0; y < f.extent1(); ++y)
 		for (size_t x = 0; x < f.extent0(); ++x)
 			f(x, y);
+
+    for (size_t i = 0; i < f.size(); ++i)
+        f[i];
 
 	M.size();
 	M.rank();
