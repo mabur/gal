@@ -5,23 +5,29 @@
 /**
 \brief Pointer to a dynamic array.
 */
-template<typename T, size_t D = 1>
-class pdarray : public array_base_dynamic<T, D>
+template<typename T, size_t RANK = 1>
+class pdarray : public array_base_dynamic<T, RANK>
 {
 public:
+
+    inline size_t size() const { return size_; }
+
+    static constexpr size_t rank() { return RANK; }
+
+    using Extents = std::array<size_t, RANK>;
 
     pdarray() : data_(nullptr), size_(0) {}
 
 	pdarray(const Extents& extents, T* data)
-		: array_base_dynamic(extents)
+		: array_base_dynamic<T, RANK>(extents)
 		, data_(data)
-		, size_(array_base_dynamic::size())
+		, size_(array_base_dynamic<T, RANK>::size())
 	{
 		assert(data_ != nullptr || size_ == 0); // Keep the assert?
 	}
 
 	pdarray(size_t size, T* data)
-		: array_base_dynamic({size})
+		: array_base_dynamic<T, RANK>({size})
 		, data_(data)
 		, size_(size)
 	{
@@ -31,7 +37,7 @@ public:
 
     template<typename Array>
     explicit pdarray(Array& array)
-		: array_base_dynamic(::extents(array))
+		: array_base_dynamic<T, RANK>(::extents(array))
 		, data_(std::data(array))
 		, size_(array.size())
     {
@@ -40,7 +46,7 @@ public:
 
     template<typename Array>
     explicit pdarray(const Array& array)
-		: array_base_dynamic(::extents(array))
+		: array_base_dynamic<T, RANK>(::extents(array))
 		, data_(std::data(array))
 		, size_(array.size())
     {
@@ -50,7 +56,6 @@ public:
     inline T* begin()    const { return data_; }
     inline T* end()      const { return data_ + size_; }
     inline T* data()     const { return data_; }
-    inline size_t size() const { return size_; }
 
     inline T& operator[](size_t i) const
     {
@@ -58,13 +63,13 @@ public:
         return data_[i];
     }
 
-	T& operator()(size_t i0)                       { return get_element(*this, i0); }
-	T& operator()(size_t i0, size_t i1)            { return get_element(*this, i0, i1); }
-	T& operator()(size_t i0, size_t i1, size_t i2) { return get_element(*this, i0, i1, i2); }
+	T& operator()(size_t i0)                       { return data_[i0]; }
+	T& operator()(size_t i0, size_t i1)            { return data_[i0 + this->extent0() * i1]; }
+    T& operator()(size_t i0, size_t i1, size_t i2) { return data_[i0 + this->extent0() * (i1 + this->extent1() * i2)]; }
 
-	const T& operator()(size_t i0)                       const { return get_element(*this, i0); }
-	const T& operator()(size_t i0, size_t i1)            const { return get_element(*this, i0, i1); }
-	const T& operator()(size_t i0, size_t i1, size_t i2) const { return get_element(*this, i0, i1, i2); }
+	const T& operator()(size_t i0)                       const { return data_[i0]; }
+	const T& operator()(size_t i0, size_t i1)            const { return data_[i0 + this->extent0() * i1]; }
+    const T& operator()(size_t i0, size_t i1, size_t i2) const { return data_[i0 + this->extent0() * (i1 + this->extent1() * i2)]; }
 
 private:
     T* data_;
