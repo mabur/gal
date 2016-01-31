@@ -29,13 +29,13 @@ template<typename T, size_t RANK>
 class array_base_dynamic : public array_base<T, RANK>
 {
 public:
-    using Extents = typename array_base<T, RANK>::Extents;// std::array<size_t, D>;
+    using typename array_base<T, RANK>::extents_type;
 
 	array_base_dynamic() { std::fill(std::begin(extents_), std::end(extents_), 0); }
 
-	array_base_dynamic(const Extents& extents) : extents_(extents) {}
+	array_base_dynamic(const extents_type& extents) : extents_(extents) {}
 
-	Extents extents() const { return extents_; }
+	extents_type extents() const { return extents_; }
 
 	template<size_t d> size_t extent() const { return extents_[d]; }
 
@@ -45,5 +45,5 @@ public:
 	size_t extent3() const { return extents_[3]; }
 
 private:
-	Extents extents_;
+	extents_type extents_;
 };

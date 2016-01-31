@@ -33,7 +33,7 @@ template<typename T, size_t... EXTENTS>
 class array_base_static : public array_base<T, sizeof...(EXTENTS)>
 {
 public:
-    using Extents = typename array_base<T, sizeof...(EXTENTS)>::Extents;
+    using typename array_base<T, sizeof...(EXTENTS)>::extents_type;
 
 	static constexpr size_t size()    { return total_size<EXTENTS...>::value; };
 
@@ -48,5 +48,5 @@ public:
 		return get_size<dimension, EXTENTS...>::value;
 	}
 
-	static constexpr Extents extents() { return { EXTENTS... }; }
+	static constexpr extents_type extents() { return { EXTENTS... }; }
 };

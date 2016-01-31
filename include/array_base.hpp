@@ -4,17 +4,6 @@
 
 #include "non_member_functions.hpp"
 
-// TODO:
-//template<typename Array>
-//T* data(Array& array);
-
-//template<size_t RANK>
-//using Extents = std::array<size_t, RANK>;
-
-template<typename Array>
-std::array<size_t, 1> extents(const Array& a) { return std::array<size_t, 1>{a.size()}; }
-
-
 template<typename Array>
 typename Array::reference get_element(Array& a, size_t i0)
 {
@@ -84,7 +73,7 @@ struct array_base
 	using size_type			= std::size_t;
 	using difference_type	= std::ptrdiff_t;
 
-    using Extents = std::array<size_t, RANK>;
+    using extents_type      = std::array<size_t, RANK>;
 
 	static constexpr size_t rank() { return RANK; }
 
@@ -127,3 +116,11 @@ struct array_base
     //	//return data_[i0 + extent0() * i1 + extent0() * extent1() * i2];
     //}
 };
+
+
+// TODO:
+//template<typename Array>
+//T* data(Array& array);
+
+template<typename Array>
+std::array<size_t, 1> extents(const Array& a) { return std::array<size_t, 1>{a.size()}; }

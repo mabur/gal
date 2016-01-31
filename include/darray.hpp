@@ -13,21 +13,21 @@ class darray : public array_base_dynamic<T, RANK>
 {
 public:
 
-    using Extents = typename array_base<T, RANK>::Extents;
+    using typename array_base<T, RANK>::extents_type;
 
 	darray() = default;
 	
-	explicit darray(const Extents& extents)
+	explicit darray(const extents_type& extents)
 		: array_base_dynamic<T, RANK>(extents)
 		, data_(product(extents))
 	{}
 
-	darray(const Extents& extents, const T& value)
+	darray(const extents_type& extents, const T& value)
 		: array_base_dynamic<T, RANK>(extents)
 		, data_(value, product(extents))
 	{}
 
-	darray(const Extents& extents, const T* data_begin)
+	darray(const extents_type& extents, const T* data_begin)
 		: array_base_dynamic<T, RANK>(extents)
 		, data_(product(extents))
 	{

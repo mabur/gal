@@ -10,11 +10,11 @@ class pdarray : public array_base_dynamic<T, RANK>
 {
 public:
 
-    using Extents = typename array_base<T, RANK>::Extents;    
+    using typename array_base<T, RANK>::extents_type;
 
     pdarray() : data_(nullptr), size_(0) {}
 
-	pdarray(const Extents& extents, T* data)
+	pdarray(const extents_type& extents, T* data)
 		: array_base_dynamic<T, RANK>(extents)
 		, data_(data)
 		, size_(product(extents))
