@@ -37,7 +37,8 @@ public:
 
 	extents_type extents() const { return extents_; }
 
-	template<size_t d> size_t extent() const { return extents_[d]; }
+	template<size_t DIMENSION>
+    size_t extent() const { return extents_[DIMENSION]; }
 
 	size_t extent0() const { return extents_[0]; }
 	size_t extent1() const { return extents_[1]; }

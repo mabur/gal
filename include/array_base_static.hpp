@@ -37,10 +37,10 @@ public:
 
 	static constexpr size_t size() { return total_size<EXTENTS...>::value; };
 
-    template<size_t dimension>
+    template<size_t DIMENSION>
     static constexpr size_t extent()
     {
-        return get_size<dimension, EXTENTS...>::value;
+        return get_size<DIMENSION, EXTENTS...>::value;
     }
 
 	static constexpr size_t extent0() { return extent<0>(); }
