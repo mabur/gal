@@ -13,26 +13,23 @@ class darray : public array_base_dynamic<T, RANK>
 {
 public:
 
-    size_t size() const { return data_.size(); };
-    static constexpr size_t rank() { return RANK; }
-
-    using Extents = std::array<size_t, RANK>;
+    using Extents = typename array_base<T, RANK>::Extents;
 
 	darray() = default;
 	
 	explicit darray(const Extents& extents)
 		: array_base_dynamic<T, RANK>(extents)
-		, data_(array_base_dynamic<T, RANK>::size())
+		, data_(product(extents))
 	{}
 
 	darray(const Extents& extents, const T& value)
 		: array_base_dynamic<T, RANK>(extents)
-		, data_(value, array_base_dynamic<T, RANK>::size())
+		, data_(value, product(extents))
 	{}
 
 	darray(const Extents& extents, const T* data_begin)
 		: array_base_dynamic<T, RANK>(extents)
-		, data_(array_base_dynamic<T, RANK>::size())
+		, data_(product(extents))
 	{
 		std::copy(data_begin, data_begin + size(), std::begin(data_));                
 	}
@@ -67,7 +64,7 @@ public:
 		std::copy(std::begin(array), std::end(array), std::begin(data_));
 	}
 
-	
+    size_t size() const { return data_.size(); };
 	
 	T*       begin()       {return std::begin(data_);};
 	const T* begin() const {return std::begin(data_);};

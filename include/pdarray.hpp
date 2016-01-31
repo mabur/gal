@@ -10,18 +10,14 @@ class pdarray : public array_base_dynamic<T, RANK>
 {
 public:
 
-    inline size_t size() const { return size_; }
-
-    static constexpr size_t rank() { return RANK; }
-
-    using Extents = std::array<size_t, RANK>;
+    using Extents = typename array_base<T, RANK>::Extents;    
 
     pdarray() : data_(nullptr), size_(0) {}
 
 	pdarray(const Extents& extents, T* data)
 		: array_base_dynamic<T, RANK>(extents)
 		, data_(data)
-		, size_(array_base_dynamic<T, RANK>::size())
+		, size_(product(extents))
 	{
 		assert(data_ != nullptr || size_ == 0); // Keep the assert?
 	}
@@ -53,6 +49,7 @@ public:
 		assert(data_ != nullptr || size_ == 0); // Keep the assert?
     }
 
+    inline size_t size() const { return size_; }
     inline T* begin()    const { return data_; }
     inline T* end()      const { return data_ + size_; }
     inline T* data()     const { return data_; }

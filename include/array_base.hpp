@@ -71,7 +71,7 @@ typename Array::const_reference get_element(const Array& a, size_t i0, size_t i1
     //return data_[i0 + extent0() * i1 + extent0() * extent1() * i2];
 }
 
-template<typename T, size_t RANK_>
+template<typename T, size_t RANK>
 struct array_base
 {
 	using value_type		= T;
@@ -84,48 +84,46 @@ struct array_base
 	using size_type			= std::size_t;
 	using difference_type	= std::ptrdiff_t;
 
-    static const size_t RANK = RANK_;
+    using Extents = std::array<size_t, RANK>;
 
 	static constexpr size_t rank() { return RANK; }
 
-    using Extents = std::array<size_t, RANK>;
-
-	//template<typename Array, typename... Indices>
-	//static typename Array::const_reference get_element(const Array& a, size_t index, Indices... indices)
+	//template<typename Array, size_t dimension>
+	//static size_t product_size(const Array& a)
 	//{
-	//	return a[offset<Array, a.rank(), Indices...>(a, indices...)];
-	//	//return data_[i0 + extent0() * i1 + extent0() * extent1() * i2];
+	//	size_t product = 1;
+	//	for (size_t i = 0; i < dimension; ++i)
+	//	{
+	//		product *= a.size<dimension>();
+	//	}
+	//	return product;
 	//}
 
-	//template<typename Array, size_t dimension, typename... Indices>
-	//static size_t offset(const Array& a, size_t index, Indices... indices)
-	//{
-	//	static_assert(sizeof...(indices) <= a.rank());
-	//	return index + a.extent<dimension>() * offset<Array, dimension - 1, Indices>(indices...);
-	//	// Kan inte kalla på offset här.
-	//}
+    //template<typename Array, typename... Indices>
+    //static typename Array::const_reference get_element(const Array& a, size_t index, Indices... indices)
+    //{
+    //	return a[offset<Array, a.rank(), Indices...>(a, indices...)];
+    //	//return data_[i0 + extent0() * i1 + extent0() * extent1() * i2];
+    //}
 
-	template<typename Array, size_t dimension, typename... Indices>
-	static size_t offset(const Array& a, Indices... indices)
-	{
-		return index;
-	}
+    //template<typename Array, size_t dimension, typename... Indices>
+    //static size_t offset(const Array& a, size_t index, Indices... indices)
+    //{
+    //	static_assert(sizeof...(indices) <= a.rank());
+    //	return index + a.extent<dimension>() * offset<Array, dimension - 1, Indices>(indices...);
+    //	// Kan inte kalla på offset här.
+    //}
 
-	template<typename Array, typename... Indices>
-	static typename Array::const_reference get_element(const Array& a, Indices... indices)
-	{
-		return a[offset<Array, a.rank(), Indices...>(a, indices...)];
-		//return data_[i0 + extent0() * i1 + extent0() * extent1() * i2];
-	}
+    //template<typename Array, size_t dimension, typename... Indices>
+    //static size_t offset(const Array& a, Indices... indices)
+    //{
+    //	return index;
+    //}
 
-	template<typename Array, size_t dimension>
-	static size_t product_size(const Array& a)
-	{
-		size_t product = 1;
-		for (size_t i = 0; i < dimension; ++i)
-		{
-			product *= a.size<dimension>();
-		}
-		return product;
-	}
+    //template<typename Array, typename... Indices>
+    //static typename Array::const_reference get_element(const Array& a, Indices... indices)
+    //{
+    //	return a[offset<Array, a.rank(), Indices...>(a, indices...)];
+    //	//return data_[i0 + extent0() * i1 + extent0() * extent1() * i2];
+    //}
 };

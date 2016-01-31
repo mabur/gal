@@ -14,11 +14,10 @@ class sarray : public array_base_static<T, EXTENTS...>
 {
 public:
 
-    static const size_t RANK = sizeof...(EXTENTS);
-    static const size_t SIZE = total_size<EXTENTS...>::value;
-
-    static constexpr size_t size() { return SIZE; };
-    static constexpr size_t rank() { return RANK; }
+    static constexpr size_t SIZE = array_base_static<T, EXTENTS...>::size();
+    using array_base_static<T, EXTENTS...>::size;
+    using array_base_static<T, EXTENTS...>::extent;
+    using array_base_static<T, EXTENTS...>::extent0;
 
 	sarray() = default;
 
@@ -51,16 +50,6 @@ public:
 		std::copy(std::begin(array), std::end(array), std::begin(data_));
 	}
 
-	static constexpr size_t extent0() { return get_size<0, EXTENTS...>::value; }
-	static constexpr size_t extent1() { return get_size<1, EXTENTS...>::value; }
-	static constexpr size_t extent2() { return get_size<2, EXTENTS...>::value; }
-	static constexpr size_t extent3() { return get_size<3, EXTENTS...>::value; }
-
-	static constexpr std::array<size_t, sizeof...(EXTENTS)> extents()
-    {
-        return std::array<size_t, sizeof...(EXTENTS)>{EXTENTS...};
-    }
-
 	T*       begin()       {return data();};
 	const T* begin() const {return data();};
 
@@ -75,11 +64,11 @@ public:
 
 	T& operator()(size_t i0)                       { return data_[i0]; }
 	T& operator()(size_t i0, size_t i1)            { return data_[i0 + extent0() * i1]; }
-    T& operator()(size_t i0, size_t i1, size_t i2) { return data_[i0 + extent0() * (i1 + extent1() * i2)]; }
+    T& operator()(size_t i0, size_t i1, size_t i2) { return data_[i0 + extent<0>() * (i1 + extent<1>() * i2)]; }
 
 	const T& operator()(size_t i0)                       const { return data_[i0]; }
-	const T& operator()(size_t i0, size_t i1)            const { return data_[i0 + extent0() * i1]; }
-    const T& operator()(size_t i0, size_t i1, size_t i2) const { return data_[i0 + extent0() * (i1 + extent1() * i2)]; }
+	const T& operator()(size_t i0, size_t i1)            const { return data_[i0 + extent<0>() * i1]; }
+    const T& operator()(size_t i0, size_t i1, size_t i2) const { return data_[i0 + extent<0>() * (i1 + extent<1>() * i2)]; }
 
 private:
 

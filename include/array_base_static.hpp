@@ -33,13 +33,9 @@ template<typename T, size_t... EXTENTS>
 class array_base_static : public array_base<T, sizeof...(EXTENTS)>
 {
 public:
-    static constexpr size_t rank() { return sizeof...(EXTENTS); }
+    using Extents = typename array_base<T, sizeof...(EXTENTS)>::Extents;
 
-	static constexpr size_t SIZE = total_size<EXTENTS...>::value;
-
-    using Extents = std::array<size_t, sizeof...(EXTENTS)>;
-
-	static constexpr size_t size() { return SIZE; };
+	static constexpr size_t size()    { return total_size<EXTENTS...>::value; };
 
 	static constexpr size_t extent0() { return get_size<0, EXTENTS...>::value; }
 	static constexpr size_t extent1() { return get_size<1, EXTENTS...>::value; }
@@ -52,8 +48,5 @@ public:
 		return get_size<dimension, EXTENTS...>::value;
 	}
 
-	static constexpr Extents extents()
-	{
-		return { EXTENTS... };
-	}
+	static constexpr Extents extents() { return { EXTENTS... }; }
 };
