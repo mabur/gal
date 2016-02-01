@@ -1,11 +1,32 @@
 #pragma once
 
-// TODO:
-//template<typename Array>
-//T* data(Array& array);
+namespace details
+{
 
 template<typename Array>
-std::array<size_t, 1> extents(const Array& a) { return std::array<size_t, 1>{a.size()}; }
+size_t offset(const Array&)
+{
+    return 0;
+}
+
+template<typename Array, typename ... INDICES>
+size_t offset(const Array& a, size_t index, INDICES ... indices)
+{
+    constexpr auto e = Array::rank() - 1 - sizeof...(indices);
+    return index + a.template extent<e>() * offset(a, indices...);
+}
+
+template<typename Array, typename ... INDICES>
+typename Array::const_reference index(const Array& a, INDICES ... indices)
+{
+    return a[offset(a, indices ...)];
+}
+
+template<typename Array, typename ... INDICES>
+typename Array::reference index(Array& a, INDICES ... indices)
+{
+    return a[offset(a, indices ...)];
+}
 
 template<size_t size> inline size_t product(const size_t* array);
 
@@ -21,30 +42,22 @@ size_t product(const size_t* array)
     return array[0] * product<size - 1>(array + 1);
 }
 
+template<size_t size> inline
+size_t product(const std::array<size_t, size>& array)
+{
+    return product<size>(&array.front());
+}
 
-template<typename T, typename _ = void>
-struct is_container : std::false_type {};
+template<size_t size, size_t... sizes>
+struct total_size
+{
+    static constexpr size_t value = size * total_size<sizes...>::value;
+};
 
-template<typename... Ts>
-struct is_container_helper {};
+template<size_t size>
+struct total_size<size>
+{
+    static constexpr size_t value = size;
+};
 
-template<typename T>
-struct is_container<
-	T,
-	std::conditional_t<
-	false,
-	is_container_helper<
-	//typename T::value_type,
-	//typename T::size_type,
-	//typename T::allocator_type,
-	//typename T::iterator,
-	//typename T::const_iterator,
-	decltype(std::declval<T>().size()),
-	decltype(std::declval<T>().begin()),
-	decltype(std::declval<T>().end())//,
-	//decltype(std::declval<T>().cbegin()),
-	//decltype(std::declval<T>().cend())
-	>,
-	void
-	>
-> : public std::true_type{};
+} // namespace details
