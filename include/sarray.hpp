@@ -62,10 +62,10 @@ public:
 	const T& operator[](size_t i) const { return data_[i]; }
 
     template<typename ... INDICES>
-    T& operator()(INDICES ... indices) { return index(*this, indices...); }
+    T& operator()(INDICES ... indices) { return details::index(*this, indices...); }
 
     template<typename ... INDICES>
-    const T& operator()(INDICES ... indices) const { return index(*this, indices...); }
+    const T& operator()(INDICES ... indices) const { return details::index(*this, indices...); }
 
 private:
     static constexpr size_t SIZE = array_base_static<T, EXTENTS...>::size();

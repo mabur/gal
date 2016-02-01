@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cassert>
+
 #include "array_base_static.hpp"
 
 /**
@@ -38,10 +40,10 @@ public:
 	}
 
     template<typename ... INDICES>
-    T& operator()(INDICES ... indices) { return index(*this, indices...); }
+    T& operator()(INDICES ... indices) { return details::index(*this, indices...); }
 
     template<typename ... INDICES>
-    const T& operator()(INDICES ... indices) const { return index(*this, indices...); }
+    const T& operator()(INDICES ... indices) const { return details::index(*this, indices...); }
 
 private:
 	T* data_;

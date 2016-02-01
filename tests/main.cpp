@@ -148,12 +148,7 @@ int main()
 {
 	using namespace std;
 
-	cout << "total_size: " << total_size<1, 2, 3>::value << endl;
-
-	cout << "get_extent0: " << get_size<0, 8, 9, 6, 5>::value << endl;
-	cout << "get_extent1: " << get_size<1, 8, 9, 6, 5>::value << endl;
-	cout << "get_extent2: " << get_size<2, 8, 9, 6, 5>::value << endl;
-	cout << "get_extent3: " << get_size<3, 8, 9, 6, 5>::value << endl;
+	cout << "total_size: " << details::total_size<1, 2, 3>::value << endl;
 
 	const auto W = size_t(4);
 	const auto H = size_t(3);

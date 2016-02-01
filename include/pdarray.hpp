@@ -19,7 +19,7 @@ public:
 	pdarray(const extents_type& extents, T* data)
 		: array_base_dynamic<T, RANK>(extents)
 		, data_(data)
-		, size_(product(extents))
+		, size_(details::product(extents))
 	{
 		assert(data_ != nullptr || size_ == 0); // Keep the assert?
 	}
@@ -63,10 +63,10 @@ public:
     }
 
     template<typename ... INDICES>
-    T& operator()(INDICES ... indices) { return index(*this, indices...); }
+    T& operator()(INDICES ... indices) { return details::index(*this, indices...); }
 
     template<typename ... INDICES>
-    const T& operator()(INDICES ... indices) const { return index(*this, indices...); }
+    const T& operator()(INDICES ... indices) const { return details::index(*this, indices...); }
 
 private:
     T* data_;

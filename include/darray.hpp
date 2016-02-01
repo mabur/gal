@@ -19,17 +19,17 @@ public:
 	
 	explicit darray(const extents_type& extents)
 		: array_base_dynamic<T, RANK>(extents)
-		, data_(product(extents))
+		, data_(details::product(extents))
 	{}
 
 	darray(const extents_type& extents, const T& value)
 		: array_base_dynamic<T, RANK>(extents)
-		, data_(value, product(extents))
+		, data_(value, details::product(extents))
 	{}
 
 	darray(const extents_type& extents, const T* data_begin)
 		: array_base_dynamic<T, RANK>(extents)
-		, data_(product(extents))
+		, data_(details::product(extents))
 	{
 		std::copy(data_begin, data_begin + size(), std::begin(data_));                
 	}
@@ -88,10 +88,10 @@ public:
 	}
 
     template<typename ... INDICES>
-    T& operator()(INDICES ... indices) { return index(*this, indices...); }
+    T& operator()(INDICES ... indices) { return details::index(*this, indices...); }
 
     template<typename ... INDICES>
-    const T& operator()(INDICES ... indices) const { return index(*this, indices...); }
+    const T& operator()(INDICES ... indices) const { return details::index(*this, indices...); }
 
 private:
 	std::valarray<T> data_;

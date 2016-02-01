@@ -26,28 +26,3 @@ struct array_base
 
 	static constexpr size_t rank() { return RANK; }
 };
-
-template<typename Array>
-size_t offset(const Array&)
-{
-    return 0;
-}
-
-template<typename Array, typename ... INDICES>
-size_t offset(const Array& a, size_t index, INDICES ... indices)
-{
-    constexpr auto e = Array::rank() - 1 - sizeof...(indices);
-    return index + a.template extent<e>() * offset(a, indices...);
-}
-
-template<typename Array, typename ... INDICES>
-typename Array::const_reference index(const Array& a, INDICES ... indices)
-{
-    return a[offset(a, indices ...)];
-}
-
-template<typename Array, typename ... INDICES>
-typename Array::reference index(Array& a, INDICES ... indices)
-{
-    return a[offset(a, indices ...)];
-}
