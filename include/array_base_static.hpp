@@ -53,6 +53,4 @@ public:
 	static constexpr size_t extent1() { return extent<1>(); }
 	static constexpr size_t extent2() { return extent<2>(); }
 	static constexpr size_t extent3() { return extent<3>(); }
-
-	
 };

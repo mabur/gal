@@ -61,13 +61,11 @@ public:
 	T&       operator[](size_t i)       { return data_[i]; }
 	const T& operator[](size_t i) const { return data_[i]; }
 
-	T& operator()(size_t i0)                       { return data_[i0]; }
-	T& operator()(size_t i0, size_t i1)            { return data_[i0 + extent0() * i1]; }
-    T& operator()(size_t i0, size_t i1, size_t i2) { return data_[i0 + extent<0>() * (i1 + extent<1>() * i2)]; }
+    template<typename ... INDICES>
+    T& operator()(INDICES ... indices) { return index(*this, indices...); }
 
-	const T& operator()(size_t i0)                       const { return data_[i0]; }
-	const T& operator()(size_t i0, size_t i1)            const { return data_[i0 + extent<0>() * i1]; }
-    const T& operator()(size_t i0, size_t i1, size_t i2) const { return data_[i0 + extent<0>() * (i1 + extent<1>() * i2)]; }
+    template<typename ... INDICES>
+    const T& operator()(INDICES ... indices) const { return index(*this, indices...); }
 
 private:
     static constexpr size_t SIZE = array_base_static<T, EXTENTS...>::size();
