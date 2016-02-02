@@ -24,7 +24,7 @@ public:
 	template<typename Array>
 	explicit psarray(Array& array,
 		typename std::is_same<T, typename Array::value_type>::type* = nullptr)
-		: data_(std::data(array))
+		: data_(::data(array))
 	{
 		assert(array.size() == size());
 	}
