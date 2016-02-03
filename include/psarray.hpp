@@ -17,6 +17,8 @@ public:
 
 	psarray() : data_(nullptr) {}
 
+    psarray(const psarray<T, EXTENTS...>&) = default;
+
     // TODO: fix.
 	explicit psarray(T* data) : data_(data) {}
 

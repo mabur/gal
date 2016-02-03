@@ -16,6 +16,8 @@ public:
 
     pdarray() : data_(nullptr), size_(0) {}
 
+    pdarray(const pdarray<T, RANK>&) = default;
+
 	pdarray(const extents_type& extents, T* data)
 		: array_base_dynamic<T, RANK>(extents)
 		, data_(data)

@@ -16,6 +16,8 @@ public:
     using typename array_base<T, RANK>::extents_type;
 
 	darray() = default;
+
+    darray(const darray<T, RANK>&) = default;
 	
 	explicit darray(const extents_type& extents)
 		: array_base_dynamic<T, RANK>(extents)

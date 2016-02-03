@@ -20,6 +20,8 @@ public:
 
 	sarray() = default;
 
+    sarray(const sarray<T, EXTENTS...>&) = default;
+
 	//explicit sarray(const std::array<T, total_size<EXTENTS...>::value>& data)
 	//	: data_(data)
 	//{}
