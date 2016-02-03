@@ -37,6 +37,15 @@ public:
 		assert(data_ != nullptr || size_ == 0); // Keep the assert?
 	}
 
+    template<typename S>
+    explicit pdarray(const pdarray<S, RANK>& array)
+        : array_base_dynamic<T, RANK>(array.extents())
+        , data_(array.data())
+        , size_(array.size())
+    {
+        assert(data_ != nullptr || size_ == 0); // Keep the assert?
+    }
+
     template<typename Array>
     explicit pdarray(Array& array)
 		: array_base_dynamic<T, RANK>(::extents(array))

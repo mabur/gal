@@ -24,6 +24,11 @@ public:
     // TODO: fix.
 	explicit psarray(T* data) : data_(data) {}
 
+    template<typename S>
+    explicit psarray(const psarray<S, EXTENTS...>& array)
+        : data_(array.data())
+    {}
+
 	// TODO: fix.
 	template<typename Array>
 	explicit psarray(Array& array,
