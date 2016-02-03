@@ -44,10 +44,8 @@ public:
 		std::copy(data_begin, data_begin + size(), std::begin(data_));
 	}
 
-	// TODO: fix.
-	template<typename Array>
-	explicit sarray(const Array& array,
-		typename std::is_same<T, typename Array::value_type>::type* = nullptr)
+	template<typename Array, typename Array::value_type* = nullptr>
+	explicit sarray(const Array& array)
 	{
 		assert(array.size() == size());
 		std::copy(std::begin(array), std::end(array), std::begin(data_));

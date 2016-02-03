@@ -21,7 +21,6 @@ public:
 
     psarray<T, EXTENTS...>& operator=(const psarray<T, EXTENTS...>&) = default;
 
-    // TODO: fix.
 	explicit psarray(T* data) : data_(data) {}
 
     template<typename S>
@@ -29,18 +28,23 @@ public:
         : data_(array.data())
     {}
 
-	// TODO: fix.
-	template<typename Array>
-	explicit psarray(Array& array,
-		typename std::is_same<T, typename Array::value_type>::type* = nullptr)
+	template<typename Array, typename Array::value_type* = nullptr>
+	explicit psarray(Array& array)
 		: data_(::data(array))
 	{
 		assert(array.size() == size());
 	}
 
-	inline T* begin()    const { return data_; }
-	inline T* end()      const { return data_ + size(); }
-	inline T* data()     const { return data_; }
+    template<typename Array, typename Array::value_type* = nullptr>
+    explicit psarray(const Array& array)
+        : data_(::data(array))
+    {
+        assert(array.size() == size());
+    }
+
+	inline T* begin() const { return data_; }
+	inline T* end()   const { return data_ + size(); }
+	inline T* data()  const { return data_; }
 
 	inline T& operator[](size_t i) const
 	{

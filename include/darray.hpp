@@ -60,8 +60,8 @@ public:
 		std::copy(data_begin, data_begin + size, std::begin(data_));
 	}
 
-	template<typename Array>
-	explicit darray(const Array& array, typename std::is_same<T, typename Array::value_type>::type* = nullptr)
+	template<typename Array, typename Array::value_type* = nullptr>
+	explicit darray(const Array& array)
 		: array_base_dynamic<T, RANK>(::extents(array))
 		, data_(array.size())
 	{
