@@ -18,6 +18,8 @@ public:
 
     pdarray(const pdarray<T, RANK>&) = default;
 
+    pdarray<T, RANK>& operator=(const pdarray<T, RANK>&) = default;
+
 	pdarray(const extents_type& extents, T* data)
 		: array_base_dynamic<T, RANK>(extents)
 		, data_(data)

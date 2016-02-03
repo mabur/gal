@@ -22,6 +22,8 @@ public:
 
     sarray(const sarray<T, EXTENTS...>&) = default;
 
+    sarray<T, EXTENTS...>& operator=(const sarray<T, EXTENTS...>&) = default;
+
 	//explicit sarray(const std::array<T, total_size<EXTENTS...>::value>& data)
 	//	: data_(data)
 	//{}

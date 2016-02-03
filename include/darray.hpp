@@ -18,6 +18,8 @@ public:
 	darray() = default;
 
     darray(const darray<T, RANK>&) = default;
+
+    darray<T, RANK>& operator=(const darray<T, RANK>&) = default;
 	
 	explicit darray(const extents_type& extents)
 		: array_base_dynamic<T, RANK>(extents)

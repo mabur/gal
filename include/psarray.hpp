@@ -19,6 +19,8 @@ public:
 
     psarray(const psarray<T, EXTENTS...>&) = default;
 
+    psarray<T, EXTENTS...>& operator=(const psarray<T, EXTENTS...>&) = default;
+
     // TODO: fix.
 	explicit psarray(T* data) : data_(data) {}
 
