@@ -22,7 +22,7 @@ struct array_base
 	using size_type			= size_t;
 	using difference_type	= ptrdiff_t;
 
-    using extents_type      = std::array<size_t, RANK>;
+    using extents_type      = extents_t<RANK>;
 
 	static constexpr size_t rank() { return RANK; }
 };

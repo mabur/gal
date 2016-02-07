@@ -96,4 +96,4 @@ template<typename T, size_t D> size_t    size(const pdarray<T, D>& a) { return a
 
 template<typename T, size_t D> constexpr size_t rank(const pdarray<T, D>& a) { return a.rank(); }
 
-template<typename T, size_t D> std::array<size_t, D> extents(const pdarray<T, D>& a) { return a.extents(); }
+template<typename T, size_t D> extents_t<D> extents(const pdarray<T, D>& a) { return a.extents(); }

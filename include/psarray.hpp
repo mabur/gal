@@ -70,6 +70,6 @@ template<typename T, size_t... EXTENTS> T*         end(psarray<T, EXTENTS...>& a
 template<typename T, size_t... EXTENTS> const T*   end(const psarray<T, EXTENTS...>& a) { return a.end(); }
 template<typename T, size_t... EXTENTS> size_t    size(const psarray<T, EXTENTS...>& a) { return a.size(); }
 
-template<typename T, size_t... EXTENTS> std::array<size_t, sizeof...(EXTENTS)> extents(const psarray<T, EXTENTS...>& a) { return a.extents(); }
+template<typename T, size_t... EXTENTS> extents_t<sizeof...(EXTENTS)> extents(const psarray<T, EXTENTS...>& a) { return a.extents(); }
 
 template<typename T, size_t W, size_t H> constexpr size_t rank(const psarray<T, W, H>& a) { return a.rank(); }

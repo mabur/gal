@@ -108,7 +108,7 @@ template<typename T, size_t D> const T* begin(const darray<T, D>& a) { return a.
 template<typename T, size_t D> T*         end(      darray<T, D>& a) { return a.end(); }
 template<typename T, size_t D> const T*   end(const darray<T, D>& a) { return a.end(); }
 template<typename T, size_t D> size_t    size(const darray<T, D>& a) { return a.size(); }
-template<typename T, size_t D> std::array<size_t, D> extents(const darray<T, D>& a) { return a.extents(); }
+template<typename T, size_t D> extents_t<D> extents(const darray<T, D>& a) { return a.extents(); }
 
 template<typename T, size_t D> constexpr size_t rank(const darray<T, D>& a) { return a.rank(); }
 
