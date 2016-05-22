@@ -220,6 +220,7 @@ int main()
 			M(row, col);
 
 	testVectors();
+    testMatrices();
 	/*
 	testArithmeticStaticArrays();
 	testArithmeticDynamicArrays();
