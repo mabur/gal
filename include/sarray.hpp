@@ -28,6 +28,7 @@ public:
     using const_iterator  = const T*;
     using size_type       = size_t;
     using difference_type = ptrdiff_t;
+    using extents_type    = std::array<size_t, sizeof...(EXTENTS)>;
 //  ____________________________________________________________________________
 //  These are the same for all static arrays in gal:
 private:
@@ -35,9 +36,9 @@ private:
     static const size_t RANK = sizeof...(EXTENTS);
 
 public:
-    static constexpr size_t size()             { return SIZE; };
-    static constexpr size_t rank()             { return RANK; }
-    static constexpr extents_t<RANK> extents() { return{ EXTENTS... }; }
+    static constexpr size_t size()          { return SIZE; };
+    static constexpr size_t rank()          { return RANK; }
+    static constexpr extents_type extents() { return{ EXTENTS... }; }
 
     template<size_t DIMENSION>
     static constexpr size_t extent()

@@ -26,7 +26,7 @@ public:
 	using const_iterator	= const T*;
 	using size_type			= size_t;
 	using difference_type	= ptrdiff_t;
-    using extents_type      = extents_t<RANK>;
+    using extents_type      = std::array<size_t, RANK>;
 //  ____________________________________________________________________________
 //  These are the same for all dynamic arrays in gal:
 public:
