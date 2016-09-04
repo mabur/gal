@@ -17,30 +17,30 @@ class pdarray
 //  ____________________________________________________________________________
 //  These are the same for all arrays in gal:
 public:
-    using value_type		= T;
-	using reference			= T&;
-	using const_reference	= const T&;
-	using pointer			= T*;
-	using const_pointer		= const T*;
-	using iterator			= T*;
-	using const_iterator	= const T*;
-	using size_type			= size_t;
-	using difference_type	= ptrdiff_t;
+    using value_type        = T;
+    using reference         = T&;
+    using const_reference   = const T&;
+    using pointer           = T*;
+    using const_pointer     = const T*;
+    using iterator          = T*;
+    using const_iterator    = const T*;
+    using size_type         = size_t;
+    using difference_type   = ptrdiff_t;
     using extents_type      = std::array<size_t, RANK>;
 //  ____________________________________________________________________________
 //  These are the same for all dynamic arrays in gal:
 public:
-	static constexpr size_t rank() { return RANK; }
+    static constexpr size_t rank() { return RANK; }
 
-	extents_type extents() const { return extents_; }
+    extents_type extents() const { return extents_; }
 
-	template<size_t DIMENSION>
+    template<size_t DIMENSION>
     size_t extent() const { return extents_[DIMENSION]; }
 
-	size_t extent0() const { return extents_[0]; }
-	size_t extent1() const { return extents_[1]; }
-	size_t extent2() const { return extents_[2]; }
-	size_t extent3() const { return extents_[3]; }
+    size_t extent0() const { return extents_[0]; }
+    size_t extent1() const { return extents_[1]; }
+    size_t extent2() const { return extents_[2]; }
+    size_t extent3() const { return extents_[3]; }
     size_t extent4() const { return extents_[4]; }
     size_t extent5() const { return extents_[5]; }
     size_t extent6() const { return extents_[6]; }
@@ -49,7 +49,7 @@ public:
     size_t extent9() const { return extents_[9]; }
 
 private:
-	extents_type extents_;
+    extents_type extents_;
 //  ____________________________________________________________________________
 //  pdarray specifics:
 public:
@@ -64,22 +64,22 @@ public:
 
     pdarray<T, RANK>& operator=(const pdarray<T, RANK>&) = default;
 
-	pdarray(const extents_type& extents, T* data)
-		: extents_(extents)
-		, data_(data)
-		, size_(details::product(extents))
-	{
-		assert(data_ != nullptr || size_ == 0); // Keep the assert?
-	}
+    pdarray(const extents_type& extents, T* data)
+        : extents_(extents)
+        , data_(data)
+        , size_(details::product(extents))
+    {
+        assert(data_ != nullptr || size_ == 0); // Keep the assert?
+    }
 
-	pdarray(size_t size, T* data)
-		: extents_({size})
-		, data_(data)
-		, size_(size)
-	{
-		static_assert(RANK == 1, "Wrong rank");
-		assert(data_ != nullptr || size_ == 0); // Keep the assert?
-	}
+    pdarray(size_t size, T* data)
+        : extents_({size})
+        , data_(data)
+        , size_(size)
+    {
+        static_assert(RANK == 1, "Wrong rank");
+        assert(data_ != nullptr || size_ == 0); // Keep the assert?
+    }
 
     template<typename S>
     explicit pdarray(const pdarray<S, RANK>& array)
@@ -92,20 +92,20 @@ public:
 
     template<typename Array>
     explicit pdarray(Array& array)
-		: extents_(::extents(array))
-		, data_(::data(array))
-		, size_(array.size())
+        : extents_(::extents(array))
+        , data_(::data(array))
+        , size_(array.size())
     {
-		assert(data_ != nullptr || size_ == 0); // Keep the assert?
+        assert(data_ != nullptr || size_ == 0); // Keep the assert?
     }
 
     template<typename Array>
     explicit pdarray(const Array& array)
-		: extents_(::extents(array))
-		, data_(::data(array))
-		, size_(array.size())
+        : extents_(::extents(array))
+        , data_(::data(array))
+        , size_(array.size())
     {
-		assert(data_ != nullptr || size_ == 0); // Keep the assert?
+        assert(data_ != nullptr || size_ == 0); // Keep the assert?
     }
 
     inline size_t size() const { return size_; }

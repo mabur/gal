@@ -46,10 +46,10 @@ public:
         return std::get<DIMENSION>(std::make_tuple(EXTENTS...));
     }
 
-	static constexpr size_t extent0() { return extent<0>(); }
-	static constexpr size_t extent1() { return extent<1>(); }
-	static constexpr size_t extent2() { return extent<2>(); }
-	static constexpr size_t extent3() { return extent<3>(); }
+    static constexpr size_t extent0() { return extent<0>(); }
+    static constexpr size_t extent1() { return extent<1>(); }
+    static constexpr size_t extent2() { return extent<2>(); }
+    static constexpr size_t extent3() { return extent<3>(); }
     static constexpr size_t extent4() { return extent<4>(); }
     static constexpr size_t extent5() { return extent<5>(); }
     static constexpr size_t extent6() { return extent<6>(); }
@@ -59,50 +59,50 @@ public:
 //  ____________________________________________________________________________
 //  sarray specifics:
 public:
-	sarray() = default;
+    sarray() = default;
 
     sarray(const sarray<T, EXTENTS...>&) = default;
 
     sarray<T, EXTENTS...>& operator=(const sarray<T, EXTENTS...>&) = default;
 
-	//explicit sarray(const std::array<T, total_size<EXTENTS...>::value>& data)
-	//	: data_(data)
-	//{}
+    //explicit sarray(const std::array<T, total_size<EXTENTS...>::value>& data)
+    //  : data_(data)
+    //{}
 
-	explicit sarray(const std::initializer_list<T>& data)
-	{
-		assert(data.size() == data_.size());
-		std::copy(data.begin(), data.end(), data_.begin());
-	}
+    explicit sarray(const std::initializer_list<T>& data)
+    {
+        assert(data.size() == data_.size());
+        std::copy(data.begin(), data.end(), data_.begin());
+    }
 
-	explicit sarray(const T& value)
-	{
-		std::fill(std::begin(data_), std::end(data_), value);
-	}
+    explicit sarray(const T& value)
+    {
+        std::fill(std::begin(data_), std::end(data_), value);
+    }
 
-	explicit sarray(const T* data_begin)
-	{
-		std::copy(data_begin, data_begin + size(), std::begin(data_));
-	}
+    explicit sarray(const T* data_begin)
+    {
+        std::copy(data_begin, data_begin + size(), std::begin(data_));
+    }
 
-	template<typename Array, typename Array::value_type* = nullptr>
-	explicit sarray(const Array& array)
-	{
-		assert(array.size() == size());
-		std::copy(std::begin(array), std::end(array), std::begin(data_));
-	}
+    template<typename Array, typename Array::value_type* = nullptr>
+    explicit sarray(const Array& array)
+    {
+        assert(array.size() == size());
+        std::copy(std::begin(array), std::end(array), std::begin(data_));
+    }
 
-	T*       begin()       {return data();};
-	const T* begin() const {return data();};
+    T*       begin()       {return data();};
+    const T* begin() const {return data();};
 
-	T*       end()         {return data() + size();};
-	const T* end()   const {return data() + size();};
+    T*       end()         {return data() + size();};
+    const T* end()   const {return data() + size();};
 
-	T*       data()        {return data_.data();};
-	const T* data()  const {return data_.data();};
+    T*       data()        {return data_.data();};
+    const T* data()  const {return data_.data();};
 
-	T&       operator[](size_t i)       { return data_[i]; }
-	const T& operator[](size_t i) const { return data_[i]; }
+    T&       operator[](size_t i)       { return data_[i]; }
+    const T& operator[](size_t i) const { return data_[i]; }
 
     template<typename ... INDICES>
     T& operator()(INDICES ... indices) { return details::index(*this, indices...); }
@@ -111,7 +111,7 @@ public:
     const T& operator()(INDICES ... indices) const { return details::index(*this, indices...); }
 
 private:
-	std::array<T, SIZE> data_;
+    std::array<T, SIZE> data_;
 };
 
 template<typename T, size_t... EXTENTS> T*        data(      sarray<T, EXTENTS...>& a) { return a.data(); }

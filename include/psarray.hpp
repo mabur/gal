@@ -45,10 +45,10 @@ public:
         return std::get<DIMENSION>(std::make_tuple(EXTENTS...));
     }
 
-	static constexpr size_t extent0() { return extent<0>(); }
-	static constexpr size_t extent1() { return extent<1>(); }
-	static constexpr size_t extent2() { return extent<2>(); }
-	static constexpr size_t extent3() { return extent<3>(); }
+    static constexpr size_t extent0() { return extent<0>(); }
+    static constexpr size_t extent1() { return extent<1>(); }
+    static constexpr size_t extent2() { return extent<2>(); }
+    static constexpr size_t extent3() { return extent<3>(); }
     static constexpr size_t extent4() { return extent<4>(); }
     static constexpr size_t extent5() { return extent<5>(); }
     static constexpr size_t extent6() { return extent<6>(); }
@@ -59,25 +59,25 @@ public:
 //  psarray specifics:
 public:
 
-	psarray() : data_(nullptr) {}
+    psarray() : data_(nullptr) {}
 
     psarray(const psarray<T, EXTENTS...>&) = default;
 
     psarray<T, EXTENTS...>& operator=(const psarray<T, EXTENTS...>&) = default;
 
-	explicit psarray(T* data) : data_(data) {}
+    explicit psarray(T* data) : data_(data) {}
 
     template<typename S>
     explicit psarray(const psarray<S, EXTENTS...>& array)
         : data_(array.data())
     {}
 
-	template<typename Array, typename Array::value_type* = nullptr>
-	explicit psarray(Array& array)
-		: data_(::data(array))
-	{
-		assert(array.size() == size());
-	}
+    template<typename Array, typename Array::value_type* = nullptr>
+    explicit psarray(Array& array)
+        : data_(::data(array))
+    {
+        assert(array.size() == size());
+    }
 
     template<typename Array, typename Array::value_type* = nullptr>
     explicit psarray(const Array& array)
@@ -86,15 +86,15 @@ public:
         assert(array.size() == size());
     }
 
-	inline T* begin() const { return data_; }
-	inline T* end()   const { return data_ + size(); }
-	inline T* data()  const { return data_; }
+    inline T* begin() const { return data_; }
+    inline T* end()   const { return data_ + size(); }
+    inline T* data()  const { return data_; }
 
-	inline T& operator[](size_t i) const
-	{
-		assert(i < size());
-		return data_[i];
-	}
+    inline T& operator[](size_t i) const
+    {
+        assert(i < size());
+        return data_[i];
+    }
 
     template<typename ... INDICES>
     T& operator()(INDICES ... indices) { return details::index(*this, indices...); }
@@ -103,7 +103,7 @@ public:
     const T& operator()(INDICES ... indices) const { return details::index(*this, indices...); }
 
 private:
-	T* data_;
+    T* data_;
 };
 
 template<typename T, size_t... EXTENTS> T*        data(psarray<T, EXTENTS...>& a) { return a.data(); }

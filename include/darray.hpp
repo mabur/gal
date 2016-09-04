@@ -17,30 +17,30 @@ class darray
 //  ____________________________________________________________________________
 //  These are the same for all arrays in gal:
 public:
-    using value_type		= T;
-	using reference			= T&;
-	using const_reference	= const T&;
-	using pointer			= T*;
-	using const_pointer		= const T*;
-	using iterator			= T*;
-	using const_iterator	= const T*;
-	using size_type			= size_t;
-	using difference_type	= ptrdiff_t;
+    using value_type        = T;
+    using reference         = T&;
+    using const_reference   = const T&;
+    using pointer           = T*;
+    using const_pointer     = const T*;
+    using iterator          = T*;
+    using const_iterator    = const T*;
+    using size_type         = size_t;
+    using difference_type   = ptrdiff_t;
     using extents_type      = std::array<size_t, RANK>;
 //  ____________________________________________________________________________
 //  These are the same for all dynamic arrays in gal:
 public:
-	static constexpr size_t rank() { return RANK; }
+    static constexpr size_t rank() { return RANK; }
 
-	extents_type extents() const { return extents_; }
+    extents_type extents() const { return extents_; }
 
-	template<size_t DIMENSION>
+    template<size_t DIMENSION>
     size_t extent() const { return extents_[DIMENSION]; }
 
-	size_t extent0() const { return extents_[0]; }
-	size_t extent1() const { return extents_[1]; }
-	size_t extent2() const { return extents_[2]; }
-	size_t extent3() const { return extents_[3]; }
+    size_t extent0() const { return extents_[0]; }
+    size_t extent1() const { return extents_[1]; }
+    size_t extent2() const { return extents_[2]; }
+    size_t extent3() const { return extents_[3]; }
     size_t extent4() const { return extents_[4]; }
     size_t extent5() const { return extents_[5]; }
     size_t extent6() const { return extents_[6]; }
@@ -49,7 +49,7 @@ public:
     size_t extent9() const { return extents_[9]; }
 
 private:
-	extents_type extents_;
+    extents_type extents_;
 //  ____________________________________________________________________________
 //  darray specifics:
 public:
@@ -57,76 +57,76 @@ public:
     darray(const darray<T, RANK>&) = default;
 
     darray<T, RANK>& operator=(const darray<T, RANK>&) = default;
-	
-	explicit darray(const extents_type& extents)
-		: extents_(extents)
-		, data_(details::product(extents))
-	{}
+    
+    explicit darray(const extents_type& extents)
+        : extents_(extents)
+        , data_(details::product(extents))
+    {}
 
-	darray(const extents_type& extents, const T& value)
-		: extents_(extents)
-		, data_(value, details::product(extents))
-	{}
+    darray(const extents_type& extents, const T& value)
+        : extents_(extents)
+        , data_(value, details::product(extents))
+    {}
 
-	darray(const extents_type& extents, const T* data_begin)
-		: extents_(extents)
-		, data_(details::product(extents))
-	{
-		std::copy(data_begin, data_begin + size(), std::begin(data_));                
-	}
+    darray(const extents_type& extents, const T* data_begin)
+        : extents_(extents)
+        , data_(details::product(extents))
+    {
+        std::copy(data_begin, data_begin + size(), std::begin(data_));                
+    }
 
-	explicit darray(size_t size)
-		: extents_({size})
-		, data_(size)
-	{
-		static_assert(RANK == 1, "Wrong rank");
-	}
-	
-	explicit darray(size_t size, const T& value)//, typename std::enable_if<D==1, T>::type* = nullptr)
-		: extents_({size})
-		, data_(value, size)
-	{
-		static_assert(RANK == 1, "Wrong rank");
-	}
-	
-	darray(size_t size, const T* data_begin)
-		: extents_({size})
-		, data_(size)
-	{
-		static_assert(RANK == 1, "Wrong rank");
-		std::copy(data_begin, data_begin + size, std::begin(data_));
-	}
+    explicit darray(size_t size)
+        : extents_({size})
+        , data_(size)
+    {
+        static_assert(RANK == 1, "Wrong rank");
+    }
+    
+    explicit darray(size_t size, const T& value)//, typename std::enable_if<D==1, T>::type* = nullptr)
+        : extents_({size})
+        , data_(value, size)
+    {
+        static_assert(RANK == 1, "Wrong rank");
+    }
+    
+    darray(size_t size, const T* data_begin)
+        : extents_({size})
+        , data_(size)
+    {
+        static_assert(RANK == 1, "Wrong rank");
+        std::copy(data_begin, data_begin + size, std::begin(data_));
+    }
 
-	template<typename Array, typename Array::value_type* = nullptr>
-	explicit darray(const Array& array)
-		: extents_(::extents(array))
-		, data_(array.size())
-	{
-		std::copy(std::begin(array), std::end(array), std::begin(data_));
-	}
+    template<typename Array, typename Array::value_type* = nullptr>
+    explicit darray(const Array& array)
+        : extents_(::extents(array))
+        , data_(array.size())
+    {
+        std::copy(std::begin(array), std::end(array), std::begin(data_));
+    }
 
     size_t size() const { return data_.size(); };
-	
-	T*       begin()       {return std::begin(data_);};
-	const T* begin() const {return std::begin(data_);};
+    
+    T*       begin()       {return std::begin(data_);};
+    const T* begin() const {return std::begin(data_);};
 
-	T*       end()         {return std::end(data_);};
-	const T* end()   const {return std::end(data_);};
+    T*       end()         {return std::end(data_);};
+    const T* end()   const {return std::end(data_);};
 
-	T*       data()        {return std::begin(data_);};
-	const T* data()  const {return std::begin(data_);};
+    T*       data()        {return std::begin(data_);};
+    const T* data()  const {return std::begin(data_);};
 
-	T& operator[](size_t i)
-	{
-		assert(i < size());
-		return data_[i];
-	}
+    T& operator[](size_t i)
+    {
+        assert(i < size());
+        return data_[i];
+    }
 
-	const T& operator[](size_t i) const
-	{
-		assert(i < size());
-		return data_[i];
-	}
+    const T& operator[](size_t i) const
+    {
+        assert(i < size());
+        return data_[i];
+    }
 
     template<typename ... INDICES>
     T& operator()(INDICES ... indices) { return details::index(*this, indices...); }
@@ -135,16 +135,16 @@ public:
     const T& operator()(INDICES ... indices) const { return details::index(*this, indices...); }
 
 private:
-	std::valarray<T> data_;
+    std::valarray<T> data_;
 };
 
-template<typename T, size_t D> T*        data(      darray<T, D>& a) { return a.data(); }
-template<typename T, size_t D> const T*  data(const darray<T, D>& a) { return a.data(); }
-template<typename T, size_t D> T*       begin(      darray<T, D>& a) { return a.begin(); }
-template<typename T, size_t D> const T* begin(const darray<T, D>& a) { return a.begin(); }
-template<typename T, size_t D> T*         end(      darray<T, D>& a) { return a.end(); }
-template<typename T, size_t D> const T*   end(const darray<T, D>& a) { return a.end(); }
-template<typename T, size_t D> size_t    size(const darray<T, D>& a) { return a.size(); }
+template<typename T, size_t D> T*              data(      darray<T, D>& a) { return a.data(); }
+template<typename T, size_t D> const T*        data(const darray<T, D>& a) { return a.data(); }
+template<typename T, size_t D> T*             begin(      darray<T, D>& a) { return a.begin(); }
+template<typename T, size_t D> const T*       begin(const darray<T, D>& a) { return a.begin(); }
+template<typename T, size_t D> T*               end(      darray<T, D>& a) { return a.end(); }
+template<typename T, size_t D> const T*         end(const darray<T, D>& a) { return a.end(); }
+template<typename T, size_t D> size_t          size(const darray<T, D>& a) { return a.size(); }
 template<typename T, size_t D> extents_t<D> extents(const darray<T, D>& a) { return a.extents(); }
 
 template<typename T, size_t D> constexpr size_t rank(const darray<T, D>& a) { return a.rank(); }

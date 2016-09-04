@@ -39,12 +39,12 @@ using matrix = sarray<T, R, C>;
 template<typename T, size_t R, size_t C>
 matrix<T, R, C> make_matrix(const std::array<T, C * R>& elements)
 {
-	auto M = matrix<T, R, C>(elements);
-	size_t i = 0;
+    auto M = matrix<T, R, C>(elements);
+    size_t i = 0;
     for (size_t r = 0; r < R; ++r)
         for (size_t c = 0; c < C; ++c)
-			M(r, c) = elements[i++];
-	return M;
+            M(r, c) = elements[i++];
+    return M;
 }
 
 matrix<float, 1, 1> make_matrix11f(const std::array<float, 1 * 1>& x) { return make_matrix<float, 1, 1>(x); }
@@ -70,13 +70,13 @@ matrix<float, 4, 4> make_matrix44f(const std::array<float, 4 * 4>& x) { return m
 template<typename T, size_t R, size_t C>
 size_t rows(const sarray<T, R, C>& matrix)
 {
-	return R;
+    return R;
 }
 
 template<typename T, size_t R, size_t C>
 size_t columns(const sarray<T, R, C>& matrix)
 {
-	return C;
+    return C;
 }
 
 template<typename T, size_t R1, size_t C1_R2, size_t C2>
@@ -117,12 +117,12 @@ matrix<T, C, R> transpose(const matrix<T, R, C>& in)
 template<int...>
 struct hej
 {
-	static const size_t value = 2;
+    static const size_t value = 2;
 };
 
 template<typename T>
 sarray<T, typename hej<elements...>::value> make_vector2(int... elements)
 {
-	return sarray<T, sizeof...(elements)>();
+    return sarray<T, sizeof...(elements)>();
 }
 */
