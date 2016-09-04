@@ -44,17 +44,6 @@ public:
     {
         return std::get<DIMENSION>(std::make_tuple(EXTENTS...));
     }
-
-    static constexpr size_t extent0() { return extent<0>(); }
-    static constexpr size_t extent1() { return extent<1>(); }
-    static constexpr size_t extent2() { return extent<2>(); }
-    static constexpr size_t extent3() { return extent<3>(); }
-    static constexpr size_t extent4() { return extent<4>(); }
-    static constexpr size_t extent5() { return extent<5>(); }
-    static constexpr size_t extent6() { return extent<6>(); }
-    static constexpr size_t extent7() { return extent<7>(); }
-    static constexpr size_t extent8() { return extent<8>(); }
-    static constexpr size_t extent9() { return extent<9>(); }
 //  ____________________________________________________________________________
 //  psarray specifics:
 public:

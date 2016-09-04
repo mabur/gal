@@ -106,9 +106,9 @@ void g(pdarray<int, 2> a)
 		++x;
 	}
 
-	for (size_t y = 0; y < a.extent1(); ++y)
+	for (size_t y = 0; y < extent1(a); ++y)
 	{
-		for (size_t x = 0; x < a.extent0(); ++x)
+		for (size_t x = 0; x < extent0(a); ++x)
 		{
 			std::cout << a(x, y) << " ";
 		}
@@ -134,9 +134,9 @@ void fill_and_print_array2d(Array2d& array)
     
     using namespace std;
 
-    for (size_t y = 0; y < array.extent1(); ++y)
+    for (size_t y = 0; y < extent1(array); ++y)
     {
-        for (size_t x = 0; x < array.extent0(); ++x)
+        for (size_t x = 0; x < extent0(array); ++x)
         {
             cout << array(x, y) << " ";
         }
@@ -198,8 +198,8 @@ int main()
 		std::ignore = x;
 	}
 
-	for (size_t y = 0; y < f.extent1(); ++y)
-		for (size_t x = 0; x < f.extent0(); ++x)
+	for (size_t y = 0; y < extent1(f); ++y)
+		for (size_t x = 0; x < extent0(f); ++x)
 			f(x, y);
 
     for (size_t i = 0; i < f.size(); ++i)
@@ -207,17 +207,17 @@ int main()
 
 	M.size();
 	M.rank();
-	M.extent0();
-	M.extent1();
+	M.extent<0>();
+	M.extent<1>();
 
 	// Row-major order for images.
-	for (size_t y = 0; y < M.extent1(); ++y)
-		for (size_t x = 0; x < M.extent0(); ++x)
+	for (size_t y = 0; y < extent1(M); ++y)
+		for (size_t x = 0; x < extent0(M); ++x)
 			M(x, y);
 
 	// Column-major order for matrices.
-	for (size_t col = 0; col < M.extent1(); ++col)
-		for (size_t row = 0; row < M.extent0(); ++row)
+	for (size_t col = 0; col < extent1(M); ++col)
+		for (size_t row = 0; row < extent0(M); ++row)
 			M(row, col);
 
 	testVectors();

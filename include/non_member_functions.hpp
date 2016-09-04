@@ -44,3 +44,14 @@ template<typename T, size_t... EXTENTS> class psarray;
 template<typename T, size_t... EXTENTS> T* data(psarray<T, EXTENTS...>& a);
 template<typename T, size_t... EXTENTS> const T* data(const psarray<T, EXTENTS...>& a);
 template<typename T, size_t... EXTENTS> extents_t<sizeof...(EXTENTS)> extents(const psarray<T, EXTENTS...>& a);
+
+template<typename Array> constexpr size_t extent0(const Array& a) { return a.extent<0>(); }
+template<typename Array> constexpr size_t extent1(const Array& a) { return a.extent<1>(); }
+template<typename Array> constexpr size_t extent2(const Array& a) { return a.extent<2>(); }
+template<typename Array> constexpr size_t extent3(const Array& a) { return a.extent<3>(); }
+template<typename Array> constexpr size_t extent4(const Array& a) { return a.extent<4>(); }
+template<typename Array> constexpr size_t extent5(const Array& a) { return a.extent<5>(); }
+template<typename Array> constexpr size_t extent6(const Array& a) { return a.extent<6>(); }
+template<typename Array> constexpr size_t extent7(const Array& a) { return a.extent<7>(); }
+template<typename Array> constexpr size_t extent8(const Array& a) { return a.extent<8>(); }
+template<typename Array> constexpr size_t extent9(const Array& a) { return a.extent<9>(); }

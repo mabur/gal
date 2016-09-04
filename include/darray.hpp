@@ -17,37 +17,22 @@ class darray
 //  ____________________________________________________________________________
 //  These are the same for all arrays in gal:
 public:
-    using value_type        = T;
-    using reference         = T&;
-    using const_reference   = const T&;
-    using pointer           = T*;
-    using const_pointer     = const T*;
-    using iterator          = T*;
-    using const_iterator    = const T*;
-    using size_type         = size_t;
-    using difference_type   = ptrdiff_t;
-    using extents_type      = std::array<size_t, RANK>;
+    using value_type      = T;
+    using reference       = T&;
+    using const_reference = const T&;
+    using pointer         = T*;
+    using const_pointer   = const T*;
+    using iterator        = T*;
+    using const_iterator  = const T*;
+    using size_type       = size_t;
+    using difference_type = ptrdiff_t;
+    using extents_type    = std::array<size_t, RANK>;
 //  ____________________________________________________________________________
 //  These are the same for all dynamic arrays in gal:
 public:
     static constexpr size_t rank() { return RANK; }
-
-    extents_type extents() const { return extents_; }
-
-    template<size_t DIMENSION>
-    size_t extent() const { return extents_[DIMENSION]; }
-
-    size_t extent0() const { return extents_[0]; }
-    size_t extent1() const { return extents_[1]; }
-    size_t extent2() const { return extents_[2]; }
-    size_t extent3() const { return extents_[3]; }
-    size_t extent4() const { return extents_[4]; }
-    size_t extent5() const { return extents_[5]; }
-    size_t extent6() const { return extents_[6]; }
-    size_t extent7() const { return extents_[7]; }
-    size_t extent8() const { return extents_[8]; }
-    size_t extent9() const { return extents_[9]; }
-
+    extents_type extents() const   { return extents_; }
+    template<size_t DIMENSION> size_t extent() const { return extents_[DIMENSION]; }
 private:
     extents_type extents_;
 //  ____________________________________________________________________________
