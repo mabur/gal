@@ -120,10 +120,11 @@ template<typename Array2d>
 void fill_and_print_array2d(Array2d& array)
 {
     assert(array.rank() == 2);
+    using value_type = typename Array2d::value_type;
 
-    for (int i = 0; i < array.size(); ++i)
+    for (size_t i = 0; i < array.size(); ++i)
     {
-        array[i] = i;
+        array[i] = static_cast<value_type>(i);
     }
 
     for (auto& element : array)
@@ -133,9 +134,9 @@ void fill_and_print_array2d(Array2d& array)
     
     using namespace std;
 
-    for (int y = 0; y < array.extent1(); ++y)
+    for (size_t y = 0; y < array.extent1(); ++y)
     {
-        for (int x = 0; x < array.extent0(); ++x)
+        for (size_t x = 0; x < array.extent0(); ++x)
         {
             cout << array(x, y) << " ";
         }
