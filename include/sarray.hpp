@@ -16,9 +16,8 @@
 template<typename T, size_t... EXTENTS>
 class sarray
 {
-private:
-    static const size_t RANK = sizeof...(EXTENTS);
-    static const size_t SIZE = details::total_size<EXTENTS...>::value;
+//  ____________________________________________________________________________
+//  These are the same for all arrays in gal:
 public:
     using value_type      = T;
     using reference       = T&;
@@ -29,9 +28,15 @@ public:
     using const_iterator  = const T*;
     using size_type       = size_t;
     using difference_type = ptrdiff_t;
+//  ____________________________________________________________________________
+//  These are the same for all static arrays in gal:
+private:
+    static const size_t SIZE = details::total_size<EXTENTS...>::value;
+    static const size_t RANK = sizeof...(EXTENTS);
 
+public:
+    static constexpr size_t size()             { return SIZE; };
     static constexpr size_t rank()             { return RANK; }
-	static constexpr size_t size()             { return SIZE; };
     static constexpr extents_t<RANK> extents() { return{ EXTENTS... }; }
 
     template<size_t DIMENSION>
@@ -50,6 +55,8 @@ public:
     static constexpr size_t extent7() { return extent<7>(); }
     static constexpr size_t extent8() { return extent<8>(); }
     static constexpr size_t extent9() { return extent<9>(); }
+//  ____________________________________________________________________________
+//  sarray specifics:
 public:
 	sarray() = default;
 

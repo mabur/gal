@@ -14,6 +14,8 @@
 template<typename T, size_t RANK = 1>
 class darray
 {
+//  ____________________________________________________________________________
+//  These are the same for all arrays in gal:
 public:
     using value_type		= T;
 	using reference			= T&;
@@ -24,9 +26,10 @@ public:
 	using const_iterator	= const T*;
 	using size_type			= size_t;
 	using difference_type	= ptrdiff_t;
-
     using extents_type      = extents_t<RANK>;
-
+//  ____________________________________________________________________________
+//  These are the same for all dynamic arrays in gal:
+public:
 	static constexpr size_t rank() { return RANK; }
 
 	extents_type extents() const { return extents_; }
@@ -44,8 +47,11 @@ public:
     size_t extent7() const { return extents_[7]; }
     size_t extent8() const { return extents_[8]; }
     size_t extent9() const { return extents_[9]; }
+
 private:
 	extents_type extents_;
+//  ____________________________________________________________________________
+//  darray specifics:
 public:
     darray() { std::fill(std::begin(extents_), std::end(extents_), 0); }
     darray(const darray<T, RANK>&) = default;
