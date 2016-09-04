@@ -1,27 +1,66 @@
 #pragma once
 
+#include <algorithm>
+#include <array>
 #include <cassert>
+#include <cstddef>
 
-#include "array_base_dynamic.hpp"
+#include "non_member_functions.hpp"
+#include "utilities.hpp"
 
 /**
 \brief Pointer to a dynamic array.
 */
 template<typename T, size_t RANK = 1>
-class pdarray : public array_base_dynamic<T, RANK>
+class pdarray
 {
 public:
+    using value_type		= T;
+	using reference			= T&;
+	using const_reference	= const T&;
+	using pointer			= T*;
+	using const_pointer		= const T*;
+	using iterator			= T*;
+	using const_iterator	= const T*;
+	using size_type			= size_t;
+	using difference_type	= ptrdiff_t;
 
-    using typename array_base<T, RANK>::extents_type;
+    using extents_type      = extents_t<RANK>;
 
-    pdarray() : data_(nullptr), size_(0) {}
+	static constexpr size_t rank() { return RANK; }
+
+	extents_type extents() const { return extents_; }
+
+	template<size_t DIMENSION>
+    size_t extent() const { return extents_[DIMENSION]; }
+
+	size_t extent0() const { return extents_[0]; }
+	size_t extent1() const { return extents_[1]; }
+	size_t extent2() const { return extents_[2]; }
+	size_t extent3() const { return extents_[3]; }
+    size_t extent4() const { return extents_[4]; }
+    size_t extent5() const { return extents_[5]; }
+    size_t extent6() const { return extents_[6]; }
+    size_t extent7() const { return extents_[7]; }
+    size_t extent8() const { return extents_[8]; }
+    size_t extent9() const { return extents_[9]; }
+
+private:
+	extents_type extents_;
+public:
+    pdarray(const extents_type& extents) : extents_(extents) {}
+
+    pdarray() : data_(nullptr), size_(0)
+    {
+        std::fill(std::begin(extents_), std::end(extents_), 0);
+    }
 
     pdarray(const pdarray<T, RANK>&) = default;
 
     pdarray<T, RANK>& operator=(const pdarray<T, RANK>&) = default;
 
 	pdarray(const extents_type& extents, T* data)
-		: array_base_dynamic<T, RANK>(extents)
+		: extents_(extents)
 		, data_(data)
 		, size_(details::product(extents))
 	{
@@ -29,7 +68,7 @@ public:
 	}
 
 	pdarray(size_t size, T* data)
-		: array_base_dynamic<T, RANK>({size})
+		: extents_({size})
 		, data_(data)
 		, size_(size)
 	{
@@ -39,7 +78,7 @@ public:
 
     template<typename S>
     explicit pdarray(const pdarray<S, RANK>& array)
-        : array_base_dynamic<T, RANK>(array.extents())
+        : extents_(array.extents())
         , data_(array.data())
         , size_(array.size())
     {
@@ -48,7 +87,7 @@ public:
 
     template<typename Array>
     explicit pdarray(Array& array)
-		: array_base_dynamic<T, RANK>(::extents(array))
+		: extents_(::extents(array))
 		, data_(::data(array))
 		, size_(array.size())
     {
@@ -57,7 +96,7 @@ public:
 
     template<typename Array>
     explicit pdarray(const Array& array)
-		: array_base_dynamic<T, RANK>(::extents(array))
+		: extents_(::extents(array))
 		, data_(::data(array))
 		, size_(array.size())
     {

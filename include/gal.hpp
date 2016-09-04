@@ -269,8 +269,6 @@ auto array3 = pdarray<const float, 2>({ N, M }, data_pointer);
 ```
 */
 
-
-
 #pragma once
 
 #include "sarray.hpp"

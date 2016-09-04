@@ -1,59 +1,90 @@
 #pragma once
 
 #include <algorithm>
+#include <array>
+#include <cstddef>
 #include <valarray>
 
-#include "array_base_dynamic.hpp"
+#include "non_member_functions.hpp"
+#include "utilities.hpp"
 
 /**
 \brief Dynamic array.
 */
 template<typename T, size_t RANK = 1>
-class darray : public array_base_dynamic<T, RANK>
+class darray
 {
 public:
+    using value_type		= T;
+	using reference			= T&;
+	using const_reference	= const T&;
+	using pointer			= T*;
+	using const_pointer		= const T*;
+	using iterator			= T*;
+	using const_iterator	= const T*;
+	using size_type			= size_t;
+	using difference_type	= ptrdiff_t;
 
-    using typename array_base<T, RANK>::extents_type;
+    using extents_type      = extents_t<RANK>;
 
-	darray() = default;
+	static constexpr size_t rank() { return RANK; }
 
+	extents_type extents() const { return extents_; }
+
+	template<size_t DIMENSION>
+    size_t extent() const { return extents_[DIMENSION]; }
+
+	size_t extent0() const { return extents_[0]; }
+	size_t extent1() const { return extents_[1]; }
+	size_t extent2() const { return extents_[2]; }
+	size_t extent3() const { return extents_[3]; }
+    size_t extent4() const { return extents_[4]; }
+    size_t extent5() const { return extents_[5]; }
+    size_t extent6() const { return extents_[6]; }
+    size_t extent7() const { return extents_[7]; }
+    size_t extent8() const { return extents_[8]; }
+    size_t extent9() const { return extents_[9]; }
+private:
+	extents_type extents_;
+public:
+    darray() { std::fill(std::begin(extents_), std::end(extents_), 0); }
     darray(const darray<T, RANK>&) = default;
 
     darray<T, RANK>& operator=(const darray<T, RANK>&) = default;
 	
 	explicit darray(const extents_type& extents)
-		: array_base_dynamic<T, RANK>(extents)
+		: extents_(extents)
 		, data_(details::product(extents))
 	{}
 
 	darray(const extents_type& extents, const T& value)
-		: array_base_dynamic<T, RANK>(extents)
+		: extents_(extents)
 		, data_(value, details::product(extents))
 	{}
 
 	darray(const extents_type& extents, const T* data_begin)
-		: array_base_dynamic<T, RANK>(extents)
+		: extents_(extents)
 		, data_(details::product(extents))
 	{
 		std::copy(data_begin, data_begin + size(), std::begin(data_));                
 	}
 
 	explicit darray(size_t size)
-		: array_base_dynamic<T, RANK>({size})
+		: extents_({size})
 		, data_(size)
 	{
 		static_assert(RANK == 1, "Wrong rank");
 	}
 	
 	explicit darray(size_t size, const T& value)//, typename std::enable_if<D==1, T>::type* = nullptr)
-		: array_base_dynamic<T, RANK>({size})
+		: extents_({size})
 		, data_(value, size)
 	{
 		static_assert(RANK == 1, "Wrong rank");
 	}
 	
 	darray(size_t size, const T* data_begin)
-		: array_base_dynamic<T, RANK>({size})
+		: extents_({size})
 		, data_(size)
 	{
 		static_assert(RANK == 1, "Wrong rank");
@@ -62,7 +93,7 @@ public:
 
 	template<typename Array, typename Array::value_type* = nullptr>
 	explicit darray(const Array& array)
-		: array_base_dynamic<T, RANK>(::extents(array))
+		: extents_(::extents(array))
 		, data_(array.size())
 	{
 		std::copy(std::begin(array), std::end(array), std::begin(data_));

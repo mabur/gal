@@ -1,19 +1,55 @@
 #pragma once
 
+#include <algorithm>
+#include <array>
 #include <cassert>
+#include <cstddef>
+#include <tuple>
 
-#include "array_base_static.hpp"
+#include "utilities.hpp"
+#include "non_member_functions.hpp"
 
 /**
 \brief Pointer to a static array.
 */
 template<typename T, size_t... EXTENTS>
-class psarray : public array_base_static<T, EXTENTS...>
+class psarray
 {
+private:
+    static const size_t RANK = sizeof...(EXTENTS);
+    static const size_t SIZE = details::total_size<EXTENTS...>::value;;
 public:
+    using value_type      = T;
+    using reference       = T&;
+    using const_reference = const T&;
+    using pointer         = T*;
+    using const_pointer   = const T*;
+    using iterator        = T*;
+    using const_iterator  = const T*;
+    using size_type       = size_t;
+    using difference_type = ptrdiff_t;
 
-    using array_base_static<T, EXTENTS...>::size;
-    using array_base_static<T, EXTENTS...>::extent;
+    static constexpr size_t rank()             { return RANK; }
+	static constexpr size_t size()             { return SIZE; };
+    static constexpr extents_t<RANK> extents() { return{ EXTENTS... }; }
+
+    template<size_t DIMENSION>
+    static constexpr size_t extent()
+    {
+        return std::get<DIMENSION>(std::make_tuple(EXTENTS...));
+    }
+
+	static constexpr size_t extent0() { return extent<0>(); }
+	static constexpr size_t extent1() { return extent<1>(); }
+	static constexpr size_t extent2() { return extent<2>(); }
+	static constexpr size_t extent3() { return extent<3>(); }
+    static constexpr size_t extent4() { return extent<4>(); }
+    static constexpr size_t extent5() { return extent<5>(); }
+    static constexpr size_t extent6() { return extent<6>(); }
+    static constexpr size_t extent7() { return extent<7>(); }
+    static constexpr size_t extent8() { return extent<8>(); }
+    static constexpr size_t extent9() { return extent<9>(); }
+public:
 
 	psarray() : data_(nullptr) {}
 
