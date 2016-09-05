@@ -23,8 +23,8 @@ using extents_t = std::array<size_t, RANK>;
 template<typename Array>
 extents_t<1> extents(const Array& a) { return extents_t<1>{a.size()}; }
 
-// Forward declare data and extents functions for the arrays:
-
+// Forward declare data and extents functions for the arrays.
+// TODO: find out if this is still needed:
 template<typename T, size_t RANK> class darray;
 template<typename T, size_t D> T* data(darray<T, D>& a);
 template<typename T, size_t D> const T* data(const darray<T, D>& a);
