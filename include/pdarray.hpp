@@ -38,8 +38,6 @@ private:
 //  ____________________________________________________________________________
 //  pdarray specifics:
 public:
-    pdarray(const extents_type& extents) : extents_(extents) {}
-
     pdarray() : data_(nullptr), size_(0)
     {
         std::fill(std::begin(extents_), std::end(extents_), 0);
@@ -49,21 +47,26 @@ public:
 
     pdarray<T, RANK>& operator=(const pdarray<T, RANK>&) = default;
 
-    pdarray(const extents_type& extents, T* data)
-        : extents_(extents)
-        , data_(data)
-        , size_(details::product(extents))
+    template<typename ... Types, typename std::enable_if<sizeof...(Types) == RANK + 1>::type* = nullptr>
+    explicit pdarray(Types... arguments_pack)
     {
+        construction_helper<0>(arguments_pack...);
+        size_ = details::product(extents_);
         assert(data_ != nullptr || size_ == 0); // Keep the assert?
     }
 
-    pdarray(size_t size, T* data)
-        : extents_({size})
-        , data_(data)
-        , size_(size)
+    template<size_t i, typename ... Types>
+    void construction_helper(size_t argument, Types... arguments)
     {
-        static_assert(RANK == 1, "Wrong rank");
-        assert(data_ != nullptr || size_ == 0); // Keep the assert?
+        extents_[i] = argument;
+        construction_helper<i + 1>(arguments...);
+    }
+
+    template<size_t i>
+    void construction_helper(pointer data_pointer)
+    {
+        data_ = data_pointer;
+        static_assert(i == RANK, "Wrong number of arguments.");
     }
 
     template<typename S>

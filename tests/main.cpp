@@ -73,6 +73,7 @@ auto a = psarray<int, 2, 3>(data_iterator);
 auto a = psarray<int, 2, 3>(data_array);
 
 auto a = std::array<int, 2>({1, 2})
+auto a = std::vector<int>({data1, data2})
 auto a = std::vector<int>(size)
 auto a = std::vector<int>(size, data_value)
 auto a = std::valarray<int>(size)
@@ -166,15 +167,15 @@ int main()
 	h(pdarray<const int>(a));
 	h(pdarray<const int>(c));
 
-	g(pdarray<int, 2>({W, H}, a.data()));
-	g(pdarray<int, 2>({W, H}, c.data()));
+	g(pdarray<int, 2>(W, H, a.data()));
+	g(pdarray<int, 2>(W, H, c.data()));
 
 	auto d = darray<int>();
 	auto e = sarray<int, 5>();
 	auto M = sarray<int, 2, 3>();
 
 	std::array<size_t, 2> sizes = {2, 3};
-    auto f = darray<float, 2>({2, 3});
+    auto f = darray<float, 2>(2, 3);
 	auto g = f;
 
 	begin(e);
@@ -189,7 +190,7 @@ int main()
 	
     cout << "print array" << endl;
     auto static_array2d = sarray<float, 3, 2>();
-    auto dynamic_array2d = darray<int, 2>({ 8, 4 });
+    auto dynamic_array2d = darray<int, 2>(8, 4);
     fill_and_print_array2d(static_array2d);
     fill_and_print_array2d(dynamic_array2d);
 

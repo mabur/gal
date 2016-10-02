@@ -25,9 +25,9 @@ void test_construction_documentation_darray1()
     auto N = size_t{ 10 };
     auto M = size_t{ 20 };
     auto L = size_t{ 30 };
-    auto array1 = darray<float, 1>({ N });
-    auto array2 = darray<float, 2>({ N, M });
-    auto array3 = darray<float, 3>({ N, M, L });
+    auto array1 = darray<float, 1>(N);
+    auto array2 = darray<float, 2>(N, M);
+    auto array3 = darray<float, 3>(N, M, L);
 }
 
 void test_construction_documentation_sarray2()
@@ -73,9 +73,9 @@ void test_construction_documentation_darray2()
 {
     auto N = size_t{ 10 };
     auto array0 = darray<float>(N);
-    auto array1 = darray<float>({ N });
+    auto array1 = darray<float>(N);
     auto array2 = darray<float, 1>(N);
-    auto array3 = darray<float, 1>({ N });
+    auto array3 = darray<float, 1>(N);
 }
 
 void test_construction_documentation_darray3()
@@ -84,8 +84,8 @@ void test_construction_documentation_darray3()
     auto M = size_t{ 20 };
     auto value = 6.283f;
     auto array1 = std::vector<float>(N, value);
-    auto array2 = darray<float>(N, value); // TODO: allow without braces.
-    auto array3 = darray<float, 2>({ N, M }, value);
+    auto array2 = darray<float>(N, value);
+    auto array3 = darray<float, 2>(N, M, value);
 }
 
 void test_construction_documentation_darray4()
@@ -95,7 +95,7 @@ void test_construction_documentation_darray4()
     auto array1 = std::vector<float>(N * M);
     auto data_pointer = array1.data();
     auto array2 = darray<float>(N, data_pointer);
-    auto array3 = darray<float, 2>({ N, M }, data_pointer);
+    auto array3 = darray<float, 2>(N, M, data_pointer);
 }
 
 void test_construction_documentation_pdarray()
@@ -105,7 +105,7 @@ void test_construction_documentation_pdarray()
     auto array1 = std::vector<float>(N * M);
     auto data_pointer = array1.data();
     auto array2 = pdarray<float>(N, data_pointer);
-    auto array3 = pdarray<float, 2>({ N, M }, data_pointer);
+    auto array3 = pdarray<float, 2>(N, M, data_pointer);
 }
 
 void test_construction_documentation_pdarray2()
@@ -115,7 +115,7 @@ void test_construction_documentation_pdarray2()
     const auto array1 = std::vector<float>(N * M);
     const auto data_pointer = array1.data();
     auto array2 = pdarray<const float>(N, data_pointer);
-    auto array3 = pdarray<const float, 2>({ N, M }, data_pointer);
+    auto array3 = pdarray<const float, 2>(N, M, data_pointer);
 }
 
 void test_construction_sarray()
@@ -132,19 +132,22 @@ void test_construction_sarray()
 void test_construction_darray()
 {
 	auto darray0 = darray<float, 2>();
-	auto darray1 = darray<float, 2>({ 2, 3 });
-	auto darray2 = darray<float, 2>({ 2, 3 }, 1.f);
-	auto darray3 = darray<float, 2>({ 2, 3 }, begin(darray1));
+	auto darray1 = darray<float, 2>(2, 3 );
+	auto darray2 = darray<float, 2>(2, 3, 1.f);
+	auto darray3 = darray<float, 2>(2, 3, begin(darray1));
 	auto darray4 = darray<float, 2>(darray1);
 	auto darray5 = darray1;
 
 	auto darray6  = darray<float>();
-	auto darray7  = darray<float>({2});
+	auto darray7  = darray<float>(2);
 	auto darray8  = darray<float>(2);
 	auto darray9  = darray<float>(2, darray8.begin());
-	auto darray10 = darray<float>({2}, darray8.begin());
-	//auto darray11 = darray<float>(2, 3.f);
-	auto darray12 = darray<float>({ 2 }, 3.f);
+	auto darray10 = darray<float>(2, darray8.begin());
+	auto darray11 = darray<float>(2, 3.f);
+	auto darray12 = darray<float>(2, 3.f);
+
+    auto darray13 = darray<float, 2>(1, 2);
+    auto darray14 = darray<float, 2>(1, 2, 3.f);
 }
 
 void test_construction_pdarray()
@@ -155,8 +158,8 @@ void test_construction_pdarray()
 	auto vector0 = std::vector<float>(N);
 	auto pdarray0 = pdarray<float>();
 	auto pdarray1 = pdarray<float>(N, vector0.data());
-	auto pdarray2 = pdarray<float>({ N }, vector0.data());
-	auto pdarray3 = pdarray<float, 2>({ ROWS, COLUMNS }, vector0.data());
+	auto pdarray2 = pdarray<float>(N, vector0.data());
+	auto pdarray3 = pdarray<float, 2>(ROWS, COLUMNS, vector0.data());
 }
 
 void test_construction_psarray()
@@ -167,17 +170,17 @@ void test_construction_psarray()
     auto vector0 = std::vector<float>(N);
 
     auto psarray0 = psarray<float, N>();
-    //auto psarray1 = psarray<float, N>(vector0.data());
+    auto psarray1 = psarray<float, N>(vector0.data());
     auto psarray2 = psarray<float, N>(vector0);
 }
 
 void test_construction_mixed()
 {
 	auto sarray0   = sarray<float, 2, 3>();
-	auto darray0   = darray<float, 2>({ 2, 3 });
-	auto pdarray0  = pdarray<float, 2>({ 2, 3 }, data(darray0));
+	auto darray0   = darray<float, 2>(2, 3);
+	auto pdarray0  = pdarray<float, 2>(2, 3, data(darray0));
 	auto psarray0  = psarray<float, 2, 3>(data(sarray0));
-	auto cpdarray0 = pdarray<const float, 2>({ 2, 3 }, data(darray0));
+	auto cpdarray0 = pdarray<const float, 2>(2, 3, data(darray0));
 	auto cpsarray0 = psarray<const float, 2, 3>(data(sarray0));
 
 	auto darray1 = darray<float, 2>(sarray0);
