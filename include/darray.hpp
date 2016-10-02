@@ -34,6 +34,17 @@ public:
     static constexpr size_t rank() { return RANK; }
     extents_type extents() const   { return extents_; }
     template<size_t DIMENSION> size_t extent() const { return extents_[DIMENSION]; }
+
+    size_t extent0() const { return extent<0>(); }
+    size_t extent1() const { return extent<1>(); }
+    size_t extent2() const { return extent<2>(); }
+    size_t extent3() const { return extent<3>(); }
+    size_t extent4() const { return extent<4>(); }
+    size_t extent5() const { return extent<5>(); }
+    size_t extent6() const { return extent<6>(); }
+    size_t extent7() const { return extent<7>(); }
+    size_t extent8() const { return extent<8>(); }
+    size_t extent9() const { return extent<9>(); }
 private:
     extents_type extents_;
 //  ____________________________________________________________________________
@@ -121,13 +132,23 @@ private:
     std::valarray<T> data_;
 };
 
-template<typename T, size_t D> T*              data(      darray<T, D>& a) { return a.data(); }
-template<typename T, size_t D> const T*        data(const darray<T, D>& a) { return a.data(); }
-template<typename T, size_t D> T*             begin(      darray<T, D>& a) { return a.begin(); }
-template<typename T, size_t D> const T*       begin(const darray<T, D>& a) { return a.begin(); }
-template<typename T, size_t D> T*               end(      darray<T, D>& a) { return a.end(); }
-template<typename T, size_t D> const T*         end(const darray<T, D>& a) { return a.end(); }
-template<typename T, size_t D> size_t          size(const darray<T, D>& a) { return a.size(); }
-template<typename T, size_t D> extents_t<D> extents(const darray<T, D>& a) { return a.extents(); }
-
+template<typename T, size_t D> T*               data(      darray<T, D>& a) { return a.data(); }
+template<typename T, size_t D> const T*         data(const darray<T, D>& a) { return a.data(); }
+template<typename T, size_t D> T*              begin(      darray<T, D>& a) { return a.begin(); }
+template<typename T, size_t D> const T*        begin(const darray<T, D>& a) { return a.begin(); }
+template<typename T, size_t D> T*                end(      darray<T, D>& a) { return a.end(); }
+template<typename T, size_t D> const T*          end(const darray<T, D>& a) { return a.end(); }
+template<typename T, size_t D> size_t           size(const darray<T, D>& a) { return a.size(); }
 template<typename T, size_t D> constexpr size_t rank(const darray<T, D>& a) { return a.rank(); }
+template<typename T, size_t D> extents_t<D>  extents(const darray<T, D>& a) { return a.extents(); }
+template<typename T, size_t D> size_t         extent(const darray<T, D>& a) { return a.extent<D>(); }
+template<typename T, size_t D> size_t        extent0(const darray<T, D>& a) { return a.extent0(); }
+template<typename T, size_t D> size_t        extent1(const darray<T, D>& a) { return a.extent1(); }
+template<typename T, size_t D> size_t        extent2(const darray<T, D>& a) { return a.extent2(); }
+template<typename T, size_t D> size_t        extent3(const darray<T, D>& a) { return a.extent3(); }
+template<typename T, size_t D> size_t        extent4(const darray<T, D>& a) { return a.extent4(); }
+template<typename T, size_t D> size_t        extent5(const darray<T, D>& a) { return a.extent5(); }
+template<typename T, size_t D> size_t        extent6(const darray<T, D>& a) { return a.extent6(); }
+template<typename T, size_t D> size_t        extent7(const darray<T, D>& a) { return a.extent7(); }
+template<typename T, size_t D> size_t        extent8(const darray<T, D>& a) { return a.extent8(); }
+template<typename T, size_t D> size_t        extent9(const darray<T, D>& a) { return a.extent9(); }
