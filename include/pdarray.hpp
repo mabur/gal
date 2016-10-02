@@ -65,7 +65,7 @@ public:
         size_ = details::product(extents_);
         assert(data_ != nullptr || size_ == 0); // Keep the assert?
     }
-
+private:
     template<size_t i, typename ... Types>
     void construction_helper(size_t argument, Types... arguments)
     {
@@ -79,7 +79,7 @@ public:
         data_ = data_pointer;
         static_assert(i == RANK, "Wrong number of arguments.");
     }
-
+public:
     template<typename S>
     explicit pdarray(const pdarray<S, RANK>& array)
         : extents_(array.extents())

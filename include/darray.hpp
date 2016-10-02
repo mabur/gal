@@ -69,7 +69,7 @@ public:
         construction_helper<0>(arguments_pack...);
         data_.resize(details::product(extents_));
     }
-
+private:
     template<size_t i, typename ... Types>
     void construction_helper(size_t argument, Types... arguments)
     {
@@ -90,7 +90,7 @@ public:
         std::copy(data_pointer, data_pointer + RANK, data());
         static_assert(i == RANK, "Wrong number of arguments.");
     }
-
+public:
     template<typename Array, typename Array::value_type* = nullptr>
     explicit darray(const Array& array)
         : extents_(::extents(array))
