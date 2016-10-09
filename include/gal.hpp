@@ -6,8 +6,8 @@ This library consists of four different array classes:
 ```
         | Owns Memory    Non Owning Pointer
 --------|----------------------------------
-Static  | sarray         psarray
-Dynamic | darray         pdarray
+Static  | sarray         sarray_ptr
+Dynamic | darray         darray_ptr
 ```
 The size of a static array is known at compile time.
 The size of a dynamic array is known at run time.
@@ -113,7 +113,7 @@ void fill_and_print_array2d(Array2d& array)
 int main()
 {
     auto static_array2d = sarray<float, 3, 2>();
-    auto dynamic_array2d = darray<int, 2>({ 8, 4 });
+    auto dynamic_array2d = darray<int, 2>(8, 4);
     fill_and_print_array2d(static_array2d);
     fill_and_print_array2d(dynamic_array2d);
 }
@@ -141,9 +141,9 @@ auto array1 = sarray<float, N>();
 ```
 `sarray` also supports multiple dimensions:
 ```
-const auto N = size_t{ 10 };
-const auto M = size_t{ 20 };
-const auto L = size_t{ 30 };
+const auto N = size_t{10};
+const auto M = size_t{20};
+const auto L = size_t{30};
 auto array0 = std::array<float, N>();
 auto array1 = sarray<float, N>();
 auto array2 = sarray<float, N, M>();
@@ -155,38 +155,31 @@ The template arguments specify the extent of each dimension.
 
 An `darray` of size `N` can be constructed similar to an `std::vector`:
 ```
-auto N = size_t{ 10 };
+size_t N = 10;
 auto array0 = std::vector<float>(N);
 auto array1 = darray<float>(N);
 ```
 `darray` also supports multiple dimensions:
 ```
-auto N = size_t{ 10 };
-auto M = size_t{ 20 };
-auto L = size_t{ 30 };
-auto array1 = darray<float, 1>({ N });
-auto array1 = darray<float, 2>({ N, M });
-auto array1 = darray<float, 3>({ N, M, L });
+auto N = {10};
+auto M = {20};
+auto L = {30};
+auto array1 = darray<float>(N);
+auto array2 = darray<float, 1>(N);
+auto array3 = darray<float, 2>(N, M);
+auto array4 = darray<float, 3>(N, M, L);
 ```
 The second template argument for `darray` specifies the rank, i.e. the number of
 dimensions. It has a defult value of `1`. The extent of each dimension are
-specified by the non-templated argument. For `darray` of rank 1 the braces
-around the extent is optional and all of these have the same meaning:
-```
-auto N = size_t{ 10 };
-auto array0 = darray<float>(N);
-auto array1 = darray<float>({N});
-auto array2 = darray<float, 1>(N);
-auto array3 = darray<float, 1>({N});
-```
+specified by the non-templated arguments.
 
 ## Construct Owning Arrays with Initialized Data
 
 `sarray` can be constructed with all the data initialized to the same value,
 unlike `std::array`:
 ```
-const auto N = size_t{ 10 };
-const auto M = size_t{ 20 };
+const auto N = size_t{10};
+const auto M = size_t{20};
 auto value = 6.283f;
 auto array1 = sarray<float, N>(value);
 auto array2 = sarray<float, N, M>(value);
@@ -199,7 +192,7 @@ auto M = size_t{ 20 };
 auto value = 6.283f;
 auto array1 = std::vector<float>(N, value);
 auto array2 = darray<float>(N, value);
-auto array3 = darray<float, 2>({ N, M }, value);
+auto array3 = darray<float, 2>(N, M, value);
 ```
 
 ## Construct Owning Arrays with Copied Data
@@ -221,7 +214,7 @@ auto M = size_t{ 20 };
 auto array1 = std::vector<float>(N * M);
 auto data_pointer = array1.data();
 auto array2 = darray<float>(N, data_pointer);
-auto array3 = darray<float, 2>({ N, M }, data_pointer);
+auto array3 = darray<float, 2>( N, M, data_pointer);
 ```
 
 ## Constructing Non-owning Pointer Arrays.
@@ -232,8 +225,8 @@ const auto N = size_t{ 10 };
 const auto M = size_t{ 20 };
 auto array0 = std::array<float, N * M>();
 auto data_pointer = array0.data();
-auto array1 = psarray<float, N>(data_pointer);
-auto array2 = psarray<float, N, M>(data_pointer);
+auto array1 = sarray_ptr<float, N>(data_pointer);
+auto array2 = sarray_ptr<float, N, M>(data_pointer);
 ```
 You can specify that the data pointed at should be constant in this way:
 ```
@@ -241,8 +234,8 @@ const auto N = size_t{ 10 };
 const auto M = size_t{ 20 };
 const auto array0 = std::array<float, N * M>();
 const auto data_pointer = array0.data();
-auto array1 = psarray<const float, N>(data_pointer);
-auto array2 = psarray<const float, N, M>(data_pointer);
+auto array1 = sarray_ptr<const float, N>(data_pointer);
+auto array2 = sarray_ptr<const float, N, M>(data_pointer);
 ```
 Note that `const` in front of the templated type and not in front of the array.
 This is similar to how you specofy a pointer to a constant using
@@ -255,8 +248,8 @@ auto N = size_t{ 10 };
 auto M = size_t{ 20 };
 auto array1 = std::vector<float>(N * M);
 auto data_pointer = array1.data();
-auto array2 = pdarray<float>(N, data_pointer);
-auto array3 = pdarray<float, 2>({ N, M }, data_pointer);
+auto array2 = darray_ptr<float>(N, data_pointer);
+auto array3 = darray_ptr<float, 2>(N, M, data_pointer);
 ```
 Dynamic arrays pointing at constant data are constructed like this:
 ```
@@ -264,8 +257,8 @@ auto N = size_t{ 10 };
 auto M = size_t{ 20 };
 const auto array1 = std::vector<float>(N * M);
 const auto data_pointer = array1.data();
-auto array2 = pdarray<const float>(N, data_pointer);
-auto array3 = pdarray<const float, 2>({ N, M }, data_pointer);
+auto array2 = darray_ptr<const float>(N, data_pointer);
+auto array3 = darray_ptr<const float, 2>(N, M, data_pointer);
 ```
 */
 
@@ -273,8 +266,8 @@ auto array3 = pdarray<const float, 2>({ N, M }, data_pointer);
 
 #include "sarray.hpp"
 #include "darray.hpp"
-#include "psarray.hpp"
-#include "pdarray.hpp"
+#include "sarray_ptr.hpp"
+#include "darray_ptr.hpp"
 
 #include "vector_math.hpp"
 #include "geometry.hpp"

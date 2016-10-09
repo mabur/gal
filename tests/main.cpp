@@ -66,11 +66,11 @@ auto a = darray<int, 2>({2, 3}, data_value);
 auto a = darray<int, 2>({2, 3});
 auto a = darray<int, 2>(data_array);
 
-auto a = pdarray<int, 2>({2, 3}, data_iterator);
-auto a = pdarray<int, 2>(data_array);
+auto a = darray_ptr<int, 2>({2, 3}, data_iterator);
+auto a = darray_ptr<int, 2>(data_array);
 
-auto a = psarray<int, 2, 3>(data_iterator);
-auto a = psarray<int, 2, 3>(data_array);
+auto a = sarray_ptr<int, 2, 3>(data_iterator);
+auto a = sarray_ptr<int, 2, 3>(data_array);
 
 auto a = std::array<int, 2>({1, 2})
 auto a = std::vector<int>({data1, data2})
@@ -82,7 +82,7 @@ auto a = std::valarray<int>(data_value, size) <- exception
 assert(extents(array1) == extents(array2))
 */
 
-void f(pdarray<int> a)
+void f(darray_ptr<int> a)
 {
 	for (auto& x : a)
 	{
@@ -90,7 +90,7 @@ void f(pdarray<int> a)
 	}
 }
 
-void h(pdarray<const int> a)
+void h(darray_ptr<const int> a)
 {
 	using namespace std;
 	for (auto& x : a)
@@ -100,7 +100,7 @@ void h(pdarray<const int> a)
 	cout << endl;
 }
 
-void g(pdarray<int, 2> a)
+void g(darray_ptr<int, 2> a)
 {
 	for (auto& x : a)
 	{
@@ -160,15 +160,15 @@ int main()
 	//auto b = valarray<int>(N);
 	auto c = array<int, N>();
 
-	f(pdarray<int>(a));
+	f(darray_ptr<int>(a));
 	//f(b);
-	f(pdarray<int>(c));
+	f(darray_ptr<int>(c));
 
-	h(pdarray<const int>(a));
-	h(pdarray<const int>(c));
+	h(darray_ptr<const int>(a));
+	h(darray_ptr<const int>(c));
 
-	g(pdarray<int, 2>(W, H, a.data()));
-	g(pdarray<int, 2>(W, H, c.data()));
+	g(darray_ptr<int, 2>(W, H, a.data()));
+	g(darray_ptr<int, 2>(W, H, c.data()));
 
 	auto d = darray<int>();
 	auto e = sarray<int, 5>();

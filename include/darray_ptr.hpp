@@ -12,7 +12,7 @@
 \brief Pointer to a dynamic array.
 */
 template<typename T, size_t RANK = 1>
-class pdarray
+class darray_ptr
 {
 //  ____________________________________________________________________________
 //  These are the same for all arrays in gal:
@@ -47,19 +47,19 @@ public:
 private:
     extents_type extents_;
 //  ____________________________________________________________________________
-//  pdarray specifics:
+//  darray_ptr specifics:
 public:
-    pdarray() : data_(nullptr), size_(0)
+    darray_ptr() : data_(nullptr), size_(0)
     {
         std::fill(std::begin(extents_), std::end(extents_), 0);
     }
 
-    pdarray(const pdarray<T, RANK>&) = default;
+    darray_ptr(const darray_ptr<T, RANK>&) = default;
 
-    pdarray<T, RANK>& operator=(const pdarray<T, RANK>&) = default;
+    darray_ptr<T, RANK>& operator=(const darray_ptr<T, RANK>&) = default;
 
     template<typename ... Types, typename std::enable_if<sizeof...(Types) == RANK + 1>::type* = nullptr>
-    explicit pdarray(Types... arguments_pack)
+    explicit darray_ptr(Types... arguments_pack)
     {
         construction_helper<0>(arguments_pack...);
         size_ = details::product(extents_);
@@ -81,7 +81,7 @@ private:
     }
 public:
     template<typename S>
-    explicit pdarray(const pdarray<S, RANK>& array)
+    explicit darray_ptr(const darray_ptr<S, RANK>& array)
         : extents_(array.extents())
         , data_(array.data())
         , size_(array.size())
@@ -90,7 +90,7 @@ public:
     }
 
     template<typename Array>
-    explicit pdarray(Array& array)
+    explicit darray_ptr(Array& array)
         : extents_(::extents(array))
         , data_(::data(array))
         , size_(array.size())
@@ -99,7 +99,7 @@ public:
     }
 
     template<typename Array>
-    explicit pdarray(const Array& array)
+    explicit darray_ptr(const Array& array)
         : extents_(::extents(array))
         , data_(::data(array))
         , size_(array.size())
@@ -129,23 +129,23 @@ private:
     size_t size_;
 };
 
-template<typename T, size_t D> T*               data      (pdarray<T, D>& a) { return a.data(); }
-template<typename T, size_t D> const T*         data(const pdarray<T, D>& a) { return a.data(); }
-template<typename T, size_t D> T*              begin(      pdarray<T, D>& a) { return a.begin(); }
-template<typename T, size_t D> const T*        begin(const pdarray<T, D>& a) { return a.begin(); }
-template<typename T, size_t D> T*                end(      pdarray<T, D>& a) { return a.end(); }
-template<typename T, size_t D> const T*          end(const pdarray<T, D>& a) { return a.end(); }
-template<typename T, size_t D> size_t           size(const pdarray<T, D>& a) { return a.size(); }
-template<typename T, size_t D> constexpr size_t rank(const pdarray<T, D>& a) { return a.rank(); }
-template<typename T, size_t D> extents_t<D>  extents(const pdarray<T, D>& a) { return a.extents(); }
-template<typename T, size_t D> size_t         extent(const pdarray<T, D>& a) { return a.extent<D>(); }
-template<typename T, size_t D> size_t        extent0(const pdarray<T, D>& a) { return a.extent0(); }
-template<typename T, size_t D> size_t        extent1(const pdarray<T, D>& a) { return a.extent1(); }
-template<typename T, size_t D> size_t        extent2(const pdarray<T, D>& a) { return a.extent2(); }
-template<typename T, size_t D> size_t        extent3(const pdarray<T, D>& a) { return a.extent3(); }
-template<typename T, size_t D> size_t        extent4(const pdarray<T, D>& a) { return a.extent4(); }
-template<typename T, size_t D> size_t        extent5(const pdarray<T, D>& a) { return a.extent5(); }
-template<typename T, size_t D> size_t        extent6(const pdarray<T, D>& a) { return a.extent6(); }
-template<typename T, size_t D> size_t        extent7(const pdarray<T, D>& a) { return a.extent7(); }
-template<typename T, size_t D> size_t        extent8(const pdarray<T, D>& a) { return a.extent8(); }
-template<typename T, size_t D> size_t        extent9(const pdarray<T, D>& a) { return a.extent9(); }
+template<typename T, size_t D> T*               data      (darray_ptr<T, D>& a) { return a.data(); }
+template<typename T, size_t D> const T*         data(const darray_ptr<T, D>& a) { return a.data(); }
+template<typename T, size_t D> T*              begin(      darray_ptr<T, D>& a) { return a.begin(); }
+template<typename T, size_t D> const T*        begin(const darray_ptr<T, D>& a) { return a.begin(); }
+template<typename T, size_t D> T*                end(      darray_ptr<T, D>& a) { return a.end(); }
+template<typename T, size_t D> const T*          end(const darray_ptr<T, D>& a) { return a.end(); }
+template<typename T, size_t D> size_t           size(const darray_ptr<T, D>& a) { return a.size(); }
+template<typename T, size_t D> constexpr size_t rank(const darray_ptr<T, D>& a) { return a.rank(); }
+template<typename T, size_t D> extents_t<D>  extents(const darray_ptr<T, D>& a) { return a.extents(); }
+template<typename T, size_t D> size_t         extent(const darray_ptr<T, D>& a) { return a.extent<D>(); }
+template<typename T, size_t D> size_t        extent0(const darray_ptr<T, D>& a) { return a.extent0(); }
+template<typename T, size_t D> size_t        extent1(const darray_ptr<T, D>& a) { return a.extent1(); }
+template<typename T, size_t D> size_t        extent2(const darray_ptr<T, D>& a) { return a.extent2(); }
+template<typename T, size_t D> size_t        extent3(const darray_ptr<T, D>& a) { return a.extent3(); }
+template<typename T, size_t D> size_t        extent4(const darray_ptr<T, D>& a) { return a.extent4(); }
+template<typename T, size_t D> size_t        extent5(const darray_ptr<T, D>& a) { return a.extent5(); }
+template<typename T, size_t D> size_t        extent6(const darray_ptr<T, D>& a) { return a.extent6(); }
+template<typename T, size_t D> size_t        extent7(const darray_ptr<T, D>& a) { return a.extent7(); }
+template<typename T, size_t D> size_t        extent8(const darray_ptr<T, D>& a) { return a.extent8(); }
+template<typename T, size_t D> size_t        extent9(const darray_ptr<T, D>& a) { return a.extent9(); }

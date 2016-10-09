@@ -13,7 +13,7 @@
 \brief Pointer to a static array.
 */
 template<typename T, size_t... EXTENTS>
-class psarray
+class sarray_ptr
 {
 //  ____________________________________________________________________________
 //  These are the same for all arrays in gal:
@@ -56,31 +56,31 @@ public:
     static constexpr size_t extent8() { return extent<8>(); }
     static constexpr size_t extent9() { return extent<9>(); }
 //  ____________________________________________________________________________
-//  psarray specifics:
+//  sarray_ptr specifics:
 public:
 
-    psarray() : data_(nullptr) {}
+    sarray_ptr() : data_(nullptr) {}
 
-    psarray(const psarray<T, EXTENTS...>&) = default;
+    sarray_ptr(const sarray_ptr<T, EXTENTS...>&) = default;
 
-    psarray<T, EXTENTS...>& operator=(const psarray<T, EXTENTS...>&) = default;
+    sarray_ptr<T, EXTENTS...>& operator=(const sarray_ptr<T, EXTENTS...>&) = default;
 
-    explicit psarray(T* data) : data_(data) {}
+    explicit sarray_ptr(T* data) : data_(data) {}
 
     template<typename S>
-    explicit psarray(const psarray<S, EXTENTS...>& array)
+    explicit sarray_ptr(const sarray_ptr<S, EXTENTS...>& array)
         : data_(array.data())
     {}
 
     template<typename Array, typename Array::value_type* = nullptr>
-    explicit psarray(Array& array)
+    explicit sarray_ptr(Array& array)
         : data_(::data(array))
     {
         assert(array.size() == size());
     }
 
     template<typename Array, typename Array::value_type* = nullptr>
-    explicit psarray(const Array& array)
+    explicit sarray_ptr(const Array& array)
         : data_(::data(array))
     {
         assert(array.size() == size());
@@ -106,25 +106,25 @@ private:
     T* data_;
 };
 
-template<typename T, size_t... EXTENTS> T*        data(      psarray<T, EXTENTS...>& a) { return a.data();  }
-template<typename T, size_t... EXTENTS> const T*  data(const psarray<T, EXTENTS...>& a) { return a.data();  }
-template<typename T, size_t... EXTENTS> T*       begin(      psarray<T, EXTENTS...>& a) { return a.begin(); }
-template<typename T, size_t... EXTENTS> const T* begin(const psarray<T, EXTENTS...>& a) { return a.begin(); }
-template<typename T, size_t... EXTENTS> T*         end(      psarray<T, EXTENTS...>& a) { return a.end();   }
-template<typename T, size_t... EXTENTS> const T*   end(const psarray<T, EXTENTS...>& a) { return a.end();   }
-template<typename T, size_t... EXTENTS> size_t    size(const psarray<T, EXTENTS...>& a) { return a.size();  }
+template<typename T, size_t... EXTENTS> T*        data(      sarray_ptr<T, EXTENTS...>& a) { return a.data();  }
+template<typename T, size_t... EXTENTS> const T*  data(const sarray_ptr<T, EXTENTS...>& a) { return a.data();  }
+template<typename T, size_t... EXTENTS> T*       begin(      sarray_ptr<T, EXTENTS...>& a) { return a.begin(); }
+template<typename T, size_t... EXTENTS> const T* begin(const sarray_ptr<T, EXTENTS...>& a) { return a.begin(); }
+template<typename T, size_t... EXTENTS> T*         end(      sarray_ptr<T, EXTENTS...>& a) { return a.end();   }
+template<typename T, size_t... EXTENTS> const T*   end(const sarray_ptr<T, EXTENTS...>& a) { return a.end();   }
+template<typename T, size_t... EXTENTS> size_t    size(const sarray_ptr<T, EXTENTS...>& a) { return a.size();  }
 
-template<          typename T, size_t... EXTENTS> constexpr size_t                           rank(const psarray<T, EXTENTS...>& a) { return a.rank(); }
-template<          typename T, size_t... EXTENTS> constexpr extents_t<sizeof...(EXTENTS)> extents(const psarray<T, EXTENTS...>& a) { return a.extents(); }
-template<size_t D, typename T, size_t... EXTENTS> constexpr size_t                         extent(const psarray<T, EXTENTS...>& a) { return a.extent<D>(); }
+template<          typename T, size_t... EXTENTS> constexpr size_t                           rank(const sarray_ptr<T, EXTENTS...>& a) { return a.rank(); }
+template<          typename T, size_t... EXTENTS> constexpr extents_t<sizeof...(EXTENTS)> extents(const sarray_ptr<T, EXTENTS...>& a) { return a.extents(); }
+template<size_t D, typename T, size_t... EXTENTS> constexpr size_t                         extent(const sarray_ptr<T, EXTENTS...>& a) { return a.extent<D>(); }
 
-template<typename T, size_t... EXTENTS> constexpr size_t extent0(const psarray<T, EXTENTS...>& a) { return a.extent0(); }
-template<typename T, size_t... EXTENTS> constexpr size_t extent1(const psarray<T, EXTENTS...>& a) { return a.extent1(); }
-template<typename T, size_t... EXTENTS> constexpr size_t extent2(const psarray<T, EXTENTS...>& a) { return a.extent2(); }
-template<typename T, size_t... EXTENTS> constexpr size_t extent3(const psarray<T, EXTENTS...>& a) { return a.extent3(); }
-template<typename T, size_t... EXTENTS> constexpr size_t extent4(const psarray<T, EXTENTS...>& a) { return a.extent4(); }
-template<typename T, size_t... EXTENTS> constexpr size_t extent5(const psarray<T, EXTENTS...>& a) { return a.extent5(); }
-template<typename T, size_t... EXTENTS> constexpr size_t extent6(const psarray<T, EXTENTS...>& a) { return a.extent6(); }
-template<typename T, size_t... EXTENTS> constexpr size_t extent7(const psarray<T, EXTENTS...>& a) { return a.extent7(); }
-template<typename T, size_t... EXTENTS> constexpr size_t extent8(const psarray<T, EXTENTS...>& a) { return a.extent8(); }
-template<typename T, size_t... EXTENTS> constexpr size_t extent9(const psarray<T, EXTENTS...>& a) { return a.extent9(); }
+template<typename T, size_t... EXTENTS> constexpr size_t extent0(const sarray_ptr<T, EXTENTS...>& a) { return a.extent0(); }
+template<typename T, size_t... EXTENTS> constexpr size_t extent1(const sarray_ptr<T, EXTENTS...>& a) { return a.extent1(); }
+template<typename T, size_t... EXTENTS> constexpr size_t extent2(const sarray_ptr<T, EXTENTS...>& a) { return a.extent2(); }
+template<typename T, size_t... EXTENTS> constexpr size_t extent3(const sarray_ptr<T, EXTENTS...>& a) { return a.extent3(); }
+template<typename T, size_t... EXTENTS> constexpr size_t extent4(const sarray_ptr<T, EXTENTS...>& a) { return a.extent4(); }
+template<typename T, size_t... EXTENTS> constexpr size_t extent5(const sarray_ptr<T, EXTENTS...>& a) { return a.extent5(); }
+template<typename T, size_t... EXTENTS> constexpr size_t extent6(const sarray_ptr<T, EXTENTS...>& a) { return a.extent6(); }
+template<typename T, size_t... EXTENTS> constexpr size_t extent7(const sarray_ptr<T, EXTENTS...>& a) { return a.extent7(); }
+template<typename T, size_t... EXTENTS> constexpr size_t extent8(const sarray_ptr<T, EXTENTS...>& a) { return a.extent8(); }
+template<typename T, size_t... EXTENTS> constexpr size_t extent9(const sarray_ptr<T, EXTENTS...>& a) { return a.extent9(); }

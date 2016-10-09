@@ -4,8 +4,8 @@
 
 #include "darray.hpp"
 #include "sarray.hpp"
-#include "pdarray.hpp"
-#include "psarray.hpp"
+#include "darray_ptr.hpp"
+#include "sarray_ptr.hpp"
 
 #include "geometry.hpp"
 
@@ -55,8 +55,8 @@ void test_construction_documentation_psarray()
     const auto M = size_t{ 20 };
     auto array0 = std::array<float, N * M>();
     auto data_pointer = array0.data();
-    auto array1 = psarray<float, N>(data_pointer);
-    auto array2 = psarray<float, N, M>(data_pointer);
+    auto array1 = sarray_ptr<float, N>(data_pointer);
+    auto array2 = sarray_ptr<float, N, M>(data_pointer);
 }
 
 void test_construction_documentation_psarray2()
@@ -65,8 +65,8 @@ void test_construction_documentation_psarray2()
     const auto M = size_t{ 20 };
     const auto array0 = std::array<float, N * M>();
     const auto data_pointer = array0.data();
-    auto array1 = psarray<const float, N>(data_pointer);
-    auto array2 = psarray<const float, N, M>(data_pointer);
+    auto array1 = sarray_ptr<const float, N>(data_pointer);
+    auto array2 = sarray_ptr<const float, N, M>(data_pointer);
 }
 
 void test_construction_documentation_darray2()
@@ -104,8 +104,8 @@ void test_construction_documentation_pdarray()
     auto M = size_t{ 20 };
     auto array1 = std::vector<float>(N * M);
     auto data_pointer = array1.data();
-    auto array2 = pdarray<float>(N, data_pointer);
-    auto array3 = pdarray<float, 2>(N, M, data_pointer);
+    auto array2 = darray_ptr<float>(N, data_pointer);
+    auto array3 = darray_ptr<float, 2>(N, M, data_pointer);
 }
 
 void test_construction_documentation_pdarray2()
@@ -114,8 +114,8 @@ void test_construction_documentation_pdarray2()
     auto M = size_t{ 20 };
     const auto array1 = std::vector<float>(N * M);
     const auto data_pointer = array1.data();
-    auto array2 = pdarray<const float>(N, data_pointer);
-    auto array3 = pdarray<const float, 2>(N, M, data_pointer);
+    auto array2 = darray_ptr<const float>(N, data_pointer);
+    auto array3 = darray_ptr<const float, 2>(N, M, data_pointer);
 }
 
 void test_construction_sarray()
@@ -156,10 +156,10 @@ void test_construction_pdarray()
 	auto COLUMNS = size_t{ 4 };
 	auto N = ROWS * COLUMNS;
 	auto vector0 = std::vector<float>(N);
-	auto pdarray0 = pdarray<float>();
-	auto pdarray1 = pdarray<float>(N, vector0.data());
-	auto pdarray2 = pdarray<float>(N, vector0.data());
-	auto pdarray3 = pdarray<float, 2>(ROWS, COLUMNS, vector0.data());
+	auto pdarray0 = darray_ptr<float>();
+	auto pdarray1 = darray_ptr<float>(N, vector0.data());
+	auto pdarray2 = darray_ptr<float>(N, vector0.data());
+	auto pdarray3 = darray_ptr<float, 2>(ROWS, COLUMNS, vector0.data());
 }
 
 void test_construction_psarray()
@@ -169,19 +169,19 @@ void test_construction_psarray()
     const auto N = ROWS * COLUMNS;
     auto vector0 = std::vector<float>(N);
 
-    auto psarray0 = psarray<float, N>();
-    auto psarray1 = psarray<float, N>(vector0.data());
-    auto psarray2 = psarray<float, N>(vector0);
+    auto psarray0 = sarray_ptr<float, N>();
+    auto psarray1 = sarray_ptr<float, N>(vector0.data());
+    auto psarray2 = sarray_ptr<float, N>(vector0);
 }
 
 void test_construction_mixed()
 {
 	auto sarray0   = sarray<float, 2, 3>();
 	auto darray0   = darray<float, 2>(2, 3);
-	auto pdarray0  = pdarray<float, 2>(2, 3, data(darray0));
-	auto psarray0  = psarray<float, 2, 3>(data(sarray0));
-	auto cpdarray0 = pdarray<const float, 2>(2, 3, data(darray0));
-	auto cpsarray0 = psarray<const float, 2, 3>(data(sarray0));
+	auto pdarray0  = darray_ptr<float, 2>(2, 3, data(darray0));
+	auto psarray0  = sarray_ptr<float, 2, 3>(data(sarray0));
+	auto cpdarray0 = darray_ptr<const float, 2>(2, 3, data(darray0));
+	auto cpsarray0 = sarray_ptr<const float, 2, 3>(data(sarray0));
 
 	auto darray1 = darray<float, 2>(sarray0);
 	auto darray2 = darray<float, 2>(darray0);
@@ -197,35 +197,35 @@ void test_construction_mixed()
 	auto sarray5 = sarray<float, 2, 3>(cpdarray0);
 	auto sarray6 = sarray<float, 2, 3>(cpsarray0);
 
-	auto pdarray1 = pdarray<float, 2>(sarray0);
-	auto pdarray2 = pdarray<float, 2>(darray0);
-	auto pdarray3 = pdarray<float, 2>(pdarray0);
-	auto pdarray4 = pdarray<float, 2>(psarray0);
+	auto pdarray1 = darray_ptr<float, 2>(sarray0);
+	auto pdarray2 = darray_ptr<float, 2>(darray0);
+	auto pdarray3 = darray_ptr<float, 2>(pdarray0);
+	auto pdarray4 = darray_ptr<float, 2>(psarray0);
 
 	// Should not compile:
-	//auto pdarray5 = pdarray<float, 2>(cpdarray0);
-	//auto pdarray6 = pdarray<float, 2>(cpsarray0);
+	//auto pdarray5 = darray_ptr<float, 2>(cpdarray0);
+	//auto pdarray6 = darray_ptr<float, 2>(cpsarray0);
 
-	auto cpdarray1 = pdarray<const float, 2>(sarray0);
-	auto cpdarray2 = pdarray<const float, 2>(darray0);
-	auto cpdarray3 = pdarray<const float, 2>(pdarray0);
-	auto cpdarray4 = pdarray<const float, 2>(psarray0);
-	auto cpdarray5 = pdarray<const float, 2>(cpdarray0);
-	auto cpdarray6 = pdarray<const float, 2>(cpsarray0);
+	auto cpdarray1 = darray_ptr<const float, 2>(sarray0);
+	auto cpdarray2 = darray_ptr<const float, 2>(darray0);
+	auto cpdarray3 = darray_ptr<const float, 2>(pdarray0);
+	auto cpdarray4 = darray_ptr<const float, 2>(psarray0);
+	auto cpdarray5 = darray_ptr<const float, 2>(cpdarray0);
+	auto cpdarray6 = darray_ptr<const float, 2>(cpsarray0);
 
-	auto psarray1 = psarray<float, 2, 3>(sarray0);
-	auto psarray2 = psarray<float, 2, 3>(darray0);
-	auto psarray3 = psarray<float, 2, 3>(pdarray0);
-	auto psarray4 = psarray<float, 2, 3>(psarray0);
+	auto psarray1 = sarray_ptr<float, 2, 3>(sarray0);
+	auto psarray2 = sarray_ptr<float, 2, 3>(darray0);
+	auto psarray3 = sarray_ptr<float, 2, 3>(pdarray0);
+	auto psarray4 = sarray_ptr<float, 2, 3>(psarray0);
 
 	// Should not compile:
-	//auto psarray5 = psarray<float, 2, 3>(cpdarray0);
-	//auto psarray6 = psarray<float, 2, 3>(cpsarray0);
+	//auto psarray5 = sarray_ptr<float, 2, 3>(cpdarray0);
+	//auto psarray6 = sarray_ptr<float, 2, 3>(cpsarray0);
 
-	auto cpsarray1 = psarray<const float, 2, 3>(sarray0);
-	auto cpsarray2 = psarray<const float, 2, 3>(darray0);
-	auto cpsarray3 = psarray<const float, 2, 3>(pdarray0);
-	auto cpsarray4 = psarray<const float, 2, 3>(psarray0);
-	auto cpsarray5 = psarray<const float, 2, 3>(cpdarray0);
-	auto cpsarray6 = psarray<const float, 2, 3>(cpsarray0);
+	auto cpsarray1 = sarray_ptr<const float, 2, 3>(sarray0);
+	auto cpsarray2 = sarray_ptr<const float, 2, 3>(darray0);
+	auto cpsarray3 = sarray_ptr<const float, 2, 3>(pdarray0);
+	auto cpsarray4 = sarray_ptr<const float, 2, 3>(psarray0);
+	auto cpsarray5 = sarray_ptr<const float, 2, 3>(cpdarray0);
+	auto cpsarray6 = sarray_ptr<const float, 2, 3>(cpsarray0);
 }
