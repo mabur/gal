@@ -10,7 +10,7 @@
 #include "utilities.hpp"
 
 /**
-\brief Dynamic array.
+\brief An array with size known at run-time.
 */
 template<typename T, size_t RANK = 1>
 class darray

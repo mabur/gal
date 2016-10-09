@@ -11,7 +11,7 @@
 #include "non_member_functions.hpp"
 
 /**
-\brief Static array.
+\brief \brief An array with size known at compile-time.
 */
 template<typename T, size_t... EXTENTS>
 class sarray

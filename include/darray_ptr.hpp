@@ -9,7 +9,7 @@
 #include "utilities.hpp"
 
 /**
-\brief Pointer to a dynamic array.
+\brief A non-owning pointer to an array with size known at run-time.
 */
 template<typename T, size_t RANK = 1>
 class darray_ptr

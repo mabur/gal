@@ -10,7 +10,7 @@
 #include "non_member_functions.hpp"
 
 /**
-\brief Pointer to a static array.
+\brief \brief A non-owning pointer to an array with size known at compile-time.
 */
 template<typename T, size_t... EXTENTS>
 class sarray_ptr
