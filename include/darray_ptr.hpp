@@ -49,14 +49,16 @@ private:
 //  ____________________________________________________________________________
 //  darray_ptr specifics:
 public:
+    darray_ptr<T, RANK>& operator=(const darray_ptr<T, RANK>&)  = default;
+    darray_ptr<T, RANK>& operator=(      darray_ptr<T, RANK>&&) = default;
+
+    darray_ptr(const darray_ptr<T, RANK>&)  = default;
+    darray_ptr(      darray_ptr<T, RANK>&&) = default;
+
     darray_ptr() : data_(nullptr), size_(0)
     {
         std::fill(std::begin(extents_), std::end(extents_), 0);
-    }
-
-    darray_ptr(const darray_ptr<T, RANK>&) = default;
-
-    darray_ptr<T, RANK>& operator=(const darray_ptr<T, RANK>&) = default;
+    }    
 
     template<typename ... Types, typename std::enable_if<sizeof...(Types) == RANK + 1>::type* = nullptr>
     explicit darray_ptr(Types... arguments_pack)

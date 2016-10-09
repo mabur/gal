@@ -59,11 +59,13 @@ public:
 //  sarray_ptr specifics:
 public:
 
+    sarray_ptr<T, EXTENTS...>& operator=(const sarray_ptr<T, EXTENTS...>&)  = default;
+    sarray_ptr<T, EXTENTS...>& operator=(      sarray_ptr<T, EXTENTS...>&&) = default;
+
+    sarray_ptr(const sarray_ptr<T, EXTENTS...>&)  = default;
+    sarray_ptr(      sarray_ptr<T, EXTENTS...>&&) = default;
+
     sarray_ptr() : data_(nullptr) {}
-
-    sarray_ptr(const sarray_ptr<T, EXTENTS...>&) = default;
-
-    sarray_ptr<T, EXTENTS...>& operator=(const sarray_ptr<T, EXTENTS...>&) = default;
 
     explicit sarray_ptr(T* data) : data_(data) {}
 

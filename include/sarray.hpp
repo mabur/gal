@@ -59,11 +59,16 @@ public:
 //  ____________________________________________________________________________
 //  sarray specifics:
 public:
+    
+    sarray<T, EXTENTS...>& operator=(const sarray<T, EXTENTS...>&)  = default;
+    sarray<T, EXTENTS...>& operator=(      sarray<T, EXTENTS...>&&) = default;
+
+    sarray(const sarray<T, EXTENTS...>&)  = default;
+    sarray(      sarray<T, EXTENTS...>&&) = default;
+
     sarray() = default;
 
-    sarray(const sarray<T, EXTENTS...>&) = default;
-
-    sarray<T, EXTENTS...>& operator=(const sarray<T, EXTENTS...>&) = default;
+    
 
     //explicit sarray(const std::array<T, total_size<EXTENTS...>::value>& data)
     //  : data_(data)

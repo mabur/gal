@@ -50,10 +50,13 @@ private:
 //  ____________________________________________________________________________
 //  darray specifics:
 public:
-    darray() { std::fill(std::begin(extents_), std::end(extents_), 0); }
-    darray(const darray<T, RANK>&) = default;
+    darray<T, RANK>& operator=(const darray<T, RANK>&)  = default;
+    darray<T, RANK>& operator=(      darray<T, RANK>&&) = default;
 
-    darray<T, RANK>& operator=(const darray<T, RANK>&) = default;
+    darray(const darray<T, RANK>&)  = default;
+    darray(      darray<T, RANK>&&) = default;
+
+    darray() { std::fill(std::begin(extents_), std::end(extents_), 0); }
 
     template<typename ... Types, typename std::enable_if<sizeof...(Types)==RANK>::type* = nullptr>
     explicit darray(Types... arguments_pack)
