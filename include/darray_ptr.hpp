@@ -67,21 +67,7 @@ public:
         size_ = details::product(extents_);
         assert(data_ != nullptr || size_ == 0); // Keep the assert?
     }
-private:
-    template<size_t i, typename ... Types>
-    void construction_helper(size_t argument, Types... arguments)
-    {
-        extents_[i] = argument;
-        construction_helper<i + 1>(arguments...);
-    }
 
-    template<size_t i>
-    void construction_helper(pointer data_pointer)
-    {
-        data_ = data_pointer;
-        static_assert(i == RANK, "Wrong number of arguments.");
-    }
-public:
     template<typename S>
     explicit darray_ptr(const darray_ptr<S, RANK>& array)
         : extents_(array.extents())
@@ -108,7 +94,21 @@ public:
     {
         assert(data_ != nullptr || size_ == 0); // Keep the assert?
     }
+private:
+    template<size_t i, typename ... Types>
+    void construction_helper(size_t argument, Types... arguments)
+    {
+        extents_[i] = argument;
+        construction_helper<i + 1>(arguments...);
+    }
 
+    template<size_t i>
+    void construction_helper(pointer data_pointer)
+    {
+        data_ = data_pointer;
+        static_assert(i == RANK, "Wrong number of arguments.");
+    }
+public:
     inline size_t size() const { return size_; }
     inline T* begin()    const { return data_; }
     inline T* end()      const { return data_ + size_; }

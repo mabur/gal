@@ -68,8 +68,6 @@ public:
 
     sarray() = default;
 
-    
-
     //explicit sarray(const std::array<T, total_size<EXTENTS...>::value>& data)
     //  : data_(data)
     //{}

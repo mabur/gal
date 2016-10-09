@@ -58,6 +58,14 @@ public:
 
     darray() { std::fill(std::begin(extents_), std::end(extents_), 0); }
 
+    template<typename Array, typename Array::value_type* = nullptr>
+    explicit darray(const Array& array)
+        : extents_(::extents(array))
+        , data_(array.size())
+    {
+        std::copy(std::begin(array), std::end(array), std::begin(data_));
+    }
+
     template<typename ... Types, typename std::enable_if<sizeof...(Types)==RANK>::type* = nullptr>
     explicit darray(Types... arguments_pack)
     {
@@ -72,6 +80,7 @@ public:
         construction_helper<0>(arguments_pack...);
         data_.resize(details::product(extents_));
     }
+
 private:
     template<size_t i, typename ... Types>
     void construction_helper(size_t argument, Types... arguments)
@@ -94,14 +103,6 @@ private:
         static_assert(i == RANK, "Wrong number of arguments.");
     }
 public:
-    template<typename Array, typename Array::value_type* = nullptr>
-    explicit darray(const Array& array)
-        : extents_(::extents(array))
-        , data_(array.size())
-    {
-        std::copy(std::begin(array), std::end(array), std::begin(data_));
-    }
-
     size_t size() const { return data_.size(); };
     
     T*       begin()       {return std::begin(data_);};
