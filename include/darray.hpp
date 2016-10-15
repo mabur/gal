@@ -9,6 +9,9 @@
 #include "non_member_functions.hpp"
 #include "utilities.hpp"
 
+namespace gal
+{
+
 /**
 \brief An array with size known at run-time.
 */
@@ -156,3 +159,5 @@ template<typename T, size_t D> size_t        extent6(const darray<T, D>& a) { re
 template<typename T, size_t D> size_t        extent7(const darray<T, D>& a) { return a.extent7(); }
 template<typename T, size_t D> size_t        extent8(const darray<T, D>& a) { return a.extent8(); }
 template<typename T, size_t D> size_t        extent9(const darray<T, D>& a) { return a.extent9(); }
+
+} // namespace gal

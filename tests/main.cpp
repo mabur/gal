@@ -82,6 +82,8 @@ auto a = std::valarray<int>(data_value, size) <- exception
 assert(extents(array1) == extents(array2))
 */
 
+using namespace gal;
+
 void f(darray_ptr<int> a)
 {
 	for (auto& x : a)

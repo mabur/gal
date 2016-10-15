@@ -3,6 +3,9 @@
 #include "sarray.hpp"
 #include "vector_math.hpp"
 
+namespace gal
+{
+
 typedef sarray<float, 1> vector1f;
 typedef sarray<float, 2> vector2f;
 typedef sarray<float, 3> vector3f;
@@ -126,3 +129,5 @@ sarray<T, typename hej<elements...>::value> make_vector2(int... elements)
     return sarray<T, sizeof...(elements)>();
 }
 */
+
+} // namespace gal

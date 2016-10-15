@@ -3,6 +3,9 @@
 #include <assert.h>
 #include "geometry.hpp"
 
+namespace gal
+{
+
 void testVectors()
 {
 	auto vector0 = vector1f{};
@@ -63,3 +66,5 @@ void testMatrices()
     assert(   rows(matrix1) == 3);
     assert(columns(matrix1) == 2);
 }
+
+} // namespace gal

@@ -9,6 +9,9 @@
 #include "sarray_ptr.hpp"
 #include "darray_ptr.hpp"
 
+namespace gal
+{
+
 inline void sarray_from_std()
 {
 	const auto N = size_t(5);
@@ -118,3 +121,5 @@ inline void psarray_from_std()
 	//auto psarray11 = sarray_ptr<int, 1>(const_std_vector);
 	//auto psarray12 = sarray_ptr<int, 1>(const_std_valarray);
 }
+
+} // namespace gal

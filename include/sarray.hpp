@@ -10,6 +10,9 @@
 #include "utilities.hpp"
 #include "non_member_functions.hpp"
 
+namespace gal
+{
+
 /**
 \brief \brief An array with size known at compile-time.
 */
@@ -139,3 +142,5 @@ template<typename T, size_t... EXTENTS> constexpr size_t extent6(const sarray<T,
 template<typename T, size_t... EXTENTS> constexpr size_t extent7(const sarray<T, EXTENTS...>& a) { return a.extent7(); }
 template<typename T, size_t... EXTENTS> constexpr size_t extent8(const sarray<T, EXTENTS...>& a) { return a.extent8(); }
 template<typename T, size_t... EXTENTS> constexpr size_t extent9(const sarray<T, EXTENTS...>& a) { return a.extent9(); }
+
+} // namespace gal

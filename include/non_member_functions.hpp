@@ -4,6 +4,9 @@
 #include <valarray>
 #include <vector>
 
+namespace gal
+{
+
 template<size_t RANK>
 using extents_t = std::array<size_t, RANK>;
 
@@ -45,3 +48,5 @@ template<typename T, size_t... EXTENTS> class sarray_ptr;
 template<typename T, size_t... EXTENTS> T* data(sarray_ptr<T, EXTENTS...>& a);
 template<typename T, size_t... EXTENTS> const T* data(const sarray_ptr<T, EXTENTS...>& a);
 template<typename T, size_t... EXTENTS> constexpr extents_t<sizeof...(EXTENTS)> extents(const sarray_ptr<T, EXTENTS...>& a);
+
+} // namespace gal

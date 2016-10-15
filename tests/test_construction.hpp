@@ -9,6 +9,9 @@
 
 #include "geometry.hpp"
 
+namespace gal
+{
+
 void test_construction_documentation_sarray1()
 {
     const auto N = size_t{ 10 };
@@ -229,3 +232,5 @@ void test_construction_mixed()
 	auto cpsarray5 = sarray_ptr<const float, 2, 3>(cpdarray0);
 	auto cpsarray6 = sarray_ptr<const float, 2, 3>(cpsarray0);
 }
+
+} // namespace gal

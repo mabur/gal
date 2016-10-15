@@ -9,6 +9,9 @@
 
 #include "vector_math.hpp"
 
+namespace gal
+{
+
 void testArithmeticDynamicArrays()
 {
 	std::array<size_t, 2> sizes = { 2, 3 };
@@ -110,4 +113,7 @@ void testArithmeticMixedArrays()
 	g -= f;
 	g -= g;
 }
+
+} // namespace gal
+
 */

@@ -1,4 +1,8 @@
 #pragma once
+
+namespace gal
+{
+
 /*
 #include <numeric>
 
@@ -91,3 +95,5 @@ Vector operator/(const Vector& a, typename const Vector::value_type& b)
     return result;
 }
 */
+
+} // namespace gal

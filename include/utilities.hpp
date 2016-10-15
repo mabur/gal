@@ -1,5 +1,7 @@
 #pragma once
 
+namespace gal
+{
 namespace details
 {
 
@@ -61,3 +63,4 @@ struct total_size<size>
 };
 
 } // namespace details
+} // namespace gal
