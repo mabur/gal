@@ -4,10 +4,10 @@
 
 This library consists of four different array classes:
 ```
-        | Owns Memory    Non Owning Pointer
---------|----------------------------------
-Static  | sarray         sarray_ptr
-Dynamic | darray         darray_ptr
+        | Owns Memory         Non Owning Pointer
+--------|---------------------------------------
+Static  | gal::sarray         gal::sarray_ptr
+Dynamic | gal::darray         gal::darray_ptr
 ```
 The size of a static array is known at compile time.
 The size of a dynamic array is known at run time.
@@ -22,15 +22,15 @@ assume contiguous memory. There is no support for strided arrays.
 GAL provides array interfaces that are consistent across these four use cases,
 while also being consistent with the arrays in the standard library.
 
-# Other standard arrays
+# Other Array Libraries
 
 The standard template library [STL](http://www.cplusplus.com/reference/stl/) has
 some array containers:
 ```
-        | Owns Memory    Non Owning Pointer
---------|----------------------------------
-Static  | std::array     -
-Dynamic | std::vector    -
+        | Owns Memory         Non Owning Pointer
+--------|---------------------------------------
+Static  | std::array          -
+Dynamic | std::vector         -
         | std::valarray
 ```
 STL has no class for multi-dimensional arrays or any class for
@@ -38,20 +38,20 @@ representing non owning pointers to general arrays.
 The Guidelines Support Library [GSL](https://github.com/Microsoft/GSL) has a
 class that represents a non owning pointer to a single-dimensional dynamic array:
 ```
-        | Owns Memory    Non Owning Pointer
---------|----------------------------------
-Static  | -              -
-Dynamic | -              gsl::span
+        | Owns Memory         Non Owning Pointer
+--------|---------------------------------------
+Static  | -                   -
+Dynamic | -                   gsl::span
 ```
 [The Boost Multidimensional Array Library]
 (http://www.boost.org/doc/libs/1_60_0/libs/multi_array/doc/index.html)
 has support for multi-dimensional dynamic arrays:
 ```
-        | Owns Memory    Non Owning Pointer
---------|----------------------------------
-Static  | -              -
-Dynamic | multi_array    multi_array_ref
-        |                const_multi_array_ref
+        | Owns Memory         Non Owning Pointer
+--------|-------------------------------------------------
+Static  | -                   -
+Dynamic | boost::multi_array  boost::multi_array_ref
+        |                     boost::const_multi_array_ref
 ```
 GAL attempts to fill in the gaps between these libraries and provide a
 consistent interface.
@@ -112,8 +112,8 @@ void fill_and_print_array2d(Array2d& array)
 
 int main()
 {
-    auto static_array2d = sarray<float, 3, 2>();
-    auto dynamic_array2d = darray<int, 2>(8, 4);
+    auto static_array2d = gal::sarray<float, 3, 2>();
+    auto dynamic_array2d = gal::darray<int, 2>(8, 4);
     fill_and_print_array2d(static_array2d);
     fill_and_print_array2d(dynamic_array2d);
 }
@@ -137,7 +137,7 @@ An `sarray` of size `N` can be constructed similar to an `std::array`:
 ```
 const auto N = size_t{ 10 };
 auto array0 = std::array<float, N>();
-auto array1 = sarray<float, N>();
+auto array1 = gal::sarray<float, N>();
 ```
 `sarray` also supports multiple dimensions:
 ```
@@ -145,9 +145,9 @@ const auto N = size_t{10};
 const auto M = size_t{20};
 const auto L = size_t{30};
 auto array0 = std::array<float, N>();
-auto array1 = sarray<float, N>();
-auto array2 = sarray<float, N, M>();
-auto array3 = sarray<float, N, M, L>();
+auto array1 = gal::sarray<float, N>();
+auto array2 = gal::sarray<float, N, M>();
+auto array3 = gal::sarray<float, N, M, L>();
 ```
 The template arguments specify the extent of each dimension.
 
@@ -157,17 +157,17 @@ An `darray` of size `N` can be constructed similar to an `std::vector`:
 ```
 size_t N = 10;
 auto array0 = std::vector<float>(N);
-auto array1 = darray<float>(N);
+auto array1 = gal::darray<float>(N);
 ```
 `darray` also supports multiple dimensions:
 ```
 auto N = {10};
 auto M = {20};
 auto L = {30};
-auto array1 = darray<float>(N);
-auto array2 = darray<float, 1>(N);
-auto array3 = darray<float, 2>(N, M);
-auto array4 = darray<float, 3>(N, M, L);
+auto array1 = gal::darray<float>(N);
+auto array2 = gal::darray<float, 1>(N);
+auto array3 = gal::darray<float, 2>(N, M);
+auto array4 = gal::darray<float, 3>(N, M, L);
 ```
 The second template argument for `darray` specifies the rank, i.e. the number of
 dimensions. It has a defult value of `1`. The extent of each dimension are
@@ -181,8 +181,8 @@ unlike `std::array`:
 const auto N = size_t{10};
 const auto M = size_t{20};
 auto value = 6.283f;
-auto array1 = sarray<float, N>(value);
-auto array2 = sarray<float, N, M>(value);
+auto array1 = gal::sarray<float, N>(value);
+auto array2 = gal::sarray<float, N, M>(value);
 ```
 `darray` can also be constructed with the data initialized to the same value
 similar to `std::vector`:
@@ -191,8 +191,8 @@ auto N = size_t{ 10 };
 auto M = size_t{ 20 };
 auto value = 6.283f;
 auto array1 = std::vector<float>(N, value);
-auto array2 = darray<float>(N, value);
-auto array3 = darray<float, 2>(N, M, value);
+auto array2 = gal::darray<float>(N, value);
+auto array3 = gal::darray<float, 2>(N, M, value);
 ```
 
 ## Construct Owning Arrays with Copied Data
@@ -203,8 +203,8 @@ const auto N = size_t{ 10 };
 const auto M = size_t{ 20 };
 auto array0 = std::array<float, N * M>();
 auto data_pointer = array0.data();
-auto array1 = sarray<float, N>(data_pointer);
-auto array2 = sarray<float, N, M>(data_pointer);
+auto array1 = gal::sarray<float, N>(data_pointer);
+auto array2 = gal::sarray<float, N, M>(data_pointer);
 ```
 
 Dynamic arrays:
@@ -213,8 +213,8 @@ auto N = size_t{ 10 };
 auto M = size_t{ 20 };
 auto array1 = std::vector<float>(N * M);
 auto data_pointer = array1.data();
-auto array2 = darray<float>(N, data_pointer);
-auto array3 = darray<float, 2>( N, M, data_pointer);
+auto array2 = gal::darray<float>(N, data_pointer);
+auto array3 = gal::darray<float, 2>( N, M, data_pointer);
 ```
 
 ## Constructing Non-owning Pointer Arrays.
@@ -225,8 +225,8 @@ const auto N = size_t{ 10 };
 const auto M = size_t{ 20 };
 auto array0 = std::array<float, N * M>();
 auto data_pointer = array0.data();
-auto array1 = sarray_ptr<float, N>(data_pointer);
-auto array2 = sarray_ptr<float, N, M>(data_pointer);
+auto array1 = gal::sarray_ptr<float, N>(data_pointer);
+auto array2 = gal::sarray_ptr<float, N, M>(data_pointer);
 ```
 You can specify that the data pointed at should be constant in this way:
 ```
@@ -234,11 +234,11 @@ const auto N = size_t{ 10 };
 const auto M = size_t{ 20 };
 const auto array0 = std::array<float, N * M>();
 const auto data_pointer = array0.data();
-auto array1 = sarray_ptr<const float, N>(data_pointer);
-auto array2 = sarray_ptr<const float, N, M>(data_pointer);
+auto array1 = gal::sarray_ptr<const float, N>(data_pointer);
+auto array2 = gal::sarray_ptr<const float, N, M>(data_pointer);
 ```
 Note that `const` in front of the templated type and not in front of the array.
-This is similar to how you specofy a pointer to a constant using
+This is similar to how you specify a pointer to a constant using
 `std::shared_ptr` and `std::uniqe_ptr`.
 
 Array with dynamic size pointing to data owned by someone else are constructed
@@ -248,8 +248,8 @@ auto N = size_t{ 10 };
 auto M = size_t{ 20 };
 auto array1 = std::vector<float>(N * M);
 auto data_pointer = array1.data();
-auto array2 = darray_ptr<float>(N, data_pointer);
-auto array3 = darray_ptr<float, 2>(N, M, data_pointer);
+auto array2 = gal::darray_ptr<float>(N, data_pointer);
+auto array3 = gal::darray_ptr<float, 2>(N, M, data_pointer);
 ```
 Dynamic arrays pointing at constant data are constructed like this:
 ```
@@ -257,8 +257,8 @@ auto N = size_t{ 10 };
 auto M = size_t{ 20 };
 const auto array1 = std::vector<float>(N * M);
 const auto data_pointer = array1.data();
-auto array2 = darray_ptr<const float>(N, data_pointer);
-auto array3 = darray_ptr<const float, 2>(N, M, data_pointer);
+auto array2 = gal::darray_ptr<const float>(N, data_pointer);
+auto array3 = gal::darray_ptr<const float, 2>(N, M, data_pointer);
 ```
 */
 
