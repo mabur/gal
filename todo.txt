@@ -1,0 +1,20 @@
+* Take small steps closer to standard.
+* Write paper about it.
+  - Explain design choices:
+    - memory layout, storage order, row-major column-major
+    - array vs matrix
+    - value semantics
+    - modularity
+    - operator [] and () and "at"?
+* Compare to:
+  - boost::multi-array.
+  - array_view.
+  - Eigen.
+* Compare:
+  - use case.
+  - syntax.
+  - run-time.
+* Try to look into the standard group that works with array_view.
+* Try to get into boost.
+* Try to use it at work.
+* https://github.com/microsoft/gsl

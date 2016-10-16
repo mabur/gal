@@ -4,10 +4,13 @@
 
 #include "sarray.hpp"
 #include "darray.hpp"
-#include "psarray.hpp"
-#include "pdarray.hpp"
+#include "sarray_ptr.hpp"
+#include "darray_ptr.hpp"
 
 #include "vector_math.hpp"
+
+namespace gal
+{
 
 void testArithmeticDynamicArrays()
 {
@@ -43,10 +46,10 @@ void testArithmeticStaticArrays()
 void testArithmeticPointerArrays()
 {
 	auto e = sarray<float, 2, 3>();
-	auto f = pdarray<const float, 2>({ 2, 3 }, e.data());
+	auto f = darray_ptr<const float, 2>({ 2, 3 }, e.data());
 
 	auto d = sarray<float, 2, 3>();
-	auto g = pdarray<float, 2>({ 2, 3 }, d.data());
+	auto g = darray_ptr<float, 2>({ 2, 3 }, d.data());
 
 	g += f;
 	g -= f;
@@ -57,10 +60,10 @@ void testArithmeticPointerArrays()
 void testArithmeticPointerStaticArrays()
 {
 	auto e = sarray<float, 2, 3>();
-	auto f = psarray<const float, 2, 3>(e.data());
+	auto f = sarray_ptr<const float, 2, 3>(e.data());
 
 	auto d = sarray<float, 2, 3>();
-	auto g = psarray<float, 2, 3>(d.data());
+	auto g = sarray_ptr<float, 2, 3>(d.data());
 
 	g += f;
 	g -= f;
@@ -73,10 +76,10 @@ void testArithmeticMixedArrays()
 	std::array<size_t, 2> sizes = { 2, 3 };
 
 	auto e = sarray<float, 2, 3>();
-	auto f = pdarray<const float, 2>({ 2, 3 }, e.data());
+	auto f = darray_ptr<const float, 2>({ 2, 3 }, e.data());
 
 	auto d = darray<float, 2>(sizes);
-	auto g = pdarray<float, 2>({ 2, 3 }, d.data());
+	auto g = darray_ptr<float, 2>({ 2, 3 }, d.data());
 
 	// TODO: aliasing?
 
@@ -110,4 +113,7 @@ void testArithmeticMixedArrays()
 	g -= f;
 	g -= g;
 }
+
+} // namespace gal
+
 */

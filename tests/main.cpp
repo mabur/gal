@@ -2,6 +2,7 @@
 #include <vector>
 #include <array>
 #include <valarray>
+#include <numeric>
 
 #include "gal.hpp"
 
@@ -66,13 +67,14 @@ auto a = darray<int, 2>({2, 3}, data_value);
 auto a = darray<int, 2>({2, 3});
 auto a = darray<int, 2>(data_array);
 
-auto a = pdarray<int, 2>({2, 3}, data_iterator);
-auto a = pdarray<int, 2>(data_array);
+auto a = darray_ptr<int, 2>({2, 3}, data_iterator);
+auto a = darray_ptr<int, 2>(data_array);
 
-auto a = psarray<int, 2, 3>(data_iterator);
-auto a = psarray<int, 2, 3>(data_array);
+auto a = sarray_ptr<int, 2, 3>(data_iterator);
+auto a = sarray_ptr<int, 2, 3>(data_array);
 
 auto a = std::array<int, 2>({1, 2})
+auto a = std::vector<int>({data1, data2})
 auto a = std::vector<int>(size)
 auto a = std::vector<int>(size, data_value)
 auto a = std::valarray<int>(size)
@@ -81,7 +83,9 @@ auto a = std::valarray<int>(data_value, size) <- exception
 assert(extents(array1) == extents(array2))
 */
 
-void f(pdarray<int> a)
+using namespace gal;
+
+void f(darray_ptr<int> a)
 {
 	for (auto& x : a)
 	{
@@ -89,7 +93,7 @@ void f(pdarray<int> a)
 	}
 }
 
-void h(pdarray<const int> a)
+void h(darray_ptr<const int> a)
 {
 	using namespace std;
 	for (auto& x : a)
@@ -99,16 +103,16 @@ void h(pdarray<const int> a)
 	cout << endl;
 }
 
-void g(pdarray<int, 2> a)
+void g(darray_ptr<int, 2> a)
 {
 	for (auto& x : a)
 	{
 		++x;
 	}
 
-	for (size_t y = 0; y < a.extent1(); ++y)
+	for (size_t y = 0; y < extent1(a); ++y)
 	{
-		for (size_t x = 0; x < a.extent0(); ++x)
+		for (size_t x = 0; x < extent0(a); ++x)
 		{
 			std::cout << a(x, y) << " ";
 		}
@@ -116,27 +120,42 @@ void g(pdarray<int, 2> a)
 	}
 }
 
-template<typename Array2d>
-void fill_and_print_array2d(Array2d& array)
+// Function that works on any of the four array classes in GAL:
+template<typename array_2d>
+void fill_array_2d(array_2d& array)
 {
+    // Check the rank of the array, i.e. the number of dimensions:
     assert(array.rank() == 2);
+    // Get the value_type of of an array similar to standard containers:
+    using value_type = typename array_2d::value_type;
 
-    for (int i = 0; i < array.size(); ++i)
+    for (size_t i = 0; i < array.size(); ++i)
     {
-        array[i] = i;
+        // Access array data with linear index, using operator[]:
+        array[i] = static_cast<value_type>(i);
     }
 
+    // Use array in range based for loop:
     for (auto& element : array)
     {
         element += 10;
     }
-    
+}
+
+// Function that works on any of the four array classes in GAL:
+template<typename array_2d>
+void print_array_2d(const array_2d& array)
+{
+    // Check the rank of the array, i.e. the number of dimensions:
+    assert(array.rank() == 2);
     using namespace std;
 
-    for (int y = 0; y < array.extent1(); ++y)
+    // Loop over the extent of each dimension:
+    for (size_t y = 0; y < extent1(array); ++y)
     {
-        for (int x = 0; x < array.extent0(); ++x)
+        for (size_t x = 0; x < extent0(array); ++x)
         {
+            // Access array data with multi-dimensional index, using operator():
             cout << array(x, y) << " ";
         }
         cout << endl;
@@ -147,6 +166,7 @@ void fill_and_print_array2d(Array2d& array)
 int main()
 {
 	using namespace std;
+    using namespace gal;
 
 	cout << "total_size: " << details::total_size<1, 2, 3>::value << endl;
 
@@ -158,22 +178,22 @@ int main()
 	//auto b = valarray<int>(N);
 	auto c = array<int, N>();
 
-	f(pdarray<int>(a));
+	f(darray_ptr<int>(a));
 	//f(b);
-	f(pdarray<int>(c));
+	f(darray_ptr<int>(c));
 
-	h(pdarray<const int>(a));
-	h(pdarray<const int>(c));
+	h(darray_ptr<const int>(a));
+	h(darray_ptr<const int>(c));
 
-	g(pdarray<int, 2>({W, H}, a.data()));
-	g(pdarray<int, 2>({W, H}, c.data()));
+	g(darray_ptr<int, 2>(W, H, a.data()));
+	g(darray_ptr<int, 2>(W, H, c.data()));
 
 	auto d = darray<int>();
 	auto e = sarray<int, 5>();
 	auto M = sarray<int, 2, 3>();
 
 	std::array<size_t, 2> sizes = {2, 3};
-    auto f = darray<float, 2>({2, 3});
+    auto f = darray<float, 2>(2, 3);
 	auto g = f;
 
 	begin(e);
@@ -187,18 +207,36 @@ int main()
 	size(f);
 	
     cout << "print array" << endl;
-    auto static_array2d = sarray<float, 3, 2>();
-    auto dynamic_array2d = darray<int, 2>({ 8, 4 });
-    fill_and_print_array2d(static_array2d);
-    fill_and_print_array2d(dynamic_array2d);
+
+    using namespace gal;
+    using namespace std;
+
+    // Create array containers that own their data:
+    auto static_array_2d = sarray<float, 3, 3>();
+    auto dynamic_array_2d = darray<int, 2>(4, 4);
+
+    // Create arrays that points to data owned by someone else:
+    auto static_array_ptr_2d = sarray_ptr<float, 3, 2>(static_array_2d.data());
+    auto dynamic_array_ptr_2d = darray_ptr<int, 2>(4, 2, dynamic_array_2d.data());
+
+    fill_array_2d(static_array_2d);
+    fill_array_2d(dynamic_array_2d);
+
+    cout << "Data of owning arrays: " << endl;
+    print_array_2d(static_array_2d);
+    print_array_2d(dynamic_array_2d);
+
+    cout << "Data pointed to by non-owning arrays: " << endl;
+    print_array_2d(static_array_ptr_2d);
+    print_array_2d(dynamic_array_ptr_2d);
 
 	for (auto x : f)
 	{
 		std::ignore = x;
 	}
 
-	for (size_t y = 0; y < f.extent1(); ++y)
-		for (size_t x = 0; x < f.extent0(); ++x)
+	for (size_t y = 0; y < extent1(f); ++y)
+		for (size_t x = 0; x < extent0(f); ++x)
 			f(x, y);
 
     for (size_t i = 0; i < f.size(); ++i)
@@ -206,20 +244,21 @@ int main()
 
 	M.size();
 	M.rank();
-	M.extent0();
-	M.extent1();
+	M.extent<0>();
+	M.extent<1>();
 
 	// Row-major order for images.
-	for (size_t y = 0; y < M.extent1(); ++y)
-		for (size_t x = 0; x < M.extent0(); ++x)
+	for (size_t y = 0; y < extent1(M); ++y)
+		for (size_t x = 0; x < extent0(M); ++x)
 			M(x, y);
 
 	// Column-major order for matrices.
-	for (size_t col = 0; col < M.extent1(); ++col)
-		for (size_t row = 0; row < M.extent0(); ++row)
+	for (size_t col = 0; col < extent1(M); ++col)
+		for (size_t row = 0; row < extent0(M); ++row)
 			M(row, col);
 
 	testVectors();
+    testMatrices();
 	/*
 	testArithmeticStaticArrays();
 	testArithmeticDynamicArrays();
