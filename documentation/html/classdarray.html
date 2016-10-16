@@ -45,7 +45,6 @@
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -65,44 +64,116 @@ $(document).ready(function(){initNavTree('classdarray.html','');});
 <div id="doc-content">
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classdarray-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">darray&lt; T, RANK &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Dynamic array.  
+<p>An array with size known at run-time.  
  <a href="classdarray.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="darray_8hpp_source.html">darray.hpp</a>&gt;</code></p>
-
-<p>Inherits <a class="el" href="classarray__base__dynamic.html">array_base_dynamic&lt; T, RANK &gt;</a>.</p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a81ebe7cfd3f6ffa03b6ac5b9753d4175"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a81ebe7cfd3f6ffa03b6ac5b9753d4175"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b> = T</td></tr>
+<tr class="separator:a81ebe7cfd3f6ffa03b6ac5b9753d4175"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f74bc130a3a6a97e3dbebd038aeb44d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7f74bc130a3a6a97e3dbebd038aeb44d"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>reference</b> = T &amp;</td></tr>
+<tr class="separator:a7f74bc130a3a6a97e3dbebd038aeb44d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36db7851216e6d0e2f732eb89ed1231e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a36db7851216e6d0e2f732eb89ed1231e"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>const_reference</b> = const T &amp;</td></tr>
+<tr class="separator:a36db7851216e6d0e2f732eb89ed1231e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17ad93d5d5fa46891a491bfaa9b5f972"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a17ad93d5d5fa46891a491bfaa9b5f972"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>pointer</b> = T *</td></tr>
+<tr class="separator:a17ad93d5d5fa46891a491bfaa9b5f972"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a25963e7afd1f4520699b5957611f43"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5a25963e7afd1f4520699b5957611f43"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>const_pointer</b> = const T *</td></tr>
+<tr class="separator:a5a25963e7afd1f4520699b5957611f43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94ecd7e92e95b11f18cbeed24d580a9b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a94ecd7e92e95b11f18cbeed24d580a9b"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>iterator</b> = T *</td></tr>
+<tr class="separator:a94ecd7e92e95b11f18cbeed24d580a9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af108ace187a61a865b5a50ddb5c88609"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af108ace187a61a865b5a50ddb5c88609"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>const_iterator</b> = const T *</td></tr>
+<tr class="separator:af108ace187a61a865b5a50ddb5c88609"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4525f2ea1db5e6c3d5081362dd9091c1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4525f2ea1db5e6c3d5081362dd9091c1"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>size_type</b> = size_t</td></tr>
+<tr class="separator:a4525f2ea1db5e6c3d5081362dd9091c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea4f83e7772094e94f23d465ca4cfc3a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aea4f83e7772094e94f23d465ca4cfc3a"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>difference_type</b> = ptrdiff_t</td></tr>
+<tr class="separator:aea4f83e7772094e94f23d465ca4cfc3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ef452315a04cd396be826d892bd88ae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8ef452315a04cd396be826d892bd88ae"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>extents_type</b> = std::array&lt; size_t, RANK &gt;</td></tr>
+<tr class="separator:a8ef452315a04cd396be826d892bd88ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5b4b3c5f3a2e8ca03eaaab451f0a29d4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5b4b3c5f3a2e8ca03eaaab451f0a29d4"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>darray</b> (const extents_type &amp;extents)</td></tr>
-<tr class="separator:a5b4b3c5f3a2e8ca03eaaab451f0a29d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ce952e7b670cae8bdbe2a70fa925f40"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7ce952e7b670cae8bdbe2a70fa925f40"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>darray</b> (const extents_type &amp;extents, const T &amp;value)</td></tr>
-<tr class="separator:a7ce952e7b670cae8bdbe2a70fa925f40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac41b5cc16012cae0db6dfa3a21a74909"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac41b5cc16012cae0db6dfa3a21a74909"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>darray</b> (const extents_type &amp;extents, const T *data_begin)</td></tr>
-<tr class="separator:ac41b5cc16012cae0db6dfa3a21a74909"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83cfcb25479310d340dad862bd6c96e9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a83cfcb25479310d340dad862bd6c96e9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>darray</b> (size_t size)</td></tr>
-<tr class="separator:a83cfcb25479310d340dad862bd6c96e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21a5005cd8200e14dfdc487496e6ffd6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a21a5005cd8200e14dfdc487496e6ffd6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>darray</b> (size_t size, const T &amp;value)</td></tr>
-<tr class="separator:a21a5005cd8200e14dfdc487496e6ffd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c10a8976b558704b7dbd481f60ca1fb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5c10a8976b558704b7dbd481f60ca1fb"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>darray</b> (size_t size, const T *data_begin)</td></tr>
-<tr class="separator:a5c10a8976b558704b7dbd481f60ca1fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6da9fb3f24b238c241950e5ffcb30395"><td class="memTemplParams" colspan="2"><a class="anchor" id="a6da9fb3f24b238c241950e5ffcb30395"></a>
-template&lt;typename Array &gt; </td></tr>
-<tr class="memitem:a6da9fb3f24b238c241950e5ffcb30395"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>darray</b> (const Array &amp;array, typename std::is_same&lt; T, typename Array::value_type &gt;::type *=nullptr)</td></tr>
-<tr class="separator:a6da9fb3f24b238c241950e5ffcb30395"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c9909de074f5a58e214d61806d6ea19"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4c9909de074f5a58e214d61806d6ea19"></a>
+extents_type&#160;</td><td class="memItemRight" valign="bottom"><b>extents</b> () const </td></tr>
+<tr class="separator:a4c9909de074f5a58e214d61806d6ea19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a129de83cdba56290e4260e806733ffa7"><td class="memTemplParams" colspan="2"><a class="anchor" id="a129de83cdba56290e4260e806733ffa7"></a>
+template&lt;size_t DIMENSION&gt; </td></tr>
+<tr class="memitem:a129de83cdba56290e4260e806733ffa7"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>extent</b> () const </td></tr>
+<tr class="separator:a129de83cdba56290e4260e806733ffa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12ab237ac4215b0e1830b102ceaa70d8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a12ab237ac4215b0e1830b102ceaa70d8"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>extent0</b> () const </td></tr>
+<tr class="separator:a12ab237ac4215b0e1830b102ceaa70d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8c43a88f82df40fa5b37278f1964e22"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af8c43a88f82df40fa5b37278f1964e22"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>extent1</b> () const </td></tr>
+<tr class="separator:af8c43a88f82df40fa5b37278f1964e22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afca421afec24e94e0fcf83ff2fbbbc95"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afca421afec24e94e0fcf83ff2fbbbc95"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>extent2</b> () const </td></tr>
+<tr class="separator:afca421afec24e94e0fcf83ff2fbbbc95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb4f0dd497e92fdfadbb7561d4d40c6a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afb4f0dd497e92fdfadbb7561d4d40c6a"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>extent3</b> () const </td></tr>
+<tr class="separator:afb4f0dd497e92fdfadbb7561d4d40c6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d7431fea3d13c9ebaaa22b1567f1a9d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1d7431fea3d13c9ebaaa22b1567f1a9d"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>extent4</b> () const </td></tr>
+<tr class="separator:a1d7431fea3d13c9ebaaa22b1567f1a9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73741aa4992061f79b0deb9975ed82a6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a73741aa4992061f79b0deb9975ed82a6"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>extent5</b> () const </td></tr>
+<tr class="separator:a73741aa4992061f79b0deb9975ed82a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ed61c14ed58fa879fd90cdf8d6f309d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2ed61c14ed58fa879fd90cdf8d6f309d"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>extent6</b> () const </td></tr>
+<tr class="separator:a2ed61c14ed58fa879fd90cdf8d6f309d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcbc53a6d488136c8e65870c29ed1193"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afcbc53a6d488136c8e65870c29ed1193"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>extent7</b> () const </td></tr>
+<tr class="separator:afcbc53a6d488136c8e65870c29ed1193"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a822f6bf2c56d36203b3e1eba077050a9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a822f6bf2c56d36203b3e1eba077050a9"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>extent8</b> () const </td></tr>
+<tr class="separator:a822f6bf2c56d36203b3e1eba077050a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5080c3fef5f6ab9e0c0d1c1e2aea0cc8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5080c3fef5f6ab9e0c0d1c1e2aea0cc8"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>extent9</b> () const </td></tr>
+<tr class="separator:a5080c3fef5f6ab9e0c0d1c1e2aea0cc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a129d4b3cddd447159484990d70ae1f43"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a129d4b3cddd447159484990d70ae1f43"></a>
+<a class="el" href="classdarray.html">darray</a>&lt; T, RANK &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classdarray.html">darray</a>&lt; T, RANK &gt; &amp;)=default</td></tr>
+<tr class="separator:a129d4b3cddd447159484990d70ae1f43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6094add325abaab7a6ca869476b2276"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa6094add325abaab7a6ca869476b2276"></a>
+<a class="el" href="classdarray.html">darray</a>&lt; T, RANK &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classdarray.html">darray</a>&lt; T, RANK &gt; &amp;&amp;)=default</td></tr>
+<tr class="separator:aa6094add325abaab7a6ca869476b2276"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a747a1a22de5f31bf1eaa727498938204"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a747a1a22de5f31bf1eaa727498938204"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>darray</b> (const <a class="el" href="classdarray.html">darray</a>&lt; T, RANK &gt; &amp;)=default</td></tr>
+<tr class="separator:a747a1a22de5f31bf1eaa727498938204"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22e9e59750f5581c8776c00aa5f126a7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a22e9e59750f5581c8776c00aa5f126a7"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>darray</b> (<a class="el" href="classdarray.html">darray</a>&lt; T, RANK &gt; &amp;&amp;)=default</td></tr>
+<tr class="separator:a22e9e59750f5581c8776c00aa5f126a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a922a023f4dd0ac0be4f8286a5b214ea9"><td class="memTemplParams" colspan="2"><a class="anchor" id="a922a023f4dd0ac0be4f8286a5b214ea9"></a>
+template&lt;typename Array , typename Array::value_type *  = nullptr&gt; </td></tr>
+<tr class="memitem:a922a023f4dd0ac0be4f8286a5b214ea9"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>darray</b> (const Array &amp;array)</td></tr>
+<tr class="separator:a922a023f4dd0ac0be4f8286a5b214ea9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afde310713bd9a201950ed55b27186bb5"><td class="memTemplParams" colspan="2"><a class="anchor" id="afde310713bd9a201950ed55b27186bb5"></a>
+template&lt;typename... Types, typename std::enable_if&lt; sizeof...(Types)==RANK &gt;::type *  = nullptr&gt; </td></tr>
+<tr class="memitem:afde310713bd9a201950ed55b27186bb5"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>darray</b> (Types...arguments_pack)</td></tr>
+<tr class="separator:afde310713bd9a201950ed55b27186bb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afde310713bd9a201950ed55b27186bb5"><td class="memTemplParams" colspan="2"><a class="anchor" id="afde310713bd9a201950ed55b27186bb5"></a>
+template&lt;typename... Types, typename std::enable_if&lt; sizeof...(Types)==RANK+1 &gt;::type *  = nullptr&gt; </td></tr>
+<tr class="memitem:afde310713bd9a201950ed55b27186bb5"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>darray</b> (Types...arguments_pack)</td></tr>
+<tr class="separator:afde310713bd9a201950ed55b27186bb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae88cfc5836acf1471fef017c421bcb5a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae88cfc5836acf1471fef017c421bcb5a"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> () const </td></tr>
 <tr class="separator:ae88cfc5836acf1471fef017c421bcb5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,91 +209,18 @@ template&lt;typename... INDICES&gt; </td></tr>
 template&lt;typename... INDICES&gt; </td></tr>
 <tr class="memitem:aeede0b725a2b2d285e1b5b4d59bdf11e"><td class="memTemplItemLeft" align="right" valign="top">const T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator()</b> (INDICES...indices) const </td></tr>
 <tr class="separator:aeede0b725a2b2d285e1b5b4d59bdf11e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classarray__base__dynamic"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classarray__base__dynamic')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classarray__base__dynamic.html">array_base_dynamic&lt; T, RANK &gt;</a></td></tr>
-<tr class="memitem:a8567336075406deaa66f780cc3f6d93b inherit pub_methods_classarray__base__dynamic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8567336075406deaa66f780cc3f6d93b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>array_base_dynamic</b> (const extents_type &amp;extents)</td></tr>
-<tr class="separator:a8567336075406deaa66f780cc3f6d93b inherit pub_methods_classarray__base__dynamic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41f3155e766bc985474bf464114257d1 inherit pub_methods_classarray__base__dynamic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a41f3155e766bc985474bf464114257d1"></a>
-extents_type&#160;</td><td class="memItemRight" valign="bottom"><b>extents</b> () const </td></tr>
-<tr class="separator:a41f3155e766bc985474bf464114257d1 inherit pub_methods_classarray__base__dynamic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5437dbd55bf321432dc17d5808555811 inherit pub_methods_classarray__base__dynamic"><td class="memTemplParams" colspan="2"><a class="anchor" id="a5437dbd55bf321432dc17d5808555811"></a>
-template&lt;size_t DIMENSION&gt; </td></tr>
-<tr class="memitem:a5437dbd55bf321432dc17d5808555811 inherit pub_methods_classarray__base__dynamic"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>extent</b> () const </td></tr>
-<tr class="separator:a5437dbd55bf321432dc17d5808555811 inherit pub_methods_classarray__base__dynamic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10498408694a8c51b7ebe49f2bb58bb3 inherit pub_methods_classarray__base__dynamic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a10498408694a8c51b7ebe49f2bb58bb3"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>extent0</b> () const </td></tr>
-<tr class="separator:a10498408694a8c51b7ebe49f2bb58bb3 inherit pub_methods_classarray__base__dynamic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a119affd02df0e7fdc3269031de5d0cc3 inherit pub_methods_classarray__base__dynamic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a119affd02df0e7fdc3269031de5d0cc3"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>extent1</b> () const </td></tr>
-<tr class="separator:a119affd02df0e7fdc3269031de5d0cc3 inherit pub_methods_classarray__base__dynamic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e5a962f3c9c59b87acf3e9e60c942e1 inherit pub_methods_classarray__base__dynamic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6e5a962f3c9c59b87acf3e9e60c942e1"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>extent2</b> () const </td></tr>
-<tr class="separator:a6e5a962f3c9c59b87acf3e9e60c942e1 inherit pub_methods_classarray__base__dynamic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c8b4bb5ef5a0ee025edf2355326a5e4 inherit pub_methods_classarray__base__dynamic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3c8b4bb5ef5a0ee025edf2355326a5e4"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>extent3</b> () const </td></tr>
-<tr class="separator:a3c8b4bb5ef5a0ee025edf2355326a5e4 inherit pub_methods_classarray__base__dynamic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adcd788f370d528838591407fb32f1a82 inherit pub_methods_classarray__base__dynamic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adcd788f370d528838591407fb32f1a82"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>extent4</b> () const </td></tr>
-<tr class="separator:adcd788f370d528838591407fb32f1a82 inherit pub_methods_classarray__base__dynamic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7deba152c559ca550a9fc1655b1b8779 inherit pub_methods_classarray__base__dynamic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7deba152c559ca550a9fc1655b1b8779"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>extent5</b> () const </td></tr>
-<tr class="separator:a7deba152c559ca550a9fc1655b1b8779 inherit pub_methods_classarray__base__dynamic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4fd9a35dd683a20bf99cb41d60875ce5 inherit pub_methods_classarray__base__dynamic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4fd9a35dd683a20bf99cb41d60875ce5"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>extent6</b> () const </td></tr>
-<tr class="separator:a4fd9a35dd683a20bf99cb41d60875ce5 inherit pub_methods_classarray__base__dynamic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b9cadf4797fe8ddabd6d623d6d3d222 inherit pub_methods_classarray__base__dynamic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3b9cadf4797fe8ddabd6d623d6d3d222"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>extent7</b> () const </td></tr>
-<tr class="separator:a3b9cadf4797fe8ddabd6d623d6d3d222 inherit pub_methods_classarray__base__dynamic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8371a7dbeabae589334cd0372d81c8b8 inherit pub_methods_classarray__base__dynamic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8371a7dbeabae589334cd0372d81c8b8"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>extent8</b> () const </td></tr>
-<tr class="separator:a8371a7dbeabae589334cd0372d81c8b8 inherit pub_methods_classarray__base__dynamic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44e056c37d9136f7c3c4547101b905f3 inherit pub_methods_classarray__base__dynamic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a44e056c37d9136f7c3c4547101b905f3"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>extent9</b> () const </td></tr>
-<tr class="separator:a44e056c37d9136f7c3c4547101b905f3 inherit pub_methods_classarray__base__dynamic"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_types_structarray__base"><td colspan="2" onclick="javascript:toggleInherit('pub_types_structarray__base')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="structarray__base.html">array_base&lt; T, RANK &gt;</a></td></tr>
-<tr class="memitem:a45a52ecea55db1811cbe2f9960a4bf9e inherit pub_types_structarray__base"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a45a52ecea55db1811cbe2f9960a4bf9e"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b> = T</td></tr>
-<tr class="separator:a45a52ecea55db1811cbe2f9960a4bf9e inherit pub_types_structarray__base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2784b79fbd1d92f71cd595f24c473e24 inherit pub_types_structarray__base"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2784b79fbd1d92f71cd595f24c473e24"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>reference</b> = T &amp;</td></tr>
-<tr class="separator:a2784b79fbd1d92f71cd595f24c473e24 inherit pub_types_structarray__base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb67b4de4e32f350fb651e15a236fd9f inherit pub_types_structarray__base"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acb67b4de4e32f350fb651e15a236fd9f"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>const_reference</b> = const T &amp;</td></tr>
-<tr class="separator:acb67b4de4e32f350fb651e15a236fd9f inherit pub_types_structarray__base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4ce32784b213c93b384f9bcdebf235b inherit pub_types_structarray__base"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af4ce32784b213c93b384f9bcdebf235b"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>pointer</b> = T *</td></tr>
-<tr class="separator:af4ce32784b213c93b384f9bcdebf235b inherit pub_types_structarray__base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b6008c1cb1d62109841da0e5d6097ab inherit pub_types_structarray__base"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5b6008c1cb1d62109841da0e5d6097ab"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>const_pointer</b> = const T *</td></tr>
-<tr class="separator:a5b6008c1cb1d62109841da0e5d6097ab inherit pub_types_structarray__base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4352dc40f59f0c46843d0fcb1a4c79a1 inherit pub_types_structarray__base"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4352dc40f59f0c46843d0fcb1a4c79a1"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>iterator</b> = T *</td></tr>
-<tr class="separator:a4352dc40f59f0c46843d0fcb1a4c79a1 inherit pub_types_structarray__base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad177501735028ef575eacd01236be5c1 inherit pub_types_structarray__base"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad177501735028ef575eacd01236be5c1"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>const_iterator</b> = const T *</td></tr>
-<tr class="separator:ad177501735028ef575eacd01236be5c1 inherit pub_types_structarray__base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afcff7046690a64ed26574457231e294f inherit pub_types_structarray__base"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afcff7046690a64ed26574457231e294f"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>size_type</b> = size_t</td></tr>
-<tr class="separator:afcff7046690a64ed26574457231e294f inherit pub_types_structarray__base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a978d743be8ee0c3481ab21027644219e inherit pub_types_structarray__base"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a978d743be8ee0c3481ab21027644219e"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>difference_type</b> = ptrdiff_t</td></tr>
-<tr class="separator:a978d743be8ee0c3481ab21027644219e inherit pub_types_structarray__base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6306de495048872dd0935b6d5869cff6 inherit pub_types_structarray__base"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6306de495048872dd0935b6d5869cff6"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>extents_type</b> = std::array&lt; size_t, RANK &gt;</td></tr>
-<tr class="separator:a6306de495048872dd0935b6d5869cff6 inherit pub_types_structarray__base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_static_methods_structarray__base"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_structarray__base')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="structarray__base.html">array_base&lt; T, RANK &gt;</a></td></tr>
-<tr class="memitem:aafd2066de91e1e10949eab31cb1dfd5d inherit pub_static_methods_structarray__base"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aafd2066de91e1e10949eab31cb1dfd5d"></a>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a24e4751bb14a78b07d382f29f37653dd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a24e4751bb14a78b07d382f29f37653dd"></a>
 static constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><b>rank</b> ()</td></tr>
-<tr class="separator:aafd2066de91e1e10949eab31cb1dfd5d inherit pub_static_methods_structarray__base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a24e4751bb14a78b07d382f29f37653dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename T, size_t RANK = 1&gt;<br />
 class darray&lt; T, RANK &gt;</h3>
 
-<p>Dynamic array. </p>
+<p>An array with size known at run-time. </p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="darray_8hpp_source.html">darray.hpp</a></li>
 </ul>

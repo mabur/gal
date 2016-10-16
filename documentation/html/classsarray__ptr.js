@@ -1,0 +1,28 @@
+var classsarray__ptr =
+[
+    [ "const_iterator", "classsarray__ptr.html#a70527fe4b7a3cd443127ae7f83ea9705", null ],
+    [ "const_pointer", "classsarray__ptr.html#a084d8ebd3ffdf2747d61bf45f7d6d7c6", null ],
+    [ "const_reference", "classsarray__ptr.html#a0a11c87126abd5c1edce5300f5e5daa4", null ],
+    [ "difference_type", "classsarray__ptr.html#a5a14ee922d7fc9750ac99ffd20f64cab", null ],
+    [ "extents_type", "classsarray__ptr.html#aa6037ca22124bb54806c0ff5cfd7ee78", null ],
+    [ "iterator", "classsarray__ptr.html#aafcd300123999083fa32fdc2eaf92061", null ],
+    [ "pointer", "classsarray__ptr.html#a177bcbc8ebedf7f82d3ceea519367038", null ],
+    [ "reference", "classsarray__ptr.html#a3914f417e9625ea0fc2105bd27c43a8f", null ],
+    [ "size_type", "classsarray__ptr.html#a856e7450002a35dbc5ed91bb60ab8dd9", null ],
+    [ "value_type", "classsarray__ptr.html#ade6c052679f5c7ac34f2af6a63337980", null ],
+    [ "sarray_ptr", "classsarray__ptr.html#a0c8b92571e54b77b3645e8f1554d6e1e", null ],
+    [ "sarray_ptr", "classsarray__ptr.html#a794a3eef962be2243003148aec3e3ae6", null ],
+    [ "sarray_ptr", "classsarray__ptr.html#ac77bfc92c08c033d2d442243ef7e7380", null ],
+    [ "sarray_ptr", "classsarray__ptr.html#ac6880433a4979483c3dca683ceb820c5", null ],
+    [ "sarray_ptr", "classsarray__ptr.html#a8e79b54d650636a51010738ab804b2ec", null ],
+    [ "sarray_ptr", "classsarray__ptr.html#a12d0898933019c5148a72958d59475ed", null ],
+    [ "sarray_ptr", "classsarray__ptr.html#a882302a3b1456fa214e3d2399e663e54", null ],
+    [ "begin", "classsarray__ptr.html#af5e92761d238df21353ba0f82a8ce524", null ],
+    [ "data", "classsarray__ptr.html#a5ea65df20811136702972af646ce805b", null ],
+    [ "end", "classsarray__ptr.html#a6de76daaf56286b21aa2fa172ed22e6f", null ],
+    [ "operator()", "classsarray__ptr.html#ac111ac7463482f6b59896a7a39b14fe7", null ],
+    [ "operator()", "classsarray__ptr.html#a342e652f389e5be27febda5dc7f82753", null ],
+    [ "operator=", "classsarray__ptr.html#a2ea99c3ee8621c1415082591e24034c3", null ],
+    [ "operator=", "classsarray__ptr.html#adf3354ddee86cfa5ae4c253b0c5e916c", null ],
+    [ "operator[]", "classsarray__ptr.html#af92bc3cafba199d28ea2c5117c572031", null ]
+];

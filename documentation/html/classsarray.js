@@ -1,10 +1,22 @@
 var classsarray =
 [
+    [ "const_iterator", "classsarray.html#a2fa54b9d06d7c336ea56b1e08efa179c", null ],
+    [ "const_pointer", "classsarray.html#a3bb22403a95c487ca7174f167cdac05e", null ],
+    [ "const_reference", "classsarray.html#aa025c4061c8eb5f334a1534be6cda78d", null ],
+    [ "difference_type", "classsarray.html#aaaba93402886b91e4407ebd95e65025a", null ],
+    [ "extents_type", "classsarray.html#a2ed28f4eaff5406a027b2facfde6b81c", null ],
+    [ "iterator", "classsarray.html#ae217b3a288d707c5b26bb3f289c957c2", null ],
+    [ "pointer", "classsarray.html#af326dea7877b763f6b03748f412a83d7", null ],
+    [ "reference", "classsarray.html#acc3d166b5530cdfea55f653821db3506", null ],
+    [ "size_type", "classsarray.html#a2cdc0f257baa77a3708e9fb330b2dbde", null ],
+    [ "value_type", "classsarray.html#a7f5c75582939944f6cf3a4c8ce27270d", null ],
+    [ "sarray", "classsarray.html#aacb5a7e7483eed4025b9d63e2242f52f", null ],
+    [ "sarray", "classsarray.html#a579197b0325256e5aa5a4824b20104ea", null ],
     [ "sarray", "classsarray.html#af806ff726c1ae6076af28dfbf3bfd089", null ],
     [ "sarray", "classsarray.html#ac12b57aaa4be31b389c92f36a0933418", null ],
     [ "sarray", "classsarray.html#a8e3de7dd25486c8b484d5ce0a882f692", null ],
     [ "sarray", "classsarray.html#a3eb3a82259453df2ec03bd5d8e5864ea", null ],
-    [ "sarray", "classsarray.html#a60ecb1314e1469aac2b7a8f57d0e6aa3", null ],
+    [ "sarray", "classsarray.html#a0a51b07c7c62f94aff07cf4dad808d98", null ],
     [ "begin", "classsarray.html#ab534441fc8759ca7733c289eb12e0013", null ],
     [ "begin", "classsarray.html#a8c30e4248c81523bd10d28aac8fdace3", null ],
     [ "data", "classsarray.html#a1fc42019c7bc57e1988c321663926a60", null ],
@@ -13,6 +25,8 @@ var classsarray =
     [ "end", "classsarray.html#a32fbad782c4c091e511636ff1227c872", null ],
     [ "operator()", "classsarray.html#afb1814a6a37fc5d9a5b369a2313fac07", null ],
     [ "operator()", "classsarray.html#a4863a14c46c883e1b2a64c15393a43b8", null ],
+    [ "operator=", "classsarray.html#a97338969fdd2ea744db3f13ba890d9fd", null ],
+    [ "operator=", "classsarray.html#a13122066b78b4f5accf7df68e5ad809c", null ],
     [ "operator[]", "classsarray.html#a202bc16541212b2aac7838a6616456e5", null ],
     [ "operator[]", "classsarray.html#a729168ac21a5746eeb6e480533da1dde", null ]
 ];

@@ -1,0 +1,28 @@
+var classgal_1_1sarray__ptr =
+[
+    [ "const_iterator", "classgal_1_1sarray__ptr.html#aba6dcf9e1a781bf769d63aa2efae6f07", null ],
+    [ "const_pointer", "classgal_1_1sarray__ptr.html#a5ab38da6853a9d4889e1730aa363cc48", null ],
+    [ "const_reference", "classgal_1_1sarray__ptr.html#a3d32eff01b2f35039b1710a43fa5fd6a", null ],
+    [ "difference_type", "classgal_1_1sarray__ptr.html#ae99c300490dccc169596512221a7987d", null ],
+    [ "extents_type", "classgal_1_1sarray__ptr.html#a9340b7414be89db35546ad5648b0492f", null ],
+    [ "iterator", "classgal_1_1sarray__ptr.html#abc84db2b54ce92fdc5d6042c6f86efbf", null ],
+    [ "pointer", "classgal_1_1sarray__ptr.html#a3942f7e800433319f2cb85270f8b501f", null ],
+    [ "reference", "classgal_1_1sarray__ptr.html#a384d4fe545047c39a06c2c1547819548", null ],
+    [ "size_type", "classgal_1_1sarray__ptr.html#a0ab9c936be8233b612d6042955956c63", null ],
+    [ "value_type", "classgal_1_1sarray__ptr.html#ae799ae00377c4b037e48a36c613cdc8b", null ],
+    [ "sarray_ptr", "classgal_1_1sarray__ptr.html#a907a26e1811288a254f64d9269ab70cc", null ],
+    [ "sarray_ptr", "classgal_1_1sarray__ptr.html#abb6e81669be5b38c689ef376a78a938c", null ],
+    [ "sarray_ptr", "classgal_1_1sarray__ptr.html#a9522b88d28013a7e11e79e2e0208156f", null ],
+    [ "sarray_ptr", "classgal_1_1sarray__ptr.html#a57623e4f3866486581f6035b291e2052", null ],
+    [ "sarray_ptr", "classgal_1_1sarray__ptr.html#a5a771acfe17796689ad0e4246efdbe14", null ],
+    [ "sarray_ptr", "classgal_1_1sarray__ptr.html#a77bba4a72484619bde3a939e08ca324e", null ],
+    [ "sarray_ptr", "classgal_1_1sarray__ptr.html#a4a3848108173cdcfc7ae26c026ad76dc", null ],
+    [ "begin", "classgal_1_1sarray__ptr.html#ae94a33965cc8c33349e1ffda4c0edba7", null ],
+    [ "data", "classgal_1_1sarray__ptr.html#a8b62e72b16070b905b641ac90e50e624", null ],
+    [ "end", "classgal_1_1sarray__ptr.html#ac9dabb5a528aa94a85d6f97a00bccd9d", null ],
+    [ "operator()", "classgal_1_1sarray__ptr.html#ab64167b4ca34bd578ee6a246cb4eec4b", null ],
+    [ "operator()", "classgal_1_1sarray__ptr.html#a295dc87a79461bec79c507349b4c913f", null ],
+    [ "operator=", "classgal_1_1sarray__ptr.html#ab16fe9243dbc8a2079d3dbd8a931e77b", null ],
+    [ "operator=", "classgal_1_1sarray__ptr.html#a7640fd6cfa0727a3ce7dc428665c2f4f", null ],
+    [ "operator[]", "classgal_1_1sarray__ptr.html#af0ad96410553ce481cd8785fc41c2b8d", null ]
+];
