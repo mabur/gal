@@ -2,6 +2,7 @@
 #include <vector>
 #include <array>
 #include <valarray>
+#include <numeric>
 
 #include "gal.hpp"
 
@@ -119,28 +120,42 @@ void g(darray_ptr<int, 2> a)
 	}
 }
 
-template<typename Array2d>
-void fill_and_print_array2d(Array2d& array)
+// Function that works on any of the four array classes in GAL:
+template<typename array_2d>
+void fill_array_2d(array_2d& array)
 {
+    // Check the rank of the array, i.e. the number of dimensions:
     assert(array.rank() == 2);
-    using value_type = typename Array2d::value_type;
+    // Get the value_type of of an array similar to standard containers:
+    using value_type = typename array_2d::value_type;
 
     for (size_t i = 0; i < array.size(); ++i)
     {
+        // Access array data with linear index, using operator[]:
         array[i] = static_cast<value_type>(i);
     }
 
+    // Use array in range based for loop:
     for (auto& element : array)
     {
         element += 10;
     }
-    
+}
+
+// Function that works on any of the four array classes in GAL:
+template<typename array_2d>
+void print_array_2d(const array_2d& array)
+{
+    // Check the rank of the array, i.e. the number of dimensions:
+    assert(array.rank() == 2);
     using namespace std;
 
+    // Loop over the extent of each dimension:
     for (size_t y = 0; y < extent1(array); ++y)
     {
         for (size_t x = 0; x < extent0(array); ++x)
         {
+            // Access array data with multi-dimensional index, using operator():
             cout << array(x, y) << " ";
         }
         cout << endl;
@@ -151,6 +166,7 @@ void fill_and_print_array2d(Array2d& array)
 int main()
 {
 	using namespace std;
+    using namespace gal;
 
 	cout << "total_size: " << details::total_size<1, 2, 3>::value << endl;
 
@@ -191,10 +207,28 @@ int main()
 	size(f);
 	
     cout << "print array" << endl;
-    auto static_array2d = sarray<float, 3, 2>();
-    auto dynamic_array2d = darray<int, 2>(8, 4);
-    fill_and_print_array2d(static_array2d);
-    fill_and_print_array2d(dynamic_array2d);
+
+    using namespace gal;
+    using namespace std;
+
+    // Create array containers that own their data:
+    auto static_array_2d = sarray<float, 3, 3>();
+    auto dynamic_array_2d = darray<int, 2>(4, 4);
+
+    // Create arrays that points to data owned by someone else:
+    auto static_array_ptr_2d = sarray_ptr<float, 3, 2>(static_array_2d.data());
+    auto dynamic_array_ptr_2d = darray_ptr<int, 2>(4, 2, dynamic_array_2d.data());
+
+    fill_array_2d(static_array_2d);
+    fill_array_2d(dynamic_array_2d);
+
+    cout << "Data of owning arrays: " << endl;
+    print_array_2d(static_array_2d);
+    print_array_2d(dynamic_array_2d);
+
+    cout << "Data pointed to by non-owning arrays: " << endl;
+    print_array_2d(static_array_ptr_2d);
+    print_array_2d(dynamic_array_ptr_2d);
 
 	for (auto x : f)
 	{

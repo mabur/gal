@@ -14,7 +14,50 @@ namespace gal
 {
 
 /**
-\brief \brief An array with size known at compile-time.
+\brief An array with size known at compile-time.
+
+## Construction with Uninitialized Data
+
+An `sarray` of size `N` can be constructed similar to an `std::array`:
+```
+const size_t N = 10;
+auto array0 = std::array<float, N>();
+auto array1 = gal::sarray<float, N>();
+```
+`sarray` also supports multiple dimensions:
+```
+const size_t N = 10;
+const size_t M = 20;
+const size_t L = 30;
+auto array0 = std::array<float, N>();
+auto array1 = gal::sarray<float, N>();
+auto array2 = gal::sarray<float, N, M>();
+auto array3 = gal::sarray<float, N, M, L>();
+```
+The template arguments specify the extent of each dimension.
+
+## Construction with Initialized Data
+
+`sarray` can be constructed with all the data initialized to the same value,
+unlike `std::array`:
+```
+const size_t N = 10;
+const size_t M = 20;
+float value = 6.283f;
+auto array1 = gal::sarray<float, N>(value);
+auto array2 = gal::sarray<float, N, M>(value);
+```
+
+## Construction with Copied Data
+
+```
+const size_t N = 10;
+const size_t M = 20;
+auto array0 = std::array<float, N * M>();
+auto pointer = array0.data();
+auto array1 = gal::sarray<float, N>(pointer);
+auto array2 = gal::sarray<float, N, M>(pointer);
+```
 */
 template<typename T, size_t... EXTENTS>
 class sarray

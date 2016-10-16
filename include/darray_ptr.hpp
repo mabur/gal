@@ -13,6 +13,28 @@ namespace gal
 
 /**
 \brief A non-owning pointer to an array with size known at run-time.
+
+## Construction
+
+Array with dynamic size pointing to data owned by someone else are constructed
+like this:
+```
+size_t N = 10;
+size_t M = 20;
+auto array1 = std::vector<float>(N * M);
+auto pointer = array1.data();
+auto array2 = gal::darray_ptr<float>(N, pointer);
+auto array3 = gal::darray_ptr<float, 2>(N, M, pointer);
+```
+Dynamic arrays pointing at constant data are constructed like this:
+```
+size_t N = 10;
+size_t M = 20;
+const auto array1 = std::vector<float>(N * M);
+const auto pointer = array1.data();
+auto array2 = gal::darray_ptr<const float>(N, pointer);
+auto array3 = gal::darray_ptr<const float, 2>(N, M, pointer);
+```
 */
 template<typename T, size_t RANK = 1>
 class darray_ptr

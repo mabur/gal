@@ -14,6 +14,53 @@ namespace gal
 
 /**
 \brief An array with size known at run-time.
+
+## Construction with Uninitialized Data
+
+An `darray` of size `N` can be constructed similar to an `std::vector`:
+```
+size_t N = 10;
+auto array0 = std::vector<float>(N);
+auto array1 = gal::darray<float>(N);
+```
+`darray` also supports multiple dimensions:
+```
+size_t N = 10;
+size_t M = 20;
+size_t L = 30;
+auto array1 = gal::darray<float>(N);
+auto array2 = gal::darray<float, 1>(N);
+auto array3 = gal::darray<float, 2>(N, M);
+auto array4 = gal::darray<float, 3>(N, M, L);
+```
+The second template argument for `darray` specifies the rank, i.e. the number of
+dimensions. It has a defult value of `1`. The extent of each dimension are
+specified by the non-templated arguments.
+
+## Construction with Initialized Data
+
+`darray` can also be constructed with the data initialized to the same value
+similar to `std::vector`:
+```
+size_t N = 10;
+size_t M = 20;
+float value = 6.283f;
+auto array1 = std::vector<float>(N, value);
+auto array2 = gal::darray<float>(N, value);
+auto array3 = gal::darray<float, 2>(N, M, value);
+```
+
+## Construction with Copied Data
+
+```
+size_t N = 10;
+size_t M = 20;
+auto array1 = std::vector<float>(N * M);
+auto pointer = array1.data();
+auto array2 = gal::darray<float>(N, pointer);
+auto array3 = gal::darray<float, 2>( N, M, pointer);
+```
+
 */
 template<typename T, size_t RANK = 1>
 class darray

@@ -14,6 +14,31 @@ namespace gal
 
 /**
 \brief \brief A non-owning pointer to an array with size known at compile-time.
+
+## Construction
+
+Construction of arrays pointing to data owned by someone else:
+```
+const size_t N = 10;
+const size_t M = 20;
+auto array0 = std::array<float, N * M>();
+auto pointer = array0.data();
+auto array1 = gal::sarray_ptr<float, N>(pointer);
+auto array2 = gal::sarray_ptr<float, N, M>(pointer);
+```
+You can specify that the data pointed at should be constant in this way:
+```
+const size_t N = 10;
+const size_t M = 20;
+const auto array0 = std::array<float, N * M>();
+const auto pointer = array0.data();
+auto array1 = gal::sarray_ptr<const float, N>(pointer);
+auto array2 = gal::sarray_ptr<const float, N, M>(pointer);
+```
+Note that `const` in front of the templated type and not in front of the array.
+This is similar to how you specify a pointer to a constant using
+`std::shared_ptr` and `std::uniqe_ptr`.
+
 */
 template<typename T, size_t... EXTENTS>
 class sarray_ptr
