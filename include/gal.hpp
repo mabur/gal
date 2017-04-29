@@ -182,6 +182,3 @@ gal::sarray, gal::sarray_ptr, gal::darray, gal::darray_ptr.
 #include "darray.hpp"
 #include "sarray_ptr.hpp"
 #include "darray_ptr.hpp"
-
-#include "vector_math.hpp"
-#include "geometry.hpp"
