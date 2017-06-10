@@ -74,8 +74,7 @@ The following holds for all of the arrays in GAL:
       - The extents of a static array is known at compile time.
       - The extent of a dynamic array is known at run time.
 - The extent of dimension `n` is retrieved by calling the templated member function
-  `extent<n>()`. Alternatively by calling any of the non-templated member functions:
-  `extent0()`, `extent1()`, `extent2()`...
+  `extent<n>()`.
 - The member function `extents` returns all extents of the array as an
   `std::array<size_t, rank()>`.
 
@@ -114,9 +113,9 @@ void print_array_2d(const array_2d& array)
     using namespace std;
 
     // Loop over the extent of each dimension:
-    for (size_t y = 0; y < extent1(array); ++y)
+    for (size_t y = 0; y < extent<1>(array); ++y)
     {
-        for (size_t x = 0; x < extent0(array); ++x)
+        for (size_t x = 0; x < extent<0>(array); ++x)
         {
             // Access array data with multi-dimensional index, using operator()
             cout << array(x, y) << " ";

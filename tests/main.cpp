@@ -110,9 +110,9 @@ void g(darray_ptr<int, 2> a)
 		++x;
 	}
 
-	for (size_t y = 0; y < extent1(a); ++y)
+	for (size_t y = 0; y < a.extent<1>(); ++y)
 	{
-		for (size_t x = 0; x < extent0(a); ++x)
+		for (size_t x = 0; x < a.extent<0>(); ++x)
 		{
 			std::cout << a(x, y) << " ";
 		}
@@ -151,9 +151,9 @@ void print_array_2d(const array_2d& array)
     using namespace std;
 
     // Loop over the extent of each dimension:
-    for (size_t y = 0; y < extent1(array); ++y)
+    for (size_t y = 0; y < array.extent<1>(); ++y)
     {
-        for (size_t x = 0; x < extent0(array); ++x)
+        for (size_t x = 0; x < array.extent<0>(); ++x)
         {
             // Access array data with multi-dimensional index, using operator():
             cout << array(x, y) << " ";
@@ -198,13 +198,9 @@ int main()
 
 	begin(e);
 	end(e);
-	data(e);
-	size(e);
 
 	begin(f);
 	end(f);
-	data(f);
-	size(f);
 	
     cout << "print array" << endl;
 
@@ -235,8 +231,8 @@ int main()
 		std::ignore = x;
 	}
 
-	for (size_t y = 0; y < extent1(f); ++y)
-		for (size_t x = 0; x < extent0(f); ++x)
+	for (size_t y = 0; y < f.extent<1>(); ++y)
+		for (size_t x = 0; x < f.extent<0>(); ++x)
 			f(x, y);
 
     for (size_t i = 0; i < f.size(); ++i)
@@ -248,13 +244,13 @@ int main()
 	M.extent<1>();
 
 	// Row-major order for images.
-	for (size_t y = 0; y < extent1(M); ++y)
-		for (size_t x = 0; x < extent0(M); ++x)
+	for (size_t y = 0; y < M.extent<1>(); ++y)
+		for (size_t x = 0; x < M.extent<0>(); ++x)
 			M(x, y);
 
 	// Column-major order for matrices.
-	for (size_t col = 0; col < extent1(M); ++col)
-		for (size_t row = 0; row < extent0(M); ++row)
+	for (size_t col = 0; col < M.extent<1>(); ++col)
+		for (size_t row = 0; row < M.extent<0>(); ++row)
 			M(row, col);
 
 	testVectors();
