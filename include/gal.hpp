@@ -113,9 +113,9 @@ void print_array_2d(const array_2d& array)
     using namespace std;
 
     // Loop over the extent of each dimension:
-    for (size_t y = 0; y < extent<1>(array); ++y)
+    for (size_t y = 0; y < array.extent<1>(); ++y)
     {
-        for (size_t x = 0; x < extent<0>(array); ++x)
+        for (size_t x = 0; x < array.extent<0>(); ++x)
         {
             // Access array data with multi-dimensional index, using operator()
             cout << array(x, y) << " ";
