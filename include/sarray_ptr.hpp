@@ -72,17 +72,6 @@ public:
     {
         return std::get<DIMENSION>(std::make_tuple(EXTENTS...));
     }
-
-    static constexpr size_t extent0() { return extent<0>(); }
-    static constexpr size_t extent1() { return extent<1>(); }
-    static constexpr size_t extent2() { return extent<2>(); }
-    static constexpr size_t extent3() { return extent<3>(); }
-    static constexpr size_t extent4() { return extent<4>(); }
-    static constexpr size_t extent5() { return extent<5>(); }
-    static constexpr size_t extent6() { return extent<6>(); }
-    static constexpr size_t extent7() { return extent<7>(); }
-    static constexpr size_t extent8() { return extent<8>(); }
-    static constexpr size_t extent9() { return extent<9>(); }
 //  ____________________________________________________________________________
 //  sarray_ptr specifics:
 public:
@@ -147,16 +136,5 @@ template<typename T, size_t... EXTENTS> size_t    size(const sarray_ptr<T, EXTEN
 template<          typename T, size_t... EXTENTS> constexpr size_t                           rank(const sarray_ptr<T, EXTENTS...>& a) { return a.rank(); }
 template<          typename T, size_t... EXTENTS> constexpr extents_t<sizeof...(EXTENTS)> extents(const sarray_ptr<T, EXTENTS...>& a) { return a.extents(); }
 template<size_t D, typename T, size_t... EXTENTS> constexpr size_t                         extent(const sarray_ptr<T, EXTENTS...>& a) { return a.extent<D>(); }
-
-template<typename T, size_t... EXTENTS> constexpr size_t extent0(const sarray_ptr<T, EXTENTS...>& a) { return a.extent0(); }
-template<typename T, size_t... EXTENTS> constexpr size_t extent1(const sarray_ptr<T, EXTENTS...>& a) { return a.extent1(); }
-template<typename T, size_t... EXTENTS> constexpr size_t extent2(const sarray_ptr<T, EXTENTS...>& a) { return a.extent2(); }
-template<typename T, size_t... EXTENTS> constexpr size_t extent3(const sarray_ptr<T, EXTENTS...>& a) { return a.extent3(); }
-template<typename T, size_t... EXTENTS> constexpr size_t extent4(const sarray_ptr<T, EXTENTS...>& a) { return a.extent4(); }
-template<typename T, size_t... EXTENTS> constexpr size_t extent5(const sarray_ptr<T, EXTENTS...>& a) { return a.extent5(); }
-template<typename T, size_t... EXTENTS> constexpr size_t extent6(const sarray_ptr<T, EXTENTS...>& a) { return a.extent6(); }
-template<typename T, size_t... EXTENTS> constexpr size_t extent7(const sarray_ptr<T, EXTENTS...>& a) { return a.extent7(); }
-template<typename T, size_t... EXTENTS> constexpr size_t extent8(const sarray_ptr<T, EXTENTS...>& a) { return a.extent8(); }
-template<typename T, size_t... EXTENTS> constexpr size_t extent9(const sarray_ptr<T, EXTENTS...>& a) { return a.extent9(); }
 
 } // namespace gal
