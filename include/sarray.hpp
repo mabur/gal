@@ -122,6 +122,7 @@ public:
     template<typename Iterator, typename std::iterator_traits<Iterator>::value_type* = nullptr>
     explicit sarray(Iterator first)
     {
+        std::copy_n(first, size(), data_.begin());
     }
 
     template<typename Array, typename Array::value_type* = nullptr>

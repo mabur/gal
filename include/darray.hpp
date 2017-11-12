@@ -138,6 +138,7 @@ private:
     template<size_t i, typename Iterator, typename std::iterator_traits<Iterator>::value_type* = nullptr>
     void construction_helper(Iterator first)
     {
+        std::copy_n(first, size(), data());
         static_assert(i == RANK, "Wrong number of arguments.");
     }
 public:
