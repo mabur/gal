@@ -19,66 +19,65 @@
   Vill man bara ha strided för pointer arrays? Kan heta spsarray och spdarray.
 
 Frågor
-* copy-construction från samma typ. Hanteras det av de templatiserade konstruktörerna?
+* Ska konstruktorerna ta storleken som två olika argument eller ett enda?
+  Man skulle kunna överlagra så att båda funkar?
+  Lutar mot att bara tillåta ett enda.
+  Vill undvika flera möjligheter att göra samma sak.
+  Vill enkelt kunna skapa en array med samma storlek som en annan.
+  Fast blandas ihop med initializer list med värden för en-dimensionel array.
+  Så strunta i det.
+
 * Single-dimensional construction from:
   - Eigen::Matrix
 
-* Implicit konvertering? För ägande arrayer: Nej. För pekare ?
-
 * Hur ska nullptr hanteras? Ska man kräva att size()==0 då?
 
-* make_pdarray({1,2,4}, data); // Så man slipper redundanta template argument.
-  make_darray({1,2}, 0.f);
-  make_sarray({1, 2}, 1.f);
+* Implicit konvertering? För ägande arrayer: Nej. För pekare ?
 
-* Hur ska multiplikation och division hanteras? Vill kunna hantera fallen:
-  - Elementvis
-  - Matriser
-  - Komplexa tal
-  - Kvaternioner
-  - Expression templates
-* Ha många elementvisa operationer i annan modul: * / % < <= > >= && ! ||.
-* implementera som allmänna funktioner: add, subtract, multiply, divide.
-
-* storage order för matriser.
-- Skulle kunna ha allmän default-templatiserad flagga i class-signature.
--  Eller kan låta den bara påverka operator() !.
-Då kan man sätta den typ:
-using matrix23f = sarray<float,2,3,ROW_MAJOR>
-- Skapa matris-klass som ärver från sarray? Vore ju bättre om man inte behövde ärva från den.
-- Skapa två fria funktioner för operator(), som kan välja mellan att plocka ut i row-major eller column major.
-at_cm(matrix, 3, 2)
-at_rm(matrix, 2, 3)
-at_cm<3,2>(matrix)
-at_rm<2,3>(matrix)
+* Så man slipper redundanta template argument.
+  make_darray(1, 2, value);
+  make_sarray(1, 2, value);
+  make_darray(1, 2, data);
+  make_sarray(1, 2, data);
+  make_darray_ptr(1, 2, 4, data);
+  make_sarray_ptr(1, 2, 4, data);
+  make_darray(array);
+  make_sarray(array);
+  make_darray_ptr(array);
+  make_sarray_ptr(array);
 
 * Hur ska konstruktorerna vara för att dom ska vara konsekventa för alla arrayer?
   - typ, dimension, storlek, värden.
 
-auto a = sarray<int, 2, 3>(1, 2, 3, 4, 5, 6);   // <- funkar nog inte det bra för matriser i den column/row-order som vi har?
-auto a = sarray<int, 2, 3>({1, 2, 3, 4, 5, 6}); // <- 
-auto a = sarray<int, 2, 3>({{1, 2, 3}, {4, 5, 6}}); // <-
+auto a = sarray<int, 2>({1, 2});
+auto a = sarray<int, 2, 3>({1, 2, 3, 4, 5, 6});
 auto a = sarray<int, 2, 3>(data_iterator);
 auto a = sarray<int, 2, 3>(data_value);
 auto a = sarray<int, 2, 3>(data_array);
 
-auto a = darray<int, 2>({2, 3}, data_iterator); // Tillåt iterator istället för pekare?
-auto a = darray<int, 2>({2, 3}, data_value);
-auto a = darray<int, 2>({2, 3});
+auto a = darray<int, 1>({1, 2, 3, 4});
+auto a = darray<int, 2>(2, 3);
+auto a = darray<int, 2>(2, 3, data_iterator);
+auto a = darray<int, 2>(2, 3, data_value);
 auto a = darray<int, 2>(data_array);
 
-auto a = darray_ptr<int, 2>({2, 3}, data_iterator);
-auto a = darray_ptr<int, 2>(data_array);
+auto a = darray<int, 1>(4, {1, 2, 3, 4}); // ?, nej, stöds ej av std::vector
+auto a = darray<int, 2>(2, 3, {1, 2, 3, 4, 5, 6}); // ?, nej, stöds ej av std::vector
 
-auto a = sarray_ptr<int, 2, 3>(data_iterator);
+auto a = sarray_ptr<int, 2, 3>(data_pointer);
 auto a = sarray_ptr<int, 2, 3>(data_array);
 
+auto a = darray_ptr<int, 2>(2, 3, data_pointer);
+auto a = darray_ptr<int, 2>(data_array);
+
 auto a = std::array<int, 2>({1, 2})
-auto a = std::vector<int>({data1, data2})
+auto a = std::vector<int>({1, 2})
 auto a = std::vector<int>(size)
 auto a = std::vector<int>(size, data_value)
+auto a = std::vector<int>(first, last)
 auto a = std::valarray<int>(size)
 auto a = std::valarray<int>(data_value, size) <- exception
+auto a = std::valarray<int>(data_pointer, size) <- exception
 
 assert(extents(array1) == extents(array2))
 */

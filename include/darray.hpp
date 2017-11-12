@@ -135,10 +135,9 @@ private:
         static_assert(i == RANK, "Wrong number of arguments.");
     }
 
-    template<size_t i>
-    void construction_helper(const_pointer data_pointer)
+    template<size_t i, typename Iterator, typename std::iterator_traits<Iterator>::value_type* = nullptr>
+    void construction_helper(Iterator first)
     {
-        std::copy(data_pointer, data_pointer + RANK, data());
         static_assert(i == RANK, "Wrong number of arguments.");
     }
 public:

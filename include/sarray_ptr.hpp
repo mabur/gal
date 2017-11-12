@@ -84,7 +84,7 @@ public:
 
     sarray_ptr() : data_(nullptr) {}
 
-    explicit sarray_ptr(T* data) : data_(data) {}
+    explicit sarray_ptr(pointer first) : data_(first) {}
 
     template<typename S>
     explicit sarray_ptr(const sarray_ptr<S, EXTENTS...>& array)

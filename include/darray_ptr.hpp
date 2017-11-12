@@ -117,9 +117,9 @@ private:
     }
 
     template<size_t i>
-    void construction_helper(pointer data_pointer)
+    void construction_helper(pointer first)
     {
-        data_ = data_pointer;
+        data_ = first;
         static_assert(i == RANK, "Wrong number of arguments.");
     }
 public:

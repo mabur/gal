@@ -4,6 +4,7 @@
 #include <array>
 #include <cassert>
 #include <cstddef>
+#include <iterator>
 #include <tuple>
 #include <initializer_list>
 
@@ -118,9 +119,9 @@ public:
         std::fill(std::begin(data_), std::end(data_), value);
     }
 
-    explicit sarray(const T* data_begin)
+    template<typename Iterator, typename std::iterator_traits<Iterator>::value_type* = nullptr>
+    explicit sarray(Iterator first)
     {
-        std::copy(data_begin, data_begin + size(), std::begin(data_));
     }
 
     template<typename Array, typename Array::value_type* = nullptr>
